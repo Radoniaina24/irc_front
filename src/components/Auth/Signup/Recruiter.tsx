@@ -47,7 +47,7 @@ const SignupRecruiter = () => {
       try {
         const response = await addRecruiter(newRecruiter).unwrap();
         showToast(response?.message, "success"); // message, type(error, success)
-        // resetForm();
+        resetForm();
       } catch (error: any) {
         if (error?.data?.message) {
           showToast(error?.data?.message, "error");
