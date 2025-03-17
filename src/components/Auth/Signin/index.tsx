@@ -8,11 +8,14 @@ import TextInput from "@/components/Input/TextInput";
 import { useToast } from "@/lib/context/ToastContext";
 import { Loader2 } from "lucide-react";
 import { useLoginMutation } from "@/lib/api/authApi";
+import { useRouter } from "next/navigation";
 const initialvalues = {
   email: "",
   password: "",
 };
+
 const Signin = () => {
+  const router = useRouter();
   const { showToast } = useToast();
   const [login] = useLoginMutation();
   const formik = useFormik({
@@ -31,6 +34,7 @@ const Signin = () => {
         const response = await login(log).unwrap();
         // showToast(response?.message, "success"); // message, type(error, success)
         resetForm();
+        router.push("/my-account");
       } catch (error: any) {
         if (error?.data?.message) {
           showToast(error?.data?.message, "error");

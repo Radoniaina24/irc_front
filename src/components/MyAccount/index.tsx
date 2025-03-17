@@ -4,23 +4,40 @@ import Breadcrumb from "../Common/Breadcrumb";
 import Image from "next/image";
 import AddressModal from "./AddressModal";
 import Orders from "../Orders";
-
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { logout, selectUser } from "@/redux/features/auth/authSlice";
+import { useLogoutMutation } from "@/lib/api/authApi";
+import { useRouter } from "next/navigation";
 const MyAccount = () => {
+  const [logoutUser] = useLogoutMutation();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [addressModal, setAddressModal] = useState(false);
-
+  const dispatch = useDispatch();
   const openAddressModal = () => {
     setAddressModal(true);
   };
-
   const closeAddressModal = () => {
     setAddressModal(false);
   };
+  const navigation = useRouter();
+  const data = useSelector(selectUser);
+  // console.log(data);
+  async function handleLogout() {
+    try {
+      // Appeler la mutation de déconnexion
+      await logoutUser("").unwrap();
+      // Si la déconnexion réussit, effacer l'état d'authentification de Redux
+      dispatch(logout());
+      navigation.push("/");
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  }
 
   return (
     <>
       <Breadcrumb title={"My Account"} pages={["my account"]} />
-
       <section className="overflow-hidden py-20 bg-gray-2">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col xl:flex-row gap-7.5">
@@ -39,9 +56,11 @@ const MyAccount = () => {
 
                   <div>
                     <p className="font-medium text-dark mb-0.5">
-                      James Septimus
+                      {data.firstName}
+                      <br />
+                      {data.lastName}
                     </p>
-                    <p className="text-custom-xs">Member Since Sep 2020</p>
+                    <p className="text-custom-xs">{data.role}</p>
                   </div>
                 </div>
 
@@ -219,7 +238,7 @@ const MyAccount = () => {
                     </button>
 
                     <button
-                      onClick={() => setActiveTab("logout")}
+                      onClick={() => handleLogout()}
                       className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
                         activeTab === "logout"
                           ? "text-white bg-blue"
@@ -251,11 +270,11 @@ const MyAccount = () => {
             </div>
             {/* <!--== user dashboard menu end ==-->
 
-            
+
           <!--== user dashboard content start ==--> */}
             {/* <!-- dashboard tab content start --> */}
 
-            <div
+            {/* <div
               className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 py-9.5 px-4 sm:px-7.5 xl:px-10 ${
                 activeTab === "dashboard" ? "block" : "hidden"
               }`}
@@ -276,31 +295,31 @@ const MyAccount = () => {
                 manage your shipping and billing addresses, and edit your
                 password and account details.
               </p>
-            </div>
+            </div> */}
             {/* <!-- dashboard tab content end -->
 
           <!-- orders tab content start --> */}
-            <div
+            {/* <div
               className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
                 activeTab === "orders" ? "block" : "hidden"
               }`}
             >
               <Orders />
-            </div>
+            </div> */}
             {/* <!-- orders tab content end -->
 
           <!-- downloads tab content start --> */}
-            <div
+            {/* <div
               className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 py-9.5 px-4 sm:px-7.5 xl:px-10 ${
                 activeTab === "downloads" ? "block" : "hidden"
               }`}
             >
               <p>You don&apos;t have any download</p>
-            </div>
+            </div> */}
             {/* <!-- downloads tab content end -->
 
           <!-- addresses tab content start --> */}
-            <div
+            {/* <div
               className={`flex-col sm:flex-row gap-7.5 ${
                 activeTab === "addresses" ? "flex" : "hidden"
               }`}
@@ -568,11 +587,11 @@ const MyAccount = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* <!-- addresses tab content end -->
 
           <!-- details tab content start --> */}
-            <div
+            {/* <div
               className={`xl:max-w-[770px] w-full ${
                 activeTab === "account-details" ? "block" : "hidden"
               }`}
@@ -636,7 +655,7 @@ const MyAccount = () => {
                             d="M2.41469 5.03569L2.41467 5.03571L2.41749 5.03846L7.76749 10.2635L8.0015 10.492L8.23442 10.2623L13.5844 4.98735L13.5844 4.98735L13.5861 4.98569C13.6809 4.89086 13.8199 4.89087 13.9147 4.98569C14.0092 5.08024 14.0095 5.21864 13.9155 5.31345C13.9152 5.31373 13.915 5.31401 13.9147 5.31429L8.16676 10.9622L8.16676 10.9622L8.16469 10.9643C8.06838 11.0606 8.02352 11.0667 8.00039 11.0667C7.94147 11.0667 7.89042 11.0522 7.82064 10.9991L2.08526 5.36345C1.99127 5.26865 1.99154 5.13024 2.08609 5.03569C2.18092 4.94086 2.31986 4.94086 2.41469 5.03569Z"
                             fill=""
                             stroke=""
-                            stroke-width="0.666667"
+                            strokeWidth="0.666667"
                           />
                         </svg>
                       </span>
@@ -714,7 +733,7 @@ const MyAccount = () => {
                   </button>
                 </div>
               </form>
-            </div>
+            </div> */}
             {/* <!-- details tab content end -->
           <!--== user dashboard content end ==--> */}
           </div>

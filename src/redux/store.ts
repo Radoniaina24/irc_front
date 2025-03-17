@@ -6,9 +6,11 @@ import productDetailsReducer from "./features/product-details";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { recruiterAPI } from "@/lib/api/recruiterApi";
 import { authAPI } from "@/lib/api/authApi";
+import { authReducer } from "./features/auth/authSlice";
 
 export const store = configureStore({
   reducer: {
+    authReducer,
     quickViewReducer,
     cartReducer,
     wishlistReducer,

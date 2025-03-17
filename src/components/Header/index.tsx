@@ -9,8 +9,9 @@ import { useSelector } from "react-redux";
 import { selectTotalPrice } from "@/redux/features/cart-slice";
 import { useCartModalContext } from "@/app/context/CartSidebarModalContext";
 import Image from "next/image";
-
+import { selectIsAuthenticated } from "@/redux/features/auth/authSlice";
 const Header = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const [searchQuery, setSearchQuery] = useState("");
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
@@ -123,7 +124,10 @@ const Header = () => {
           <div className="flex w-full lg:w-auto items-center gap-7.5">
             <div className="flex w-full lg:w-auto justify-between items-center gap-5">
               <div className="flex items-center gap-5">
-                <Link href="/signin" className="flex items-center gap-2.5">
+                <Link
+                  href={isAuthenticated ? "/my-account" : "/signin"}
+                  className="flex items-center gap-2.5"
+                >
                   <svg
                     width="24"
                     height="24"
@@ -146,12 +150,15 @@ const Header = () => {
                   </svg>
 
                   <div>
-                    <span className="block text-2xs text-dark-4 uppercase">
-                      account
-                    </span>
-                    <p className="font-medium text-custom-sm text-dark">
-                      Sign In
-                    </p>
+                    {isAuthenticated ? (
+                      <span className="font-medium text-custom-sm text-dark">
+                        Account
+                      </span>
+                    ) : (
+                      <p className="font-medium text-custom-sm text-dark">
+                        Sign In
+                      </p>
+                    )}
                   </div>
                 </Link>
               </div>

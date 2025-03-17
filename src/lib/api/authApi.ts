@@ -14,6 +14,7 @@ export const authAPI = createApi({
           method: "GET",
         };
       },
+
       providesTags: ["authentication"],
     }),
     login: builder.mutation({
@@ -23,6 +24,17 @@ export const authAPI = createApi({
           method: "POST",
           body: credentials,
         };
+      },
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled; // Attendre que la connexion réussisse
+          dispatch(authAPI.endpoints.getUser.initiate("")); // Récupérer l'utilisateur après login
+        } catch (error) {
+          console.error(
+            "Erreur lors de la récupération de l'utilisateur après connexion",
+            error
+          );
+        }
       },
       invalidatesTags: ["authentication"],
     }),
@@ -37,5 +49,4 @@ export const authAPI = createApi({
     }),
   }),
 });
-
 export const { useLoginMutation, useGetUserQuery, useLogoutMutation } = authAPI;

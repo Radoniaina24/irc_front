@@ -2,16 +2,19 @@ import MyAccount from "@/components/MyAccount";
 import React from "react";
 
 import { Metadata } from "next";
+import AuthGuard from "@/components/Auth/AuthGuard/AuthGuard";
 export const metadata: Metadata = {
-  title: "My Account | NextCommerce Nextjs E-commerce template",
-  description: "This is My Account page for NextCommerce Template",
+  title: "My Account | IRC",
+
   // other metadata
 };
 
 const MyAccountPage = () => {
   return (
     <main>
-      <MyAccount />
+      <AuthGuard>
+        <MyAccount />
+      </AuthGuard>
     </main>
   );
 };
