@@ -39,6 +39,56 @@ const data = [
     id: 8,
     img: "/images/categories/categories-04.png",
   },
+  {
+    title: "Televisions",
+    id: 9,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 10,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 10,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 10,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 13,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 14,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 15,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 16,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 17,
+    img: "/images/categories/categories-04.png",
+  },
+  {
+    title: "Televisions",
+    id: 18,
+    img: "/images/categories/categories-04.png",
+  },
 ];
 
 export default data;
