@@ -1,8 +1,47 @@
+"use client";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import Link from "next/link";
 import React from "react";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import TextInput from "@/components/Input/TextInput";
+import { useToast } from "@/lib/context/ToastContext";
+import { Loader2 } from "lucide-react";
+import { useLoginMutation } from "@/lib/api/authApi";
+const initialvalues = {
+  email: "",
+  password: "",
+};
 const Signin = () => {
+  const { showToast } = useToast();
+  const [login] = useLoginMutation();
+  const formik = useFormik({
+    initialValues: initialvalues,
+    validationSchema: Yup.object({
+      email: Yup.string().email("Invalid email").required("Email is required"),
+      password: Yup.string().required("Password is required"),
+    }),
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      setSubmitting(true);
+      const log = {
+        email: values.email,
+        password: values.password,
+      };
+      try {
+        const response = await login(log).unwrap();
+        // showToast(response?.message, "success"); // message, type(error, success)
+        resetForm();
+      } catch (error: any) {
+        if (error?.data?.message) {
+          showToast(error?.data?.message, "error");
+        } else {
+          showToast("Check your network", "error");
+        }
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
   return (
     <>
       <Breadcrumb title={"Signin"} pages={["Signin"]} />
@@ -16,41 +55,47 @@ const Signin = () => {
             </div>
 
             <div>
-              <form>
-                <div className="mb-5">
-                  <label htmlFor="email" className="block mb-2.5">
-                    Email
-                  </label>
-
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
-                  />
-                </div>
-
-                <div className="mb-5">
-                  <label htmlFor="password" className="block mb-2.5">
-                    Password
-                  </label>
-
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    autoComplete="on"
-                    className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
-                  />
-                </div>
+              <form onSubmit={formik.handleSubmit} autoComplete="off">
+                <TextInput
+                  type="email"
+                  label={"Email Address"}
+                  name={"email"}
+                  placeholder="Enter your email address"
+                  required={true}
+                  onChange={formik.handleChange}
+                  error={formik.errors.email}
+                  touched={formik.touched.email}
+                  value={formik.values.email}
+                />
+                <TextInput
+                  type="password"
+                  label={"Password"}
+                  name={"password"}
+                  placeholder="Enter your password"
+                  required={true}
+                  onChange={formik.handleChange}
+                  error={formik.errors.password}
+                  touched={formik.touched.password}
+                  value={formik.values.password}
+                />
 
                 <button
+                  disabled={formik.isSubmitting}
                   type="submit"
-                  className="w-full flex justify-center font-medium text-white bg-dark py-3 px-6 rounded-lg ease-out duration-200 hover:bg-blue mt-7.5"
+                  className={`w-full flex justify-center font-medium bg-dark text-white  py-3 px-6 rounded-lg ease-out duration-200 hover:bg-blue mt-7.5${
+                    formik.isSubmitting
+                      ? "cursor-not-allowed bg-gray-400"
+                      : "bg-dark"
+                  }`}
                 >
-                  Sign in to account
+                  {formik.isSubmitting ? (
+                    <>
+                      Sign in to account...
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                    </>
+                  ) : (
+                    "Sign in to account"
+                  )}
                 </button>
 
                 <a
