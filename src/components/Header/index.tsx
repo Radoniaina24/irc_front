@@ -38,14 +38,25 @@ const Header = () => {
   });
 
   const options = [
-    { label: "All Sector", value: "0" },
-    { label: "Desktop", value: "1" },
-    { label: "Laptop", value: "2" },
-    { label: "Monitor", value: "3" },
-    { label: "Phone", value: "4" },
-    { label: "Watch", value: "5" },
-    { label: "Mouse", value: "6" },
-    { label: "Tablet", value: "7" },
+    { label: "Agriculture et Environnement", value: "0" },
+    { label: "Armée, Sécurité et Gouvernance", value: "1" },
+    { label: "Art et Culture", value: "2" },
+    { label: "BTP et Immobilier", value: "3" },
+    { label: "Commerce et Distribution", value: "4" },
+    // { label: "Construction et Industrie", value: "5" },
+    // { label: "Droit et Financen", value: "6" },
+    // { label: "Enseignement et Formation", value: "7" },
+    // { label: "Hôtellerie et Tourisme", value: "8" },
+    // { label: "Informatique et Numérique", value: "9" },
+    // { label: "Logistique et Transport", value: "11" },
+    // { label: "Marketing et Communication", value: "12" },
+    // { label: "Médical et Social", value: "13" },
+    // { label: "Maintenance et Services", value: "14" },
+    // { label: "Médical et Social", value: "15" },
+    // { label: "Marketing et Communication", value: "16" },
+    // { label: "ONG et Organisations internationales", value: "17" },
+    // { label: "Textile et Mode", value: "18" },
+    // { label: "Audit et Conseil", value: "19" },
   ];
 
   return (
