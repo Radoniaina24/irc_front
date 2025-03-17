@@ -2,15 +2,10 @@ import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { counterSlice } from "./features/counter/counterSlice";
 import { quotesApiSlice } from "./features/quotes/quotesApiSlice";
-import { studentAPI } from "./api/studentApi";
-import { classeAPI } from "./api/classeApi";
-import { subjectAPI } from "./api/subjectApi";
 import { authAPI } from "./api/authApi";
 import { authReducer, authSlice } from "./features/auth/authSlice";
-import { panelistsAPI } from "./api/panelistApi";
-import { courseAPI } from "./api/courseApi";
 import { usersAPI } from "./api/userApi";
-
+import { recruiterAPI } from "./api/recruiterApi";
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
 const rootReducer = combineSlices(counterSlice, quotesApiSlice, authSlice);
@@ -26,24 +21,16 @@ export const makeStore = () => {
     reducer: {
       auth: authReducer,
       [authAPI.reducerPath]: authAPI.reducer,
-      [studentAPI.reducerPath]: studentAPI.reducer,
-      [panelistsAPI.reducerPath]: panelistsAPI.reducer,
-      [classeAPI.reducerPath]: classeAPI.reducer,
-      [subjectAPI.reducerPath]: subjectAPI.reducer,
-      [courseAPI.reducerPath]: courseAPI.reducer,
       [usersAPI.reducerPath]: usersAPI.reducer,
+      [recruiterAPI.reducerPath]: recruiterAPI.reducer,
     },
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) => {
       return getDefaultMiddleware().concat(
         authAPI.middleware,
-        studentAPI.middleware,
-        panelistsAPI.middleware,
-        classeAPI.middleware,
-        subjectAPI.middleware,
-        courseAPI.middleware,
-        usersAPI.middleware
+        usersAPI.middleware,
+        recruiterAPI.middleware
       );
     },
   });
