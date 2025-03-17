@@ -16,6 +16,7 @@ import PreviewSliderModal from "@/components/Common/PreviewSlider";
 import ScrollToTop from "@/components/Common/ScrollToTop";
 import PreLoader from "@/components/Common/PreLoader";
 import { StoreProvider } from "./StoreProvider";
+import { ToastProvider } from "@/lib/context/ToastContext";
 
 export default function RootLayout({
   children,
@@ -35,22 +36,24 @@ export default function RootLayout({
           <PreLoader />
         ) : (
           <>
-            <StoreProvider>
-              <ReduxProvider>
-                <CartModalProvider>
-                  <ModalProvider>
-                    <PreviewSliderProvider>
-                      <Header />
-                      {children}
+            <ToastProvider>
+              <StoreProvider>
+                <ReduxProvider>
+                  <CartModalProvider>
+                    <ModalProvider>
+                      <PreviewSliderProvider>
+                        <Header />
+                        {children}
 
-                      <QuickViewModal />
-                      <CartSidebarModal />
-                      <PreviewSliderModal />
-                    </PreviewSliderProvider>
-                  </ModalProvider>
-                </CartModalProvider>
-              </ReduxProvider>
-            </StoreProvider>
+                        <QuickViewModal />
+                        <CartSidebarModal />
+                        <PreviewSliderModal />
+                      </PreviewSliderProvider>
+                    </ModalProvider>
+                  </CartModalProvider>
+                </ReduxProvider>
+              </StoreProvider>
+            </ToastProvider>
 
             <ScrollToTop />
             {/* <Footer /> */}

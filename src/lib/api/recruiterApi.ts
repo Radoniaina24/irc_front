@@ -5,14 +5,6 @@ export const recruiterAPI = createApi({
   tagTypes: ["recruiter"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as any).auth.token; // Récupération du token JWT depuis Redux
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-    credentials: "include", // S'assurer que les cookies sont envoyés avec la requête
   }),
   keepUnusedDataFor: 30,
   endpoints: (builder) => ({
@@ -46,11 +38,11 @@ export const recruiterAPI = createApi({
       providesTags: ["recruiter"],
     }),
     addRecruiter: builder.mutation({
-      query: (obj) => {
+      query: (values) => {
         return {
           url: `recruiter/register`,
           method: "POST",
-          body: obj,
+          body: values,
         };
       },
       invalidatesTags: ["recruiter"],
