@@ -14,12 +14,12 @@ const Home = () => {
     <main className="pt-36">
       {/* <Hero /> */}
       <Categories />
-      <NewArrival />
+      {/* <NewArrival />
       <PromoBanner />
       <BestSeller />
       <CounDown />
       <Testimonials />
-      <Newsletter />
+      <Newsletter /> */}
     </main>
   );
 };
