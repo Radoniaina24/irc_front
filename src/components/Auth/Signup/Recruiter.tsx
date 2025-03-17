@@ -83,6 +83,7 @@ const SignupRecruiter = () => {
                     required={true}
                     error={formik.errors.lastName}
                     touched={formik.touched.lastName}
+                    value={formik.values.lastName}
                   />
                   <TextInput
                     label={"First name"}
@@ -92,6 +93,7 @@ const SignupRecruiter = () => {
                     onChange={formik.handleChange}
                     error={formik.errors.firstName}
                     touched={formik.touched.firstName}
+                    value={formik.values.firstName}
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -103,6 +105,7 @@ const SignupRecruiter = () => {
                     onChange={formik.handleChange}
                     error={formik.errors.companyName}
                     touched={formik.touched.companyName}
+                    value={formik.values.companyName}
                   />
                   <TextInput
                     type="email"
@@ -113,6 +116,7 @@ const SignupRecruiter = () => {
                     onChange={formik.handleChange}
                     error={formik.errors.email}
                     touched={formik.touched.email}
+                    value={formik.values.email}
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -125,6 +129,7 @@ const SignupRecruiter = () => {
                     onChange={formik.handleChange}
                     error={formik.errors.password}
                     touched={formik.touched.password}
+                    value={formik.values.password}
                   />
                   <TextInput
                     type="password"
@@ -135,6 +140,7 @@ const SignupRecruiter = () => {
                     onChange={formik.handleChange}
                     error={formik.errors.re_type_password}
                     touched={formik.touched.re_type_password}
+                    value={formik.values.re_type_password}
                   />
                 </div>
 

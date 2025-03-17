@@ -9,6 +9,7 @@ interface TextInputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: any;
   touched: any;
+  value: string;
 }
 const TextInput: React.FC<TextInputProps> = ({
   label,
@@ -19,6 +20,7 @@ const TextInput: React.FC<TextInputProps> = ({
   type = "text",
   onChange,
   touched,
+  value,
 }) => {
   const hashError = error && touched;
   return (
@@ -30,6 +32,7 @@ const TextInput: React.FC<TextInputProps> = ({
 
       {/* Input Field */}
       <input
+        value={value}
         onChange={onChange}
         type={type}
         name={name}
