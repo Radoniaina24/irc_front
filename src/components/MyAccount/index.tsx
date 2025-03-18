@@ -7,7 +7,7 @@ import Orders from "../Orders";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { logout, selectUser } from "@/redux/features/auth/authSlice";
-import { useLogoutMutation } from "@/lib/api/authApi";
+import { useGetUserQuery, useLogoutMutation } from "@/lib/api/authApi";
 import { useRouter } from "next/navigation";
 const MyAccount = () => {
   const [logoutUser] = useLogoutMutation();
@@ -20,9 +20,9 @@ const MyAccount = () => {
   const closeAddressModal = () => {
     setAddressModal(false);
   };
+
   const navigation = useRouter();
-  const data = useSelector(selectUser);
-  // console.log(data);
+  const user = useSelector(selectUser);
   async function handleLogout() {
     try {
       // Appeler la mutation de déconnexion
@@ -56,11 +56,11 @@ const MyAccount = () => {
 
                   <div>
                     <p className="font-medium text-dark mb-0.5">
-                      {data.firstName}
+                      {user.firstName}
                       <br />
-                      {data.lastName}
+                      {user.lastName}
                     </p>
-                    <p className="text-custom-xs">{data.role}</p>
+                    <p className="text-custom-xs">{user.role}</p>
                   </div>
                 </div>
 

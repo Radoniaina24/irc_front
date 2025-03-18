@@ -58,7 +58,7 @@ const Header = () => {
     // { label: "Textile et Mode", value: "18" },
     // { label: "Audit et Conseil", value: "19" },
   ];
-
+  console.log(isAuthenticated);
   return (
     <header
       className={`fixed left-0 top-0 w-full z-9999 bg-white transition-all ease-in-out duration-300 ${

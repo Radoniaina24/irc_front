@@ -1,3 +1,4 @@
+import { logout } from "@/redux/features/auth/authSlice";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const authAPI = createApi({
   reducerPath: "authAPI",
@@ -25,18 +26,16 @@ export const authAPI = createApi({
           body: credentials,
         };
       },
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          await queryFulfilled; // Attendre que la connexion réussisse
-          dispatch(authAPI.endpoints.getUser.initiate("")); // Récupérer l'utilisateur après login
-        } catch (error) {
-          console.error(
-            "Erreur lors de la récupération de l'utilisateur après connexion",
-            error
-          );
-        }
-      },
       invalidatesTags: ["authentication"],
+    }),
+    refreshToken: builder.query({
+      query: () => {
+        return {
+          url: "/auth/refresh-token",
+          method: "GET",
+        };
+      },
+      providesTags: ["authentication"],
     }),
     logout: builder.mutation({
       query: () => {
@@ -45,8 +44,22 @@ export const authAPI = createApi({
           method: "POST",
         };
       },
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(logout()); // Supprimer l'utilisateur de Redux
+          dispatch(authAPI.util.resetApiState()); // Nettoyer complètement RTK Query
+        } catch (error) {
+          console.error("Erreur lors de la déconnexion :", error);
+        }
+      },
       invalidatesTags: ["authentication"],
     }),
   }),
 });
-export const { useLoginMutation, useGetUserQuery, useLogoutMutation } = authAPI;
+export const {
+  useLoginMutation,
+  useGetUserQuery,
+  useLogoutMutation,
+  useRefreshTokenQuery,
+} = authAPI;
