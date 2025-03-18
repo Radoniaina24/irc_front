@@ -1,12 +1,33 @@
 "use client";
 
 import { store } from "./store";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
-import { authAPI } from "@/lib/api/authApi";
+import { authAPI, useGetUserQuery } from "@/lib/api/authApi";
+import { logout, setUser } from "./features/auth/authSlice";
 export function ReduxProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    store.dispatch(authAPI.endpoints.getUser.initiate("")); // ✅ Utilisation de `store.dispatch`
+    const fetchUser = async () => {
+      try {
+        const response = await store.dispatch(
+          authAPI.endpoints.getUser.initiate("")
+        );
+        if ("data" in response) {
+          store.dispatch(setUser(response.data)); // ✅ Mise à jour correcte du store
+        } else {
+          store.dispatch(logout()); // Déconnexion si le token est invalide
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération de l'utilisateur :",
+          error
+        );
+        store.dispatch(logout());
+      }
+    };
+
+    fetchUser();
   }, []);
+
   return <Provider store={store}>{children}</Provider>;
 }
