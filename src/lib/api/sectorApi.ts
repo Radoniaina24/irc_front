@@ -48,11 +48,11 @@ export const sectorAPI = createApi({
       invalidatesTags: ["sector"],
     }),
     updateSector: builder.mutation({
-      query: ({ updateSector, id }) => {
+      query: ({ name, id }) => {
         return {
           url: `/sector/${id}`,
           method: "PUT",
-          body: updateSector,
+          body: name,
         };
       },
       invalidatesTags: ["sector"],
