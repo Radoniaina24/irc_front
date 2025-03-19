@@ -7,6 +7,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { recruiterAPI } from "@/lib/api/recruiterApi";
 import { authAPI } from "@/lib/api/authApi";
 import { authReducer } from "./features/auth/authSlice";
+import { sectorAPI } from "@/lib/api/sectorApi";
 
 export const store = configureStore({
   reducer: {
@@ -17,11 +18,13 @@ export const store = configureStore({
     productDetailsReducer,
     [recruiterAPI.reducerPath]: recruiterAPI.reducer,
     [authAPI.reducerPath]: authAPI.reducer,
+    [sectorAPI.reducerPath]: sectorAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
       recruiterAPI.middleware,
-      authAPI.middleware
+      authAPI.middleware,
+      sectorAPI.middleware
     );
   },
 });

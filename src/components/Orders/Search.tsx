@@ -11,7 +11,7 @@ export default function Search({
     onQuery(e.target.value);
   }
   return (
-    <div className="flex mt-2 px-2 items-center justify-end flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
+    <div className="flex  items-center justify-end flex-column flex-wrap md:flex-row space-y-4 md:space-y-0  bg-white">
       <label htmlFor="table-search" className="sr-only">
         Search
       </label>
@@ -38,8 +38,8 @@ export default function Search({
           id="table-search-users"
           value={query}
           onChange={handleChange}
-          className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Search for recruiter"
+          className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Search ..."
         />
       </div>
     </div>

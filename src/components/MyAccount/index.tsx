@@ -19,6 +19,7 @@ import Dashboard from "./Dashboard";
 import AccountDetails from "./AccountDetails";
 import Address from "./Address";
 import { LuUserRound } from "react-icons/lu";
+import Sector from "@/features/sector";
 const MyAccount = () => {
   const [logoutUser] = useLogoutMutation();
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -141,7 +142,7 @@ const MyAccount = () => {
                       <BiCategoryAlt size={18} />
                       Category
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => setActiveTab("addresses")}
                       className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
                         activeTab === "addresses"
@@ -151,8 +152,8 @@ const MyAccount = () => {
                     >
                       <PiAddressBookLight size={18} />
                       Addresses
-                    </button>
-                    <button
+                    </button> */}
+                    {/* <button
                       onClick={() => setActiveTab("account-details")}
                       className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
                         activeTab === "account-details"
@@ -162,7 +163,7 @@ const MyAccount = () => {
                     >
                       <LuUserRound size={18} />
                       Account Details
-                    </button>
+                    </button> */}
                     <button
                       onClick={() => handleLogout()}
                       className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
@@ -178,13 +179,8 @@ const MyAccount = () => {
                 </div>
               </div>
             </div>
-            {/* <!--== user dashboard menu end ==-->
-          <!--== user dashboard content start ==--> */}
-            {/* <!-- dashboard tab content start --> */}
-            <Dashboard activeTab={activeTab} user={user} />
-            {/* <!-- dashboard tab content end -->
 
-          <!-- recruiter tab content start --> */}
+            <Dashboard activeTab={activeTab} user={user} />
             <div
               className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
                 activeTab === "recruiter" ? "block" : "hidden"
@@ -192,19 +188,18 @@ const MyAccount = () => {
             >
               <Recruiter />
             </div>
-            {/* <!-- recruiter tab content end -->
-
-          <!-- addresses tab content start --> */}
             <Address
               activeTab={activeTab}
               openAddressModal={openAddressModal}
             />
-            {/* <!-- addresses tab content end -->
-
-          <!-- details tab content start --> */}
             <AccountDetails activeTab={activeTab} />
-            {/* <!-- details tab content end -->
-          <!--== user dashboard content end ==--> */}
+            <div
+              className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
+                activeTab === "sector" ? "block" : "hidden"
+              }`}
+            >
+              <Sector />
+            </div>
           </div>
         </div>
       </section>

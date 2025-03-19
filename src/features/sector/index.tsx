@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useGetAllRecruiterQuery } from "@/lib/api/recruiterApi";
-import RecruiterList from "./recruiterList";
-import Search from "./Search";
-import Pagination from "./Pagination";
+import Pagination from "@/components/Orders/Pagination";
+import SectorList from "./SectorList";
+import Search from "@/components/Orders/Search";
+import { useGetAllSectorQuery } from "@/lib/api/sectorApi";
+import AddSector from "./AddSector";
 
-const Recruiter = () => {
+const Sector = () => {
   const [search, setSearch] = useState<string>("");
   const [limit, setLimit] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading, error } = useGetAllRecruiterQuery({
+  const { data, isLoading, error } = useGetAllSectorQuery({
     search,
     limit,
     page,
@@ -20,14 +21,15 @@ const Recruiter = () => {
   if (error)
     return (
       <div className="text-red-500">
-        Erreur lors du chargement des recruteurs
+        Error while loading the industry sectors.
       </div>
     );
-  const recruiters = data.recruiters;
+  const sectors = data.sectors;
   return (
     <div className="py-5 px-5">
       <div className="relative overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg ">
-        <div className="py-4 px-2">
+        <div className="flex flex-wrap justify-between items-center px-4 py-2">
+          <AddSector />
           <Search onQuery={setSearch} query={search} />
         </div>
 
@@ -35,35 +37,27 @@ const Recruiter = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Full Name
+                Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Email
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Role
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Created At
+                Action
               </th>
             </tr>
           </thead>
           <tbody>
-            {recruiters.length > 0 ? (
-              recruiters.map((item) => (
-                <RecruiterList recruiter={item} key={item._id} />
-              ))
+            {sectors.length > 0 ? (
+              sectors.map((item) => <SectorList sector={item} key={item._id} />)
             ) : (
               <tr>
-                <td colSpan={4} className="text-center py-4 text-gray-500">
-                  No recruiters found.
+                <td colSpan={2} className="text-center py-4 text-gray-500">
+                  No sectors found.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
-      {recruiters.length > limit ? (
+      {sectors.length > limit ? (
         <Pagination
           totalPages={data.totalPages}
           currentPage={data.currentPage}
@@ -75,4 +69,4 @@ const Recruiter = () => {
     </div>
   );
 };
-export default Recruiter;
+export default Sector;
