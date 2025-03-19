@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-
 import { useGetAllRecruiterQuery } from "@/lib/api/recruiterApi";
 import RecruiterList from "./recruiterList";
 import Search from "./Search";
+import Pagination from "./Pagination";
 
 const Recruiter = () => {
   const [search, setSearch] = useState<string>("");
-  const [limit, setLimit] = useState<number>(3);
+  const [limit, setLimit] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
   const { data, isLoading, error } = useGetAllRecruiterQuery({
     search,
     limit,
     page,
   });
+  // console.log(data);
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -37,7 +38,7 @@ const Recruiter = () => {
                 Email
               </th>
               <th scope="col" className="px-6 py-3">
-                Status
+                Role
               </th>
               <th scope="col" className="px-6 py-3">
                 Created At
@@ -45,12 +46,29 @@ const Recruiter = () => {
             </tr>
           </thead>
           <tbody>
-            {recruiters.map((item, index) => (
-              <RecruiterList recruiter={item} key={index} />
-            ))}
+            {recruiters.length > 0 ? (
+              recruiters.map((item) => (
+                <RecruiterList recruiter={item} key={item._id} />
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="text-center py-4 text-gray-500">
+                  No recruiters found.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
+      {recruiters.length > limit ? (
+        <Pagination
+          totalPages={data.totalPages}
+          currentPage={data.currentPage}
+          onPageChange={setPage}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
