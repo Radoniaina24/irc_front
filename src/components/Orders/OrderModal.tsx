@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import OrderDetails from "./OrderDetails";
-import EditOrder from "./EditOrder";
+import OrderDetails from "./RecruiterDetails";
+import EditOrder from "./EditRecruiter";
 
 const OrderModal = ({ showDetails, showEdit, toggleModal, order }: any) => {
   if (!showDetails && !showEdit) {

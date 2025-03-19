@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import OrderActions from "./OrderActions";
+import OrderActions from "./RecruiterActions";
 import OrderModal from "./OrderModal";
+import RecruiterActions from "./RecruiterActions";
 
 const SingleOrder = ({ orderItem, smallView }: any) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -57,7 +58,7 @@ const SingleOrder = ({ orderItem, smallView }: any) => {
           </div>
 
           <div className="flex gap-5 items-center">
-            <OrderActions
+            <RecruiterActions
               toggleDetails={toggleDetails}
               toggleEdit={toggleEdit}
             />

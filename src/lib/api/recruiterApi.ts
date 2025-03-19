@@ -5,6 +5,7 @@ export const recruiterAPI = createApi({
   tagTypes: ["recruiter"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+    credentials: "include",
   }),
   keepUnusedDataFor: 30,
   endpoints: (builder) => ({

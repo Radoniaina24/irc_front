@@ -1,70 +1,58 @@
-import React, { useEffect, useState } from "react";
-import SingleOrder from "./SingleOrder";
-import ordersData from "./ordersData";
+import React, { useState } from "react";
 
-const Orders = () => {
-  const [orders, setOrders] = useState<any>([]);
+import { useGetAllRecruiterQuery } from "@/lib/api/recruiterApi";
+import RecruiterList from "./recruiterList";
+import Search from "./Search";
 
-  useEffect(() => {
-    fetch(`/api/order`)
-      .then((res) => res.json())
-      .then((data) => {
-        setOrders(data.orders);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-
-  return (
-    <>
-      <div className="w-full overflow-x-auto">
-        <div className="min-w-[770px]">
-          {/* <!-- order item --> */}
-          {ordersData.length > 0 && (
-            <div className="items-center justify-between py-4.5 px-7.5 hidden md:flex ">
-              <div className="min-w-[111px]">
-                <p className="text-custom-sm text-dark">Order</p>
-              </div>
-              <div className="min-w-[175px]">
-                <p className="text-custom-sm text-dark">Date</p>
-              </div>
-
-              <div className="min-w-[128px]">
-                <p className="text-custom-sm text-dark">Status</p>
-              </div>
-
-              <div className="min-w-[213px]">
-                <p className="text-custom-sm text-dark">Title</p>
-              </div>
-
-              <div className="min-w-[113px]">
-                <p className="text-custom-sm text-dark">Total</p>
-              </div>
-
-              <div className="min-w-[113px]">
-                <p className="text-custom-sm text-dark">Action</p>
-              </div>
-            </div>
-          )}
-          {ordersData.length > 0 ? (
-            ordersData.map((orderItem, key) => (
-              <SingleOrder key={key} orderItem={orderItem} smallView={false} />
-            ))
-          ) : (
-            <p className="py-9.5 px-4 sm:px-7.5 xl:px-10">
-              You don&apos;t have any orders!
-            </p>
-          )}
-        </div>
-
-        {ordersData.length > 0 &&
-          ordersData.map((orderItem, key) => (
-            <SingleOrder key={key} orderItem={orderItem} smallView={true} />
-          ))}
+const Recruiter = () => {
+  const [search, setSearch] = useState<string>("");
+  const [limit, setLimit] = useState<number>(3);
+  const [page, setPage] = useState<number>(1);
+  const { data, isLoading, error } = useGetAllRecruiterQuery({
+    search,
+    limit,
+    page,
+  });
+  console.log(data);
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+  if (error)
+    return (
+      <div className="text-red-500">
+        Erreur lors du chargement des recruteurs
       </div>
-    </>
+    );
+  const recruiters = data.recruiters;
+  return (
+    <div className="py-5 px-5">
+      <div className="relative overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg ">
+        <Search onQuery={setSearch} query={search} />
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Full Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Email
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Status
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {recruiters.map((item, index) => (
+              <RecruiterList recruiter={item} key={index} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
-
-export default Orders;
+export default Recruiter;

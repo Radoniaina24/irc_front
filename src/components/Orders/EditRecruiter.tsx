@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-const EditOrder = ({ order, toggleModal }: any) => {
+const EditRecruiter = ({ order, toggleModal }: any) => {
   const [currentStatus, setCurrentStatus] = useState(order?.status);
   const handleChanege = (e: any) => {
     setCurrentStatus(e.target.value);
@@ -46,4 +46,4 @@ const EditOrder = ({ order, toggleModal }: any) => {
   );
 };
 
-export default EditOrder;
+export default EditRecruiter;

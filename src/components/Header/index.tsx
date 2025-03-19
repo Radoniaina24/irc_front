@@ -38,11 +38,11 @@ const Header = () => {
   });
 
   const options = [
-    { label: "Agriculture et Environnement", value: "0" },
-    { label: "Armée, Sécurité et Gouvernance", value: "1" },
-    { label: "Art et Culture", value: "2" },
-    { label: "BTP et Immobilier", value: "3" },
-    { label: "Commerce et Distribution", value: "4" },
+    { label: "Agriculture ", value: "0" },
+    { label: "Armée", value: "1" },
+    { label: "Culture", value: "2" },
+    { label: "BTP ", value: "3" },
+    { label: "Commerce", value: "4" },
     // { label: "Construction et Industrie", value: "5" },
     // { label: "Droit et Financen", value: "6" },
     // { label: "Enseignement et Formation", value: "7" },
@@ -58,7 +58,7 @@ const Header = () => {
     // { label: "Textile et Mode", value: "18" },
     // { label: "Audit et Conseil", value: "19" },
   ];
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
   return (
     <header
       className={`fixed left-0 top-0 w-full z-9999 bg-white transition-all ease-in-out duration-300 ${
