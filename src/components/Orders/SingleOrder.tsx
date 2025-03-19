@@ -126,13 +126,6 @@ const SingleOrder = ({ orderItem, smallView }: any) => {
           </div>
         </div>
       )}
-
-      <OrderModal
-        showDetails={showDetails}
-        showEdit={showEdit}
-        toggleModal={toggleModal}
-        order={orderItem}
-      />
     </>
   );
 };

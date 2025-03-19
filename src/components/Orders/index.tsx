@@ -13,7 +13,6 @@ const Recruiter = () => {
     limit,
     page,
   });
-  console.log(data);
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -41,7 +40,7 @@ const Recruiter = () => {
                 Status
               </th>
               <th scope="col" className="px-6 py-3">
-                Action
+                Created At
               </th>
             </tr>
           </thead>

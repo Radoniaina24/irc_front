@@ -1,12 +1,11 @@
-import React, { useRef, useEffect } from "react";
-import OrderDetails from "./RecruiterDetails";
-import EditOrder from "./EditRecruiter";
+import React, { useEffect } from "react";
+import RecruiterDetails from "./RecruiterDetails";
 
-const OrderModal = ({ showDetails, showEdit, toggleModal, order }: any) => {
+const OrderModal = ({ showDetails, showEdit, toggleModal, recruiter }: any) => {
   if (!showDetails && !showEdit) {
     return null;
   }
-
+  console.log(recruiter);
   return (
     <>
       <div
@@ -32,9 +31,8 @@ const OrderModal = ({ showDetails, showEdit, toggleModal, order }: any) => {
           </button>
 
           <>
-            {showDetails && <OrderDetails orderItem={order} />}
-
-            {showEdit && <EditOrder order={order} toggleModal={toggleModal} />}
+            {showDetails && <RecruiterDetails recruiterItem={recruiter} />}
+            {/* {showEdit && <EditOrder order={order} toggleModal={toggleModal} />} */}
           </>
         </div>
       </div>

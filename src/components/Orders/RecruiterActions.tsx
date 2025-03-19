@@ -10,9 +10,9 @@ const RecruiterActions = ({ toggleEdit, toggleDetails }: any) => {
       >
         <GrView size={16} />
       </button>
-      <button onClick={toggleEdit} className="hover:bg-gray-2 rounded-full p-2">
+      {/* <button onClick={toggleEdit} className="hover:bg-gray-2 rounded-full p-2">
         <FiEdit size={16} />
-      </button>
+      </button> */}
     </>
   );
 };
