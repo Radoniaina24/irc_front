@@ -36,7 +36,6 @@ export default function AddSector() {
       }
     },
   });
-  const hashError = formik.touched.name && formik.errors.name;
   return (
     <form onSubmit={formik.handleSubmit} autoComplete="off" className="flex ">
       <label htmlFor="name" className="sr-only">

@@ -57,7 +57,7 @@ const Sector = () => {
           </tbody>
         </table>
       </div>
-      {sectors.length > limit ? (
+      {sectors.length > 1 ? (
         <Pagination
           totalPages={data.totalPages}
           currentPage={data.currentPage}
