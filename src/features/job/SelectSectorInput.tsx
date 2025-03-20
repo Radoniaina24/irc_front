@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useGetAllCategoryQuery } from "@/lib/api/categoryApi";
+import { useGetAllSectorQuery } from "@/lib/api/sectorApi";
 
 interface SelectCategoryProps {
   label: string;
@@ -10,7 +10,7 @@ interface SelectCategoryProps {
   error?: any;
   touched?: any;
 }
-const SelectCategory: React.FC<SelectCategoryProps> = ({
+const SelectSector: React.FC<SelectCategoryProps> = ({
   label,
   onChange,
   value,
@@ -18,8 +18,8 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
   error,
   touched,
 }) => {
-  const { data, isLoading } = useGetAllCategoryQuery({ limit: 1000 });
-  const Categories = data?.categories || [];
+  const { data, isLoading } = useGetAllSectorQuery({ limit: 1000 });
+  const Categories = data?.sectors || [];
   // console.log(data);
   // Rendu conditionnel du contenu principal
   const renderContent = () => {
@@ -33,14 +33,14 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
       return (
         <div className="bg-gray-50 border border-gray-300 p-4 rounded-md dark:bg-gray-800">
           <p className="text-gray-700 dark:text-gray-300">
-            🚨 <strong>No category available</strong>. Please create one to
+            🚨 <strong>No Sector available</strong>. Please create one to
             continue.
           </p>
           <button
             className="bg-blue-500 rounded mt-2 px-4 py-2"
             onClick={() => (window.location.href = "/classe")}
           >
-            ➕ Add category
+            ➕ Add sector
           </button>
         </div>
       );
@@ -54,7 +54,7 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
         className="bg-gray-50 border border-gray-300 p-2 rounded text-gray-900 text-sm w-full block focus:border-blue-500 ps-5 py-2"
       >
         <option value="" disabled className="text-sm">
-          Please select a category.
+          Please select a sector.
         </option>
         {Categories.map((item: any) => (
           <option key={item?._id} value={item?._id} className="text-sm">
@@ -78,4 +78,4 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
     </div>
   );
 };
-export default SelectCategory;
+export default SelectSector;

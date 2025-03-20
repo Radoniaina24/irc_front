@@ -17,7 +17,7 @@ const Job = () => {
   });
 
   if (isLoading) {
-    return <div className="text-center py-94">Loading ...</div>;
+    return <div className="text-center py-75">Loading ...</div>;
   }
   if (error)
     return (

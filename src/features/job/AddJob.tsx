@@ -9,14 +9,17 @@ import { useAddSectorMutation } from "@/lib/api/sectorApi";
 import Modal from "./Modal";
 import SelectCategory from "./SelectCategoryInput";
 import { useAddCategoryMutation } from "@/lib/api/categoryApi";
+import InputField from "./InputField";
+import SelectSector from "./SelectSectorInput";
+import SelectInput from "./SelectInput";
+import Checkbox from "./CheckBox";
 const initialvalues = {
-  name: "",
   sector: "",
   category: "",
   title: "",
-  description: "",
+  description: "", //TextArea + summer Note
   location: "",
-  remote: "",
+  remote: false, //checkBOx
   contractType: "", //["CDI", "CDD", "Freelance", "Stage", "Alternance", "Intérim"]
   experienceRequired: "", //["Débutant", "1 ans", "2 ans", "3 ans", "4 ans", "5 ans"],
   studyLevels: "", //["Sans bac", "Bac", "Bac +2", "Bac +3", "Bac +4", "Bac +5"],
@@ -30,7 +33,6 @@ export default function AddJob() {
   const formik = useFormik({
     initialValues: initialvalues,
     validationSchema: Yup.object({
-      name: Yup.string().required("Name is required"),
       sector: Yup.mixed()
         .test("sector", "This field is required.", (value) => {
           // Vérifiez si la valeur est un objet ou une chaîne non vide
@@ -64,7 +66,31 @@ export default function AddJob() {
       }
     },
   });
-  // console.log(formik.values);
+  console.log(formik.values);
+  const optionsContractType = [
+    { id: 1, value: "CDI", name: "CDI" },
+    { id: 2, value: "CDD", name: "CDD" },
+    { id: 3, value: "Freelance", name: "Freelance" },
+    { id: 4, value: "Stage", name: "Stage" },
+    { id: 5, value: "Alternance", name: "Alternance" },
+    { id: 6, value: "Intérim", name: "Intérim" },
+  ];
+  const experienceLevels = [
+    { id: 1, value: "Débutant", name: "Beginner" },
+    { id: 2, value: "1 an", name: "1 year" },
+    { id: 3, value: "2 ans", name: "2 years" },
+    { id: 4, value: "3 ans", name: "3 years" },
+    { id: 5, value: "4 ans", name: "4 years" },
+    { id: 6, value: "5 ans", name: "5 years" },
+  ];
+  const studyLevels = [
+    { id: 1, value: "Sans bac", name: "No bac" },
+    { id: 2, value: "Bac", name: "Bac" },
+    { id: 3, value: "Bac +2", name: "Bac +2" },
+    { id: 4, value: "Bac +3", name: "Bac +3" },
+    { id: 5, value: "Bac +4", name: "Bac +4" },
+    { id: 6, value: "Bac +5", name: "Bac +5" },
+  ];
   return (
     <div>
       <button onClick={() => setOpen(true)}>
@@ -75,28 +101,75 @@ export default function AddJob() {
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <h1 className="text-center text-lg font-bold">New job post</h1>
 
-            <label htmlFor="name" className="text-sm">
-              Name
-            </label>
-            <div className="w-full mt-2 relative">
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.name}
-                type="text"
-                id="name"
-                className="bg-gray-50 border border-gray-300 p-2 rounded text-gray-900 text-sm w-full block focus:border-blue-500 ps-5 py-2"
-                placeholder="category..."
-                required
-              />
-            </div>
-
+            <InputField
+              label="Post"
+              name="title"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              placeholder="eg: developpeur web"
+              required
+            />
+            <InputField
+              label="Workplace"
+              name="location"
+              value={formik.values.location}
+              onChange={formik.handleChange}
+              placeholder="eg:Paris"
+              required
+            />
+            <InputField
+              type="date"
+              label="Deadline"
+              name="deadline"
+              value={formik.values.deadline}
+              onChange={formik.handleChange}
+              required
+            />
+            <SelectInput
+              label="Contract type"
+              id="contractType"
+              value={formik.values.contractType}
+              onChange={formik.handleChange}
+              options={optionsContractType}
+              optionsLabel="Please select a contract type"
+            />
+            <SelectInput
+              label="Experience Level"
+              id="experienceRequired"
+              value={formik.values.experienceRequired}
+              onChange={formik.handleChange}
+              options={experienceLevels}
+              optionsLabel="Please select a experience"
+            />
+            <SelectInput
+              label="Study Level"
+              id="studyLevels"
+              value={formik.values.studyLevels}
+              onChange={formik.handleChange}
+              options={studyLevels}
+              optionsLabel="Please select a study levels"
+            />
             <SelectCategory
+              label="Category"
+              onChange={formik.handleChange}
+              value={formik.values.category}
+              error={formik.errors.category}
+              touched={formik.touched.category}
+              id="category"
+            />
+            <SelectSector
               label="Sector"
               onChange={formik.handleChange}
               value={formik.values.sector}
               error={formik.errors.sector}
               touched={formik.touched.sector}
               id="sector"
+            />
+            <Checkbox
+              label="Work from home"
+              name="remote"
+              checked={formik.values.remote}
+              onChange={formik.handleChange}
             />
             <button
               disabled={formik.isSubmitting}
