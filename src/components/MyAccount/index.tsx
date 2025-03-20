@@ -21,197 +21,121 @@ import Address from "./Address";
 import { LuUserRound } from "react-icons/lu";
 import Sector from "@/features/sector";
 import Category from "@/features/category";
+const TABS = [
+  { id: "dashboard", label: "Dashboard", icon: <RxDashboard size={18} /> },
+  {
+    id: "job",
+    label: "Job Announcement",
+    icon: <PiReadCvLogoLight size={18} />,
+  },
+  {
+    id: "recruiter",
+    label: "Recruiter",
+    icon: <GrUserSettings size={18} />,
+    adminOnly: true,
+  },
+  {
+    id: "candidate",
+    label: "Candidate",
+    icon: <GrUserSettings size={18} />,
+    adminOnly: true,
+  },
+  {
+    id: "sector",
+    label: "Sector",
+    icon: <MdOutlineCategory size={18} />,
+    adminOnly: true,
+  },
+  {
+    id: "category",
+    label: "Category",
+    icon: <BiCategoryAlt size={18} />,
+    adminOnly: true,
+  },
+];
+
 const MyAccount = () => {
   const [logoutUser] = useLogoutMutation();
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [addressModal, setAddressModal] = useState(false);
   const dispatch = useDispatch();
-  const openAddressModal = () => {
-    setAddressModal(true);
-  };
-  const closeAddressModal = () => {
-    setAddressModal(false);
-  };
-
-  const navigation = useRouter();
+  const router = useRouter();
   const user = useSelector(selectUser);
-  async function handleLogout() {
+
+  const handleLogout = async () => {
     try {
-      // Appeler la mutation de déconnexion
       await logoutUser("").unwrap();
-      // Si la déconnexion réussit, effacer l'état d'authentification de Redux
       dispatch(logout());
-      navigation.push("/");
+      router.push("/");
     } catch (err) {
       console.error("Logout failed", err);
     }
-  }
+  };
+
   return (
     <>
-      <Breadcrumb title={"My Account"} pages={["my account"]} />
+      <Breadcrumb title="My Account" pages={["my account"]} />
       <section className="bg-gray-2 overflow-hidden py-20">
-        <div className="w-full max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
-          <div className="flex flex-col gap-7.5 xl:flex-row">
-            {/* <!--== user dashboard menu start ==--> */}
-            <div className="bg-white rounded-xl shadow-1 w-full xl:max-w-[370px]">
-              <div className="flex xl:flex-col">
-                <div className="flex-wrap border-gray-3 border-r gap-5 hidden items-center lg:flex px-4 py-6 sm:px-7.5 xl:border-b xl:border-r-0 xl:px-9">
-                  <div className="h-16 rounded-full w-full max-w-[64px] overflow-hidden">
-                    <Image
-                      src="/images/users/user-04.jpg"
-                      alt="user"
-                      width={64}
-                      height={64}
-                    />
-                  </div>
-
-                  <div>
-                    <p className="text-dark font-medium mb-0.5">
-                      {user.firstName}
-                      <br />
-                      {user.lastName}
-                    </p>
-                    <p className="text-custom-xs">{user.role}</p>
-                  </div>
-                </div>
-
-                <div className="p-4 sm:p-7.5 xl:p-9">
-                  <div className="flex flex-wrap gap-4 xl:flex-col xl:flex-nowrap">
-                    <button
-                      onClick={() => setActiveTab("dashboard")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "dashboard"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <RxDashboard size={18} />
-                      Dashboard
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("recruiter")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "recruiter"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <GrUserSettings size={18} />
-                      Recruiter
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("candidate")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "candidate"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <GrUserSettings size={18} />
-                      Candidate
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("job")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "job"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <PiReadCvLogoLight size={18} />
-                      Job Announcement
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("sector")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "sector"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <MdOutlineCategory size={18} />
-                      Sector
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("category")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "category"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <BiCategoryAlt size={18} />
-                      Category
-                    </button>
-                    {/* <button
-                      onClick={() => setActiveTab("addresses")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "addresses"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <PiAddressBookLight size={18} />
-                      Addresses
-                    </button> */}
-                    {/* <button
-                      onClick={() => setActiveTab("account-details")}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "account-details"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <LuUserRound size={18} />
-                      Account Details
-                    </button> */}
-                    <button
-                      onClick={() => handleLogout()}
-                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
-                        activeTab === "logout"
-                          ? "text-white bg-blue"
-                          : "text-dark-2 bg-gray-1"
-                      }`}
-                    >
-                      <SlLogout size={18} />
-                      Logout
-                    </button>
-                  </div>
+        <div className="flex flex-col w-full gap-7.5 max-w-[1170px] mx-auto px-4 sm:px-8 xl:flex-row xl:px-0">
+          {/* Sidebar */}
+          <aside className="bg-white rounded-xl shadow-1 w-full xl:max-w-[370px]">
+            <div className="flex xl:flex-col">
+              <div className="flex-wrap border-gray-3 border-r gap-5 hidden items-center lg:flex px-4 py-6 sm:px-7.5 xl:border-b xl:border-r-0 xl:px-9">
+                <Image
+                  src="/images/users/user-04.jpg"
+                  alt="user"
+                  width={64}
+                  height={64}
+                  className="h-16 rounded-full w-full max-w-[64px]"
+                />
+                <div>
+                  <p className="text-dark font-medium mb-0.5">
+                    {user.firstName} {user.lastName}
+                  </p>
+                  <p className="text-custom-xs">{user.role}</p>
                 </div>
               </div>
+              <div className="p-4 sm:p-7.5 xl:p-9">
+                <nav className="flex flex-wrap gap-4 xl:flex-col xl:flex-nowrap">
+                  {TABS.map(
+                    ({ id, label, icon, adminOnly }) =>
+                      (!adminOnly || user.role === "admin") && (
+                        <button
+                          key={id}
+                          onClick={() => setActiveTab(id)}
+                          className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 transition duration-200 hover:bg-blue hover:text-white ${
+                            activeTab === id
+                              ? "text-white bg-blue"
+                              : "text-dark-2 bg-gray-1"
+                          }`}
+                        >
+                          {icon} {label}
+                        </button>
+                      )
+                  )}
+                  <button
+                    onClick={handleLogout}
+                    className="flex bg-gray-1 rounded-md text-dark-2 duration-200 gap-2.5 hover:bg-blue hover:text-white items-center px-4.5 py-3 transition"
+                  >
+                    <SlLogout size={18} /> Logout
+                  </button>
+                </nav>
+              </div>
             </div>
+          </aside>
 
-            <Dashboard activeTab={activeTab} user={user} />
-            <div
-              className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
-                activeTab === "recruiter" ? "block" : "hidden"
-              }`}
-            >
+          {/* Main Content */}
+          <main className="bg-white rounded-xl shadow-1 w-full xl:max-w-[770px]">
+            {activeTab === "dashboard" && (
+              <Dashboard activeTab={activeTab} user={user} />
+            )}
+            {activeTab === "recruiter" && user.role === "admin" && (
               <Recruiter />
-            </div>
-            {/* <Address
-              activeTab={activeTab}
-              openAddressModal={openAddressModal}
-            />
-            <AccountDetails activeTab={activeTab} /> */}
-            <div
-              className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
-                activeTab === "sector" ? "block" : "hidden"
-              }`}
-            >
-              <Sector />
-            </div>
-            <div
-              className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
-                activeTab === "category" ? "block" : "hidden"
-              }`}
-            >
-              <Category />
-            </div>
-          </div>
+            )}
+            {activeTab === "sector" && <Sector />}
+            {activeTab === "category" && <Category />}
+          </main>
         </div>
       </section>
-      {/* <AddressModal isOpen={addressModal} closeModal={closeAddressModal} /> */}
     </>
   );
 };

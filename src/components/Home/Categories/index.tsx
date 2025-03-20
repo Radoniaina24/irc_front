@@ -1,15 +1,17 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useCallback, useRef, useEffect } from "react";
-import data from "./categoryData";
+import datas from "./categoryData";
 import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css/navigation";
 import "swiper/css";
 import SingleItem from "./SingleItem";
+import { useGetAllSectorQuery } from "@/lib/api/sectorApi";
 
 const Categories = () => {
+  const { data, isLoading, error } = useGetAllSectorQuery({ limit: 1000 });
   const sliderRef = useRef(null);
 
   const handlePrev = useCallback(() => {
@@ -27,15 +29,18 @@ const Categories = () => {
       sliderRef.current.swiper.init();
     }
   }, []);
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const sectors = data.sectors;
   return (
     <section className="overflow-hidden pt-30">
-      <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0 pb-15 border-b border-gray-3">
-        <div className="swiper categories-carousel common-carousel">
+      <div className="border-b border-gray-3 w-full max-w-[1170px] mx-auto pb-15 px-4 sm:px-8 xl:px-0">
+        <div className="categories-carousel common-carousel swiper">
           {/* <!-- section title --> */}
-          <div className="mb-10 flex items-center justify-between">
+          <div className="flex justify-between items-center mb-10">
             <div>
-              <span className="flex items-center gap-2.5 font-medium text-dark mb-1.5">
+              <span className="flex text-dark font-medium gap-2.5 items-center mb-1.5">
                 <svg
                   width="20"
                   height="20"
@@ -72,12 +77,12 @@ const Categories = () => {
                 </svg>
                 Sector
               </span>
-              <h2 className="font-semibold text-xl xl:text-heading-5 text-dark">
+              <h2 className="text-dark text-xl font-semibold xl:text-heading-5">
                 Browse by Sector
               </h2>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex gap-3 items-center">
               <button onClick={handlePrev} className="swiper-button-prev">
                 <svg
                   className="fill-current"
@@ -124,8 +129,12 @@ const Categories = () => {
               0: {
                 slidesPerView: 2,
               },
+              640: {
+                slidesPerView: 3,
+                // spaceBetween: 4,
+              },
               1000: {
-                slidesPerView: 4,
+                slidesPerView: 5,
                 // spaceBetween: 4,
               },
               // when window width is >= 768px
@@ -134,7 +143,7 @@ const Categories = () => {
               },
             }}
           >
-            {data.map((item, key) => (
+            {sectors.map((item, key) => (
               <SwiperSlide key={key}>
                 <SingleItem item={item} />
               </SwiperSlide>
