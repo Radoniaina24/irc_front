@@ -10,7 +10,7 @@ export default function CategoryList(category: any) {
         <td className="px-6 py-4"> {cat.name}</td>
         <td className="px-6 py-4"> {cat.sector.name}</td>
         <td className="flex gap-3 px-6 py-4">
-          <EditButton id={cat._id} name={cat.name} />
+          <EditButton id={cat._id} name={cat.name} sector={cat.sector._id} />
           <DeleteButton id={cat._id} />
         </td>
       </tr>

@@ -48,11 +48,11 @@ export const categoryAPI = createApi({
       invalidatesTags: ["category"],
     }),
     updateCategory: builder.mutation({
-      query: ({ name, id }) => {
+      query: ({ name, id, sector }) => {
         return {
           url: `/category/${id}`,
           method: "PUT",
-          body: name,
+          body: { sector, name },
         };
       },
       invalidatesTags: ["category"],
