@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Pagination from "@/components/Orders/Pagination";
-import SectorList from "./SectorList";
+import CategoryList from "./CategoryList";
 import Search from "@/components/Orders/Search";
-import { useGetAllSectorQuery } from "@/lib/api/sectorApi";
-import AddSector from "./AddSector";
+import { useGetAllCategoryQuery } from "@/lib/api/categoryApi";
+import AddCategory from "./AddCategory";
 
-const Sector = () => {
+const Category = () => {
   const [search, setSearch] = useState<string>("");
   const [limit, setLimit] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading, error } = useGetAllSectorQuery({
+  const { data, isLoading, error } = useGetAllCategoryQuery({
     search,
     limit,
     page,
@@ -20,17 +20,15 @@ const Sector = () => {
   }
   if (error)
     return (
-      <div className="text-red-500">
-        Error while loading the industry sectors.
-      </div>
+      <div className="text-red-500">Error while loading the categories.</div>
     );
-  const sectors = data.sectors;
+  const categories = data.categories;
   return (
     <div className="px-5 py-5">
       <div className="shadow-md overflow-x-auto overflow-y-auto relative sm:rounded-lg">
         <div className="flex flex-wrap justify-between items-center px-4 py-2">
-          <AddSector />
           <Search onQuery={setSearch} query={search} />
+          <AddCategory />
         </div>
 
         <div className="h-100 lg:h-[650px] overflow-y-auto">
@@ -41,19 +39,22 @@ const Sector = () => {
                   Name
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Sector
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Action
                 </th>
               </tr>
             </thead>
             <tbody>
-              {sectors.length > 0 ? (
-                sectors.map((item) => (
-                  <SectorList sector={item} key={item._id} />
+              {categories.length > 0 ? (
+                categories.map((item) => (
+                  <CategoryList category={item} key={item._id} />
                 ))
               ) : (
                 <tr>
                   <td colSpan={2} className="text-center text-gray-500 py-4">
-                    No sectors found.
+                    No categories found.
                   </td>
                 </tr>
               )}
@@ -70,4 +71,4 @@ const Sector = () => {
     </div>
   );
 };
-export default Sector;
+export default Category;

@@ -20,6 +20,7 @@ import AccountDetails from "./AccountDetails";
 import Address from "./Address";
 import { LuUserRound } from "react-icons/lu";
 import Sector from "@/features/sector";
+import Category from "@/features/category";
 const MyAccount = () => {
   const [logoutUser] = useLogoutMutation();
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -48,14 +49,14 @@ const MyAccount = () => {
   return (
     <>
       <Breadcrumb title={"My Account"} pages={["my account"]} />
-      <section className="overflow-hidden py-20 bg-gray-2">
-        <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
-          <div className="flex flex-col xl:flex-row gap-7.5">
+      <section className="bg-gray-2 overflow-hidden py-20">
+        <div className="w-full max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
+          <div className="flex flex-col gap-7.5 xl:flex-row">
             {/* <!--== user dashboard menu start ==--> */}
-            <div className="xl:max-w-[370px] w-full bg-white rounded-xl shadow-1">
+            <div className="bg-white rounded-xl shadow-1 w-full xl:max-w-[370px]">
               <div className="flex xl:flex-col">
-                <div className="hidden lg:flex flex-wrap items-center gap-5 py-6 px-4 sm:px-7.5 xl:px-9 border-r xl:border-r-0 xl:border-b border-gray-3">
-                  <div className="max-w-[64px] w-full h-16 rounded-full overflow-hidden">
+                <div className="flex-wrap border-gray-3 border-r gap-5 hidden items-center lg:flex px-4 py-6 sm:px-7.5 xl:border-b xl:border-r-0 xl:px-9">
+                  <div className="h-16 rounded-full w-full max-w-[64px] overflow-hidden">
                     <Image
                       src="/images/users/user-04.jpg"
                       alt="user"
@@ -65,7 +66,7 @@ const MyAccount = () => {
                   </div>
 
                   <div>
-                    <p className="font-medium text-dark mb-0.5">
+                    <p className="text-dark font-medium mb-0.5">
                       {user.firstName}
                       <br />
                       {user.lastName}
@@ -75,7 +76,7 @@ const MyAccount = () => {
                 </div>
 
                 <div className="p-4 sm:p-7.5 xl:p-9">
-                  <div className="flex flex-wrap xl:flex-nowrap xl:flex-col gap-4">
+                  <div className="flex flex-wrap gap-4 xl:flex-col xl:flex-nowrap">
                     <button
                       onClick={() => setActiveTab("dashboard")}
                       className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 ease-out duration-200 hover:bg-blue hover:text-white ${
@@ -188,11 +189,11 @@ const MyAccount = () => {
             >
               <Recruiter />
             </div>
-            <Address
+            {/* <Address
               activeTab={activeTab}
               openAddressModal={openAddressModal}
             />
-            <AccountDetails activeTab={activeTab} />
+            <AccountDetails activeTab={activeTab} /> */}
             <div
               className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
                 activeTab === "sector" ? "block" : "hidden"
@@ -200,11 +201,17 @@ const MyAccount = () => {
             >
               <Sector />
             </div>
+            <div
+              className={`xl:max-w-[770px] w-full bg-white rounded-xl shadow-1 ${
+                activeTab === "category" ? "block" : "hidden"
+              }`}
+            >
+              <Category />
+            </div>
           </div>
         </div>
       </section>
-
-      <AddressModal isOpen={addressModal} closeModal={closeAddressModal} />
+      {/* <AddressModal isOpen={addressModal} closeModal={closeAddressModal} /> */}
     </>
   );
 };

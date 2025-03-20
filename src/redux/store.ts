@@ -8,6 +8,7 @@ import { recruiterAPI } from "@/lib/api/recruiterApi";
 import { authAPI } from "@/lib/api/authApi";
 import { authReducer } from "./features/auth/authSlice";
 import { sectorAPI } from "@/lib/api/sectorApi";
+import { categoryAPI } from "@/lib/api/categoryApi";
 
 export const store = configureStore({
   reducer: {
@@ -19,12 +20,14 @@ export const store = configureStore({
     [recruiterAPI.reducerPath]: recruiterAPI.reducer,
     [authAPI.reducerPath]: authAPI.reducer,
     [sectorAPI.reducerPath]: sectorAPI.reducer,
+    [categoryAPI.reducerPath]: categoryAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
       recruiterAPI.middleware,
       authAPI.middleware,
-      sectorAPI.middleware
+      sectorAPI.middleware,
+      categoryAPI.middleware
     );
   },
 });

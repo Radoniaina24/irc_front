@@ -6,14 +6,15 @@ import { MdDeleteForever } from "react-icons/md";
 
 import { useDeleteSectorMutation } from "@/lib/api/sectorApi";
 import { useToast } from "@/lib/context/ToastContext";
+import { useDeleteCategoryMutation } from "@/lib/api/categoryApi";
 
 export default function DeleteButton({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean>(false);
-  const [deleteSector] = useDeleteSectorMutation();
+  const [deleteCategory] = useDeleteCategoryMutation();
   const { showToast } = useToast();
   async function handleDelete(id: string) {
     try {
-      const response = await deleteSector(id).unwrap();
+      const response = await deleteCategory(id).unwrap();
       showToast(response?.message, "success");
       setOpen(false);
     } catch (error) {
