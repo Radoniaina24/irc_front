@@ -1,5 +1,5 @@
 import React from "react";
-import Xcircle from "./svg/Xcircle";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 export default function Modal({
   open,
   onClose,
@@ -27,8 +27,10 @@ export default function Modal({
       >
         <button
           onClick={onClose}
-          className="absolute right-2 top-2 rounded-lg bg-white p-1 text-gray-400 hover:bg-gray-50 hover:text-gray-600"
-        ></button>
+          className="bg-white p-1 rounded-lg text-gray-400 absolute hover:bg-gray-50 hover:text-gray-600 right-2 top-2"
+        >
+          <IoIosCloseCircleOutline />
+        </button>
         {children}
       </div>
     </div>
