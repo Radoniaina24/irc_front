@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import Modal from "./Modal";
 import SelectCategory from "./SelectCategoryInput";
 import { useUpdateCategoryMutation } from "@/lib/api/categoryApi";
-import { MdDeleteForever, MdEditNote } from "react-icons/md";
+import { MdEditNote } from "react-icons/md";
 export default function EditCategory({
   id,
   name,
