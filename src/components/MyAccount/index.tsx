@@ -21,6 +21,7 @@ import Address from "./Address";
 import { LuUserRound } from "react-icons/lu";
 import Sector from "@/features/sector";
 import Category from "@/features/category";
+import Job from "@/features/job";
 const TABS = [
   { id: "dashboard", label: "Dashboard", icon: <RxDashboard size={18} /> },
   {
@@ -70,7 +71,6 @@ const MyAccount = () => {
       console.error("Logout failed", err);
     }
   };
-
   return (
     <>
       <Breadcrumb title="My Account" pages={["my account"]} />
@@ -133,6 +133,7 @@ const MyAccount = () => {
             )}
             {activeTab === "sector" && <Sector />}
             {activeTab === "category" && <Category />}
+            {activeTab === "job" && <Job />}
           </main>
         </div>
       </section>

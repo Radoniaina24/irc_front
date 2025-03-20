@@ -9,6 +9,7 @@ import { authAPI } from "@/lib/api/authApi";
 import { authReducer } from "./features/auth/authSlice";
 import { sectorAPI } from "@/lib/api/sectorApi";
 import { categoryAPI } from "@/lib/api/categoryApi";
+import { jobAPI } from "@/lib/api/jobApi";
 
 export const store = configureStore({
   reducer: {
@@ -21,13 +22,15 @@ export const store = configureStore({
     [authAPI.reducerPath]: authAPI.reducer,
     [sectorAPI.reducerPath]: sectorAPI.reducer,
     [categoryAPI.reducerPath]: categoryAPI.reducer,
+    [jobAPI.reducerPath]: jobAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
       recruiterAPI.middleware,
       authAPI.middleware,
       sectorAPI.middleware,
-      categoryAPI.middleware
+      categoryAPI.middleware,
+      jobAPI.middleware
     );
   },
 });
