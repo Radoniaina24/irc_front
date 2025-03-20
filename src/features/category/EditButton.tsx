@@ -25,6 +25,7 @@ export default function EditCategory({
   const [updateCategories] = useUpdateCategoryMutation();
   const formik = useFormik({
     initialValues: initialvalues,
+    enableReinitialize: true,
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
       sector: Yup.mixed()

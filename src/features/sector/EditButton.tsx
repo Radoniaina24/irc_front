@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Modal from "./Modal";
 import { MdDeleteForever, MdEditNote } from "react-icons/md";
 import { Loader2 } from "lucide-react";
@@ -7,17 +7,17 @@ import { useUpdateSectorMutation } from "@/lib/api/sectorApi";
 import { useToast } from "@/lib/context/ToastContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { IoMdAdd } from "react-icons/io";
 
 export default function EditButton({ id, name }: { id: string; name: any }) {
   const [open, setOpen] = useState<boolean>(false);
   const [updateSector] = useUpdateSectorMutation();
+
+  // console.log(data);
   const { showToast } = useToast();
-  const initialValues = {
-    name: name,
-  };
+  const initialValues = useMemo(() => ({ name }), [name]);
   const formik = useFormik({
     initialValues: initialValues,
+    enableReinitialize: true,
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
     }),
