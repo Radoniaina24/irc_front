@@ -26,36 +26,40 @@ const Sector = () => {
     );
   const sectors = data.sectors;
   return (
-    <div className="py-5 px-5">
-      <div className="relative overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg ">
+    <div className="px-5 py-5">
+      <div className="shadow-md overflow-x-auto overflow-y-auto relative sm:rounded-lg">
         <div className="flex flex-wrap justify-between items-center px-4 py-2">
           <AddSector />
           <Search onQuery={setSearch} query={search} />
         </div>
 
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sectors.length > 0 ? (
-              sectors.map((item) => <SectorList sector={item} key={item._id} />)
-            ) : (
+        <div className="h-100 lg:h-[650px] overflow-y-auto">
+          <table className="text-gray-500 text-left text-sm w-full dark:text-gray-400 rtl:text-right">
+            <thead className="bg-gray-50 text-gray-700 text-xs dark:bg-gray-700 dark:text-gray-400 sticky top-0 z-10 uppercase">
               <tr>
-                <td colSpan={2} className="text-center py-4 text-gray-500">
-                  No sectors found.
-                </td>
+                <th scope="col" className="px-6 py-3">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Action
+                </th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sectors.length > 0 ? (
+                sectors.map((item) => (
+                  <SectorList sector={item} key={item._id} />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={2} className="text-center text-gray-500 py-4">
+                    No sectors found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
       {sectors.length > 1 ? (
         <Pagination
