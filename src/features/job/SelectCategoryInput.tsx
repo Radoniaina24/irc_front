@@ -20,6 +20,7 @@ const SelectCategory: React.FC<SelectCategoryProps> = ({
 }) => {
   const { data, isLoading } = useGetAllCategoryQuery({ limit: 1000 });
   const Categories = data?.categories || [];
+
   // console.log(data);
   // Rendu conditionnel du contenu principal
   const renderContent = () => {

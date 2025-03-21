@@ -2,17 +2,21 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { MdAddBox } from "react-icons/md";
-
 import { useToast } from "@/lib/context/ToastContext";
 import { Loader2 } from "lucide-react";
-import { useAddSectorMutation } from "@/lib/api/sectorApi";
 import Modal from "./Modal";
 import SelectCategory from "./SelectCategoryInput";
-import { useAddCategoryMutation } from "@/lib/api/categoryApi";
+import {
+  useAddCategoryMutation,
+  useGetAllCategoryQuery,
+} from "@/lib/api/categoryApi";
 import InputField from "./InputField";
 import SelectSector from "./SelectSectorInput";
 import SelectInput from "./SelectInput";
 import Checkbox from "./CheckBox";
+import MultiValueInput from "./MultiValueInput";
+import { useCategoriesOptions, useSectorsOptions } from "./options";
+import ReactSelectInput from "./ReactSelectInput";
 const initialvalues = {
   sector: "",
   category: "",
@@ -27,6 +31,9 @@ const initialvalues = {
   deadline: "",
 };
 export default function AddJob() {
+  const { options: categories, isLoading: isCategoriesLoading } =
+    useCategoriesOptions();
+  const { options: sectors, isLoading: isSectorsLoading } = useSectorsOptions();
   const [open, setOpen] = useState<boolean>(false);
   const { showToast } = useToast();
   const [addCategories] = useAddCategoryMutation();
@@ -44,7 +51,19 @@ export default function AddJob() {
           return false; // Si la valeur n'est ni un objet valide ni une chaîne non vide, la validation échoue
         })
         .required("This field is required."),
+      category: Yup.mixed()
+        .test("category", "This field is required.", (value) => {
+          // Vérifiez si la valeur est un objet ou une chaîne non vide
+          if (typeof value === "object" && value !== null) {
+            return true; // L'objet est valide
+          } else if (typeof value === "string" && value.trim() !== "") {
+            return true; // La chaîne non vide est valide
+          }
+          return false; // Si la valeur n'est ni un objet valide ni une chaîne non vide, la validation échoue
+        })
+        .required("This field is required."),
     }),
+
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
 
@@ -66,7 +85,7 @@ export default function AddJob() {
       }
     },
   });
-  console.log(formik.values);
+  // console.log(formik.values.sector);
   const optionsContractType = [
     { id: 1, value: "CDI", name: "CDI" },
     { id: 2, value: "CDD", name: "CDD" },
@@ -97,73 +116,89 @@ export default function AddJob() {
         <MdAddBox size={30} className="text-blue-500" />
       </button>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="p-10 w-115">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full lg:max-w-3xl max-w-lg md:max-w-2xl mx-auto">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <h1 className="text-center text-lg font-bold">New job post</h1>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <InputField
+                label="Post"
+                name="title"
+                value={formik.values.title}
+                onChange={formik.handleChange}
+                placeholder="eg: developpeur web"
+                required
+              />
+              <InputField
+                label="Workplace"
+                name="location"
+                value={formik.values.location}
+                onChange={formik.handleChange}
+                placeholder="eg:Paris"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <InputField
+                type="date"
+                label="Deadline"
+                name="deadline"
+                value={formik.values.deadline}
+                onChange={formik.handleChange}
+                required
+              />
+              <SelectInput
+                label="Contract type"
+                id="contractType"
+                value={formik.values.contractType}
+                onChange={formik.handleChange}
+                options={optionsContractType}
+                optionsLabel="Please select a contract type"
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <SelectInput
+                label="Experience Level"
+                id="experienceRequired"
+                value={formik.values.experienceRequired}
+                onChange={formik.handleChange}
+                options={experienceLevels}
+                optionsLabel="Please select a experience"
+              />
+              <SelectInput
+                label="Study Level"
+                id="studyLevels"
+                value={formik.values.studyLevels}
+                onChange={formik.handleChange}
+                options={studyLevels}
+                optionsLabel="Please select a study levels"
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <ReactSelectInput
+                label="Category"
+                name="category"
+                options={categories}
+                formik={formik}
+                isLoading={isCategoriesLoading}
+                placeholder="Choose a category"
+              />
+              <ReactSelectInput
+                label="Sector"
+                name="sector"
+                options={sectors}
+                formik={formik}
+                isLoading={isSectorsLoading}
+                placeholder="Choose a sector"
+              />
+            </div>
 
-            <InputField
-              label="Post"
-              name="title"
-              value={formik.values.title}
-              onChange={formik.handleChange}
-              placeholder="eg: developpeur web"
-              required
-            />
-            <InputField
-              label="Workplace"
-              name="location"
-              value={formik.values.location}
-              onChange={formik.handleChange}
-              placeholder="eg:Paris"
-              required
-            />
-            <InputField
-              type="date"
-              label="Deadline"
-              name="deadline"
-              value={formik.values.deadline}
-              onChange={formik.handleChange}
-              required
-            />
-            <SelectInput
-              label="Contract type"
-              id="contractType"
-              value={formik.values.contractType}
-              onChange={formik.handleChange}
-              options={optionsContractType}
-              optionsLabel="Please select a contract type"
-            />
-            <SelectInput
-              label="Experience Level"
-              id="experienceRequired"
-              value={formik.values.experienceRequired}
-              onChange={formik.handleChange}
-              options={experienceLevels}
-              optionsLabel="Please select a experience"
-            />
-            <SelectInput
-              label="Study Level"
-              id="studyLevels"
-              value={formik.values.studyLevels}
-              onChange={formik.handleChange}
-              options={studyLevels}
-              optionsLabel="Please select a study levels"
-            />
-            <SelectCategory
-              label="Category"
-              onChange={formik.handleChange}
-              value={formik.values.category}
-              error={formik.errors.category}
-              touched={formik.touched.category}
-              id="category"
-            />
-            <SelectSector
-              label="Sector"
-              onChange={formik.handleChange}
-              value={formik.values.sector}
-              error={formik.errors.sector}
-              touched={formik.touched.sector}
-              id="sector"
+            <MultiValueInput
+              label="Skills"
+              name="skills"
+              values={formik.values.skills}
+              onChange={(newValues) =>
+                formik.setFieldValue("skills", newValues)
+              }
             />
             <Checkbox
               label="Work from home"
@@ -182,11 +217,11 @@ export default function AddJob() {
             >
               {formik.isSubmitting ? (
                 <>
-                  Add...
+                  Add Job Post...
                   <Loader2 className="h-5 w-5 animate-spin" />
                 </>
               ) : (
-                "Add"
+                "Add Job Post"
               )}
             </button>
           </form>

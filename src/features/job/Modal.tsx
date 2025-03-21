@@ -27,9 +27,9 @@ export default function Modal({
       >
         <button
           onClick={onClose}
-          className="bg-white p-1 rounded-lg text-gray-400 absolute hover:bg-gray-50 hover:text-gray-600 right-2 top-2"
+          className="bg-white p-1 rounded-lg text-gray-400 absolute hover:bg-red-50 hover:text-gray-600 right-2 top-2"
         >
-          <IoIosCloseCircleOutline />
+          <IoIosCloseCircleOutline size={28} className="text-red-500" />
         </button>
         {children}
       </div>
