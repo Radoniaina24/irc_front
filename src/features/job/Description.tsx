@@ -13,7 +13,7 @@ import {
   ListOrdered,
   UnderlineIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 interface RichTextEditorProps {
@@ -88,19 +88,14 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
     },
     immediatelyRender: false,
   });
-
-  const [showLinkInput, setShowLinkInput] = useState(false);
-  const [linkUrl, setLinkUrl] = useState("");
+  // Met à jour l'éditeur lorsque Formik réinitialise `value`
+  useEffect(() => {
+    if (editor && value !== editor.getHTML()) {
+      editor.commands.setContent(value);
+    }
+  }, [value, editor]);
 
   if (!editor) return null;
-
-  const addLink = () => {
-    if (linkUrl) {
-      editor.chain().focus().setLink({ href: linkUrl }).run();
-      setLinkUrl("");
-      setShowLinkInput(false);
-    }
-  };
 
   return (
     <div className="border rounded-lg shadow bg-white p-3">
@@ -121,25 +116,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
           />
         ))}
       </div>
-
-      {/* Input pour ajouter un lien */}
-      {showLinkInput && (
-        <div className="flex items-center gap-2 mt-2">
-          <input
-            type="text"
-            placeholder="Entrez l'URL..."
-            className="border p-1 rounded w-full"
-            value={linkUrl}
-            onChange={(e) => setLinkUrl(e.target.value)}
-          />
-          <button
-            onClick={addLink}
-            className="px-3 py-1 bg-blue-500 text-white rounded"
-          >
-            Ajouter
-          </button>
-        </div>
-      )}
 
       {/* Zone de texte */}
       <div className="mt-3 min-h-[150px] max-h-[150px] p-2 border rounded bg-gray-50 overflow-y-auto">

@@ -18,10 +18,11 @@ import MultiValueInput from "./MultiValueInput";
 import { useCategoriesOptions, useSectorsOptions } from "./options";
 import ReactSelectInput from "./ReactSelectInput";
 import RichTextEditor from "./Description";
-import Description from "./Description";
+import { useAddJobMutation } from "@/lib/api/jobApi";
+
 const initialvalues = {
-  sector: "",
-  category: "",
+  sector: { value: "", label: "" },
+  category: { value: "", label: "" },
   title: "",
   description: "", //TextArea + summer Note
   location: "",
@@ -39,8 +40,10 @@ export default function AddJob() {
   const [open, setOpen] = useState<boolean>(false);
   const { showToast } = useToast();
   const [addCategories] = useAddCategoryMutation();
+  const [addJobPost] = useAddJobMutation();
   const formik = useFormik({
     initialValues: initialvalues,
+    enableReinitialize: true,
     validationSchema: Yup.object({
       sector: Yup.mixed()
         .test("sector", "This field is required.", (value) => {
@@ -64,13 +67,18 @@ export default function AddJob() {
           return false; // Si la valeur n'est ni un objet valide ni une chaîne non vide, la validation échoue
         })
         .required("This field is required."),
+      description: Yup.mixed().required("This field is required."),
     }),
 
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
-
+      console.log(values);
       try {
-        const response = await addCategories(values).unwrap();
+        const response = await addJobPost({
+          ...values,
+          category: values.category.value,
+          sector: values.sector.value,
+        }).unwrap();
         showToast(response?.message, "success"); // message, type(error, success)
         resetForm();
         setOpen(false);
@@ -87,7 +95,7 @@ export default function AddJob() {
       }
     },
   });
-  console.log(formik.values.description);
+  // console.log(formik.values.description);
   const optionsContractType = [
     { id: 1, value: "CDI", name: "CDI" },
     { id: 2, value: "CDD", name: "CDD" },
