@@ -17,6 +17,8 @@ import Checkbox from "./CheckBox";
 import MultiValueInput from "./MultiValueInput";
 import { useCategoriesOptions, useSectorsOptions } from "./options";
 import ReactSelectInput from "./ReactSelectInput";
+import RichTextEditor from "./Description";
+import Description from "./Description";
 const initialvalues = {
   sector: "",
   category: "",
@@ -85,7 +87,7 @@ export default function AddJob() {
       }
     },
   });
-  // console.log(formik.values.sector);
+  console.log(formik.values.description);
   const optionsContractType = [
     { id: 1, value: "CDI", name: "CDI" },
     { id: 2, value: "CDD", name: "CDD" },
@@ -116,7 +118,7 @@ export default function AddJob() {
         <MdAddBox size={30} className="text-blue-500" />
       </button>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="bg-white p-6 rounded-lg shadow-lg w-full lg:max-w-3xl max-w-lg md:max-w-2xl mx-auto">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <h1 className="text-center text-lg font-bold">New job post</h1>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -200,6 +202,19 @@ export default function AddJob() {
                 formik.setFieldValue("skills", newValues)
               }
             />
+            <label className="block text-sm mb-2">Description</label>
+            <RichTextEditor
+              value={formik.values.description}
+              onChange={(content) =>
+                formik.setFieldValue("description", content)
+              }
+            />
+            {formik.touched.description && formik.errors.description && (
+              <p className="text-red-500 text-sm">
+                {formik.errors.description}
+              </p>
+            )}
+
             <Checkbox
               label="Work from home"
               name="remote"

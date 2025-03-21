@@ -197,3 +197,44 @@ input[type="search"]::-webkit-search-results-decoration {
 .range-slider__range {
   @apply !bg-blue;
 }
+
+/* tiptap */
+.tiptap:focus {
+  outline: none;
+  border: none;
+}
+.ProseMirror:focus {
+  outline: none;
+  border: none;
+}
+
+.prose h1 {
+  @apply text-3xl font-bold;
+}
+
+.prose h2 {
+  @apply text-2xl font-semibold;
+}
+prose h1 {
+  @apply text-3xl font-bold;
+}
+
+.prose h2 {
+  @apply text-2xl font-semibold;
+}
+
+.prose h3 {
+  @apply text-xl font-medium;
+}
+
+.prose h4 {
+  @apply text-lg font-medium;
+}
+
+.prose h5 {
+  @apply text-base font-medium;
+}
+
+.prose h6 {
+  @apply text-sm font-medium;
+}
