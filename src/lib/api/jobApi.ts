@@ -70,7 +70,7 @@ export const jobAPI = createApi({
     deleteJob: builder.mutation({
       query: (id) => {
         return {
-          url: `/job/${id}`,
+          url: `/job-posts/delete/${id}`,
           method: "DELETE",
           body: id,
         };

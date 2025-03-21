@@ -3,18 +3,16 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import { Button } from "flowbite-react";
 import { MdDeleteForever } from "react-icons/md";
-
-import { useDeleteSectorMutation } from "@/lib/api/sectorApi";
 import { useToast } from "@/lib/context/ToastContext";
-import { useDeleteCategoryMutation } from "@/lib/api/categoryApi";
+import { useDeleteJobMutation } from "@/lib/api/jobApi";
 
 export default function DeleteButton({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean>(false);
-  const [deleteCategory] = useDeleteCategoryMutation();
+  const [deleteJob] = useDeleteJobMutation();
   const { showToast } = useToast();
   async function handleDelete(id: string) {
     try {
-      const response = await deleteCategory(id).unwrap();
+      const response = await deleteJob(id).unwrap();
       showToast(response?.message, "success");
       setOpen(false);
     } catch (error) {

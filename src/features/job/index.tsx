@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Pagination from "@/components/Orders/Pagination";
-import CategoryList from "./CategoryList";
+
 import Search from "@/components/Orders/Search";
 import { useGetAllCategoryQuery } from "@/lib/api/categoryApi";
 import AddJob from "./AddJob";
 import { useGetMyJobQuery } from "@/lib/api/jobApi";
+import JobList from "./JobList";
 
 const Job = () => {
   const [search, setSearch] = useState<string>("");
@@ -34,7 +35,7 @@ const Job = () => {
         </div>
       </section>
     );
-
+  const jobs = data.jobPosts;
   return (
     <div className="px-5 py-5">
       <div className="shadow-md overflow-x-auto overflow-y-auto relative sm:rounded-lg">
@@ -43,15 +44,24 @@ const Job = () => {
           <AddJob />
         </div>
 
-        {/* <div className="h-100 lg:h-[650px] overflow-y-auto">
+        <div className="h-100 lg:h-[650px] overflow-y-auto">
           <table className="text-gray-500 text-left text-sm w-full dark:text-gray-400 rtl:text-right">
             <thead className="bg-gray-50 text-gray-700 text-xs dark:bg-gray-700 dark:text-gray-400 sticky top-0 uppercase z-10">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Name
+                  Post
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Sector
+                  Deadline
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Category
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Status
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Persmisions
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Action
@@ -59,10 +69,8 @@ const Job = () => {
               </tr>
             </thead>
             <tbody>
-              {categories.length > 0 ? (
-                categories.map((item) => (
-                  <CategoryList category={item} key={item._id} />
-                ))
+              {jobs.length > 0 ? (
+                jobs.map((item) => <JobList category={item} key={item._id} />)
               ) : (
                 <tr>
                   <td colSpan={2} className="text-center text-gray-500 py-4">
@@ -72,14 +80,14 @@ const Job = () => {
               )}
             </tbody>
           </table>
-        </div> */}
+        </div>
       </div>
 
-      {/* <Pagination
+      <Pagination
         totalPages={data.totalPages}
         currentPage={data.currentPage}
         onPageChange={setPage}
-      /> */}
+      />
     </div>
   );
 };
