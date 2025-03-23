@@ -2,6 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+import ViewJobPost from "./ViewJobPost";
 export default function JobList(category: any) {
   const job = category.category;
   dayjs.locale("en");
@@ -19,6 +20,7 @@ export default function JobList(category: any) {
         <td className="flex gap-3 px-6 py-4">
           <EditButton id={job._id} job={job} />
           <DeleteButton id={job._id} />
+          <ViewJobPost job={job} />
         </td>
       </tr>
     </>

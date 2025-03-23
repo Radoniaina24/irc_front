@@ -61,7 +61,7 @@ const Job = () => {
                   Status
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Persmisions
+                  Published
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Action
@@ -73,8 +73,8 @@ const Job = () => {
                 jobs.map((item) => <JobList category={item} key={item._id} />)
               ) : (
                 <tr>
-                  <td colSpan={2} className="text-center text-gray-500 py-4">
-                    No categories found.
+                  <td colSpan={6} className="text-center text-gray-500 py-4">
+                    No job post found.
                   </td>
                 </tr>
               )}
