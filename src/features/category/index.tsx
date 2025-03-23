@@ -16,7 +16,7 @@ const Category = () => {
   });
   // console.log(data);
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div className="text-center py-75">Loading ...</div>;
   }
   if (error)
     return (
