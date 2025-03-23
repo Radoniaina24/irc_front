@@ -32,7 +32,7 @@ const Categories = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  const sectors = data.sectors;
+  const sectors = data?.sectors;
   return (
     <section className="overflow-hidden pt-30">
       <div className="border-b border-gray-3 w-full max-w-[1170px] mx-auto pb-15 px-4 sm:px-8 xl:px-0">
