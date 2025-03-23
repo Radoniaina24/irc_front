@@ -73,7 +73,7 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
 
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
-      console.log(values);
+      // console.log(values);
       const jobPost = {
         ...values,
         category: values.category.value,
@@ -88,9 +88,11 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
         if (error?.data?.message) {
           showToast(error?.data?.message, "error");
           setOpen(false);
+          resetForm();
         } else {
           setOpen(false);
           showToast("Check your network", "error");
+          resetForm();
         }
       } finally {
         setSubmitting(false);

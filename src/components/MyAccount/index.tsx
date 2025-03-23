@@ -81,7 +81,7 @@ const MyAccount = () => {
             <div className="flex xl:flex-col">
               <div className="flex-wrap border-gray-3 border-r gap-5 hidden items-center lg:flex px-4 py-6 sm:px-7.5 xl:border-b xl:border-r-0 xl:px-9">
                 <Image
-                  src="/images/users/user-04.jpg"
+                  src="/images/users/user.png"
                   alt="user"
                   width={64}
                   height={64}

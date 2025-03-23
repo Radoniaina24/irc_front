@@ -72,7 +72,7 @@ export default function AddJob() {
 
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
-      console.log(values);
+      // console.log(values);
       try {
         const response = await addJobPost({
           ...values,

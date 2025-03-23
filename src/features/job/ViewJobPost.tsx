@@ -54,13 +54,13 @@ export default function ViewJobPost({ job }: { job: any }) {
               </div>
               <ToHtml content={job.description} />
               <h3 className="text-lg font-semibold text-gray-800 mt-6">
-                Compétences requises
+                Required skills
               </h3>
+
               <ul className="list-disc list-inside text-gray-700 mt-2">
-                <li>Analyse financière</li>
-                <li>Excel</li>
-                <li>Comptabilité</li>
-                <li>Modélisation financière</li>
+                {job.skills.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </CardContent>
           </Card>
