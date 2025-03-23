@@ -12,7 +12,7 @@ import {
   Building,
 } from "lucide-react";
 import { Badge } from "@/components/Ui/Badge";
-import { Card, CardContent } from "@/components/Ui/Card";
+import { Card, CardContent } from "@/components/Ui/card";
 import ToHtml from "@/lib/utils/toHtml";
 
 export default function ViewJobPost({ job }: { job: any }) {
