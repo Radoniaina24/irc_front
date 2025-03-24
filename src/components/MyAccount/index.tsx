@@ -12,16 +12,15 @@ import { RxDashboard } from "react-icons/rx";
 import { GrUserSettings } from "react-icons/gr";
 import Recruiter from "../Orders";
 import { SlLogout } from "react-icons/sl";
-import { MdOutlineCategory } from "react-icons/md";
+import { MdOutlineCategory, MdOutlinePassword } from "react-icons/md";
 import { BiCategoryAlt } from "react-icons/bi";
-import { PiAddressBookLight, PiReadCvLogoLight } from "react-icons/pi";
+import { PiReadCvLogoLight } from "react-icons/pi";
 import Dashboard from "./Dashboard";
-import AccountDetails from "./AccountDetails";
-import Address from "./Address";
-import { LuUserRound } from "react-icons/lu";
 import Sector from "@/features/sector";
 import Category from "@/features/category";
 import Job from "@/features/job";
+import ChangePassword from "@/features/recruiter/password";
+
 const TABS = [
   { id: "dashboard", label: "Dashboard", icon: <RxDashboard size={18} /> },
   {
@@ -46,6 +45,12 @@ const TABS = [
     label: "Sector",
     icon: <MdOutlineCategory size={18} />,
     adminOnly: true,
+  },
+  {
+    id: "password",
+    label: "Change password",
+    icon: <MdOutlinePassword size={18} />,
+    adminOnly: false,
   },
   {
     id: "category",
@@ -134,6 +139,7 @@ const MyAccount = () => {
             {activeTab === "sector" && <Sector />}
             {activeTab === "category" && <Category />}
             {activeTab === "job" && <Job />}
+            {activeTab === "password" && <ChangePassword />}
           </main>
         </div>
       </section>

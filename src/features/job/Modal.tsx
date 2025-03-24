@@ -24,7 +24,7 @@ const Modal = ({ isOpen, closeModal, children, width = "500px" }) => {
         isOpen ? "block z-99999" : "hidden"
       }`}
     >
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center modal-content">
         <div
           x-show="addressModal"
           className={`"w-full max-w-[${width}] rounded-xl shadow-3 bg-white p-7.5 relative modal-content"`}

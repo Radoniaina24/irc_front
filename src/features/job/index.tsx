@@ -22,7 +22,7 @@ const Job = () => {
   }
   if (error)
     return (
-      <section className="bg-white dark:bg-gray-900">
+      <section className="bg-white ">
         <div className="lg:px-6 lg:py-16 max-w-screen-xl mx-auto px-4 py-8">
           <div className="text-center max-w-screen-sm mx-auto">
             <p className="text-3xl text-gray-900 dark:text-white font-bold mb-4 md:text-4xl tracking-tight">
@@ -57,9 +57,7 @@ const Job = () => {
                 <th scope="col" className="px-6 py-3">
                   Category
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Status
-                </th>
+
                 <th scope="col" className="px-6 py-3">
                   Published
                 </th>

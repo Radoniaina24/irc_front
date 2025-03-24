@@ -15,13 +15,22 @@ const Recruiter = () => {
   });
   // console.log(data);
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div className="text-center py-75">Loading ...</div>;
   }
   if (error)
     return (
-      <div className="text-red-500">
-        Erreur lors du chargement des recruteurs
-      </div>
+      <section className="bg-white dark:bg-gray-900">
+        <div className="lg:px-6 lg:py-16 max-w-screen-xl mx-auto px-4 py-8">
+          <div className="text-center max-w-screen-sm mx-auto">
+            <p className="text-3xl text-gray-900 dark:text-white font-bold mb-4 md:text-4xl tracking-tight">
+              Something&apos;s missing.
+            </p>
+            <p className="text-gray-500 text-lg dark:text-gray-400 font-light mb-4">
+              Error while loading recruiters.
+            </p>
+          </div>
+        </div>
+      </section>
     );
   const recruiters = data.recruiters;
   return (

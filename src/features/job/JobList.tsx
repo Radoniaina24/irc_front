@@ -15,7 +15,6 @@ export default function JobList(category: any) {
         <td className="px-6 py-4"> {job.title}</td>
         <td className="px-6 py-4"> {formatDate(job.deadline)}</td>
         <td className="px-6 py-4"> {job.category.name}</td>
-        <td className="px-6 py-4"> {job.status}</td>
         <td className="px-6 py-4"> {job.permissions}</td>
         <td className=" px-6 py-4">
           <div className="flex gap-3">

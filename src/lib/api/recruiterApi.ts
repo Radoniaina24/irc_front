@@ -68,6 +68,16 @@ export const recruiterAPI = createApi({
       },
       invalidatesTags: ["recruiter"],
     }),
+    changePassword: builder.mutation({
+      query: (obj) => {
+        return {
+          url: `/recruiter/change_password`,
+          method: "POST",
+          body: obj,
+        };
+      },
+      invalidatesTags: ["recruiter"],
+    }),
   }),
 });
 
@@ -78,4 +88,5 @@ export const {
   useDeleteRecruiterMutation,
   useUpdateRecruiterMutation,
   useGetAllRecruiterQuery,
+  useChangePasswordMutation,
 } = recruiterAPI;
