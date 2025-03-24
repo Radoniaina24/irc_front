@@ -38,6 +38,15 @@ export const recruiterAPI = createApi({
       },
       providesTags: ["recruiter"],
     }),
+    getProfil: builder.query({
+      query: () => {
+        return {
+          url: `recruiter/my-profile`,
+          method: "GET",
+        };
+      },
+      providesTags: ["recruiter"],
+    }),
     addRecruiter: builder.mutation({
       query: (values) => {
         return {
@@ -51,7 +60,7 @@ export const recruiterAPI = createApi({
     updateRecruiter: builder.mutation({
       query: ({ recruiter, id }) => {
         return {
-          url: `/recruiter/update/${id}`,
+          url: `/recruiter/update`,
           method: "PUT",
           body: recruiter,
         };
@@ -89,4 +98,5 @@ export const {
   useUpdateRecruiterMutation,
   useGetAllRecruiterQuery,
   useChangePasswordMutation,
+  useGetProfilQuery,
 } = recruiterAPI;

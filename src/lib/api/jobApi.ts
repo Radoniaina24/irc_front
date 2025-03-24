@@ -21,7 +21,7 @@ export const jobAPI = createApi({
     getAllJob: builder.query({
       query: (params) => {
         return {
-          url: `/application`,
+          url: `/job-posts`,
           method: "GET",
           params,
         };
@@ -67,6 +67,16 @@ export const jobAPI = createApi({
       },
       invalidatesTags: ["job"],
     }),
+    updateJobByAdmin: builder.mutation({
+      query: ({ jobPost, id }) => {
+        return {
+          url: `/job-posts/update-by-admin/${id}`,
+          method: "PUT",
+          body: jobPost,
+        };
+      },
+      invalidatesTags: ["job"],
+    }),
     deleteJob: builder.mutation({
       query: (id) => {
         return {
@@ -88,4 +98,5 @@ export const {
   useUpdateJobMutation,
   useGetAllJobQuery,
   useGetMyJobQuery,
+  useUpdateJobByAdminMutation,
 } = jobAPI;

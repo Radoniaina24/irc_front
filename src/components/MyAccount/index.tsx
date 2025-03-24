@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 import Image from "next/image";
 import AddressModal from "./AddressModal";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { logout, selectUser } from "@/redux/features/auth/authSlice";
-import { useLogoutMutation } from "@/lib/api/authApi";
+import { authAPI, useLogoutMutation } from "@/lib/api/authApi";
 import { useRouter } from "next/navigation";
 import { RxDashboard } from "react-icons/rx";
 import { GrUserSettings } from "react-icons/gr";
@@ -20,13 +20,32 @@ import Sector from "@/features/sector";
 import Category from "@/features/category";
 import Job from "@/features/job";
 import ChangePassword from "@/features/recruiter/password";
-
-const TABS = [
+import { FaUserCog } from "react-icons/fa";
+import InfoRecruteur from "@/features/recruiter/info";
+import { recruiterAPI } from "@/lib/api/recruiterApi";
+import { jobAPI } from "@/lib/api/jobApi";
+import JobAdmin from "@/features/admin/job";
+type Tab = {
+  id: string;
+  label: string;
+  icon: JSX.Element;
+  adminOnly?: boolean;
+  recruiterOnly?: boolean;
+  candidateOnly?: boolean;
+};
+const TABS: Tab[] = [
   { id: "dashboard", label: "Dashboard", icon: <RxDashboard size={18} /> },
   {
-    id: "job",
+    id: "job-recruiter",
     label: "Job Announcement",
     icon: <PiReadCvLogoLight size={18} />,
+    recruiterOnly: true,
+  },
+  {
+    id: "job-admin",
+    label: "Job Announcement",
+    icon: <PiReadCvLogoLight size={18} />,
+    adminOnly: true,
   },
   {
     id: "recruiter",
@@ -47,10 +66,16 @@ const TABS = [
     adminOnly: true,
   },
   {
-    id: "password",
-    label: "Change password",
+    id: "info-recruiter",
+    label: "Personal Information",
+    icon: <FaUserCog size={18} />,
+    recruiterOnly: true,
+  },
+  {
+    id: "password-recruiter",
+    label: "Change Password",
     icon: <MdOutlinePassword size={18} />,
-    adminOnly: false,
+    recruiterOnly: true,
   },
   {
     id: "category",
@@ -71,18 +96,29 @@ const MyAccount = () => {
     try {
       await logoutUser("").unwrap();
       dispatch(logout());
+      dispatch(recruiterAPI.util.resetApiState());
+      dispatch(jobAPI.util.resetApiState()); // Réinitialiser RTK Query
+      dispatch(authAPI.util.resetApiState()); // Réinitialiser RTK Query
       router.push("/");
     } catch (err) {
       console.error("Logout failed", err);
     }
   };
+  const availableTabs = useMemo(() => {
+    return TABS.filter(({ adminOnly, recruiterOnly, candidateOnly }) => {
+      if (adminOnly && user.role !== "admin") return false;
+      if (recruiterOnly && user.role !== "recruiter") return false;
+      if (candidateOnly && user.role !== "candidate") return false;
+      return true;
+    });
+  }, [user.role]);
   return (
     <>
       <Breadcrumb title="My Account" pages={["my account"]} />
       <section className="bg-gray-2 overflow-hidden py-20">
         <div className="flex flex-col w-full gap-7.5 max-w-[1170px] mx-auto px-4 sm:px-8 xl:flex-row xl:px-0">
           {/* Sidebar */}
-          <aside className="bg-white rounded-xl shadow-1 w-full xl:max-w-[370px]">
+          <aside className="bg-white rounded-xl shadow-1 w-full xl:max-w-[300px]">
             <div className="flex xl:flex-col">
               <div className="flex-wrap border-gray-3 border-r gap-5 hidden items-center lg:flex px-4 py-6 sm:px-7.5 xl:border-b xl:border-r-0 xl:px-9">
                 <Image
@@ -101,22 +137,19 @@ const MyAccount = () => {
               </div>
               <div className="p-4 sm:p-7.5 xl:p-9">
                 <nav className="flex flex-wrap gap-4 xl:flex-col xl:flex-nowrap">
-                  {TABS.map(
-                    ({ id, label, icon, adminOnly }) =>
-                      (!adminOnly || user.role === "admin") && (
-                        <button
-                          key={id}
-                          onClick={() => setActiveTab(id)}
-                          className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 transition duration-200 hover:bg-blue hover:text-white ${
-                            activeTab === id
-                              ? "text-white bg-blue"
-                              : "text-dark-2 bg-gray-1"
-                          }`}
-                        >
-                          {icon} {label}
-                        </button>
-                      )
-                  )}
+                  {availableTabs.map(({ id, label, icon }) => (
+                    <button
+                      key={id}
+                      onClick={() => setActiveTab(id)}
+                      className={`flex items-center rounded-md gap-2.5 py-3 px-4.5 transition duration-200 hover:bg-blue hover:text-white ${
+                        activeTab === id
+                          ? "text-white bg-blue"
+                          : "text-dark-2 bg-gray-1"
+                      }`}
+                    >
+                      {icon} {label}
+                    </button>
+                  ))}
                   <button
                     onClick={handleLogout}
                     className="flex bg-gray-1 rounded-md text-dark-2 duration-200 gap-2.5 hover:bg-blue hover:text-white items-center px-4.5 py-3 transition"
@@ -129,7 +162,7 @@ const MyAccount = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="bg-white rounded-xl shadow-1 w-full xl:max-w-[770px]">
+          <main className="bg-white rounded-xl shadow-1 w-full xl:max-w-[820px]">
             {activeTab === "dashboard" && (
               <Dashboard activeTab={activeTab} user={user} />
             )}
@@ -138,8 +171,13 @@ const MyAccount = () => {
             )}
             {activeTab === "sector" && <Sector />}
             {activeTab === "category" && <Category />}
-            {activeTab === "job" && <Job />}
-            {activeTab === "password" && <ChangePassword />}
+            {activeTab === "job-recruiter" && <Job />}
+            {activeTab === "job-admin" && <JobAdmin />}
+            {activeTab === "password-recruiter" &&
+              user.role === "recruiter" && <ChangePassword />}
+            {activeTab === "info-recruiter" && user.role === "recruiter" && (
+              <InfoRecruteur />
+            )}
           </main>
         </div>
       </section>
