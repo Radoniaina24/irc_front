@@ -26,7 +26,7 @@ export default function ViewJobPost({ job }: { job: any }) {
       <button onClick={() => setOpen(true)}>
         <AiOutlineFolderView size={20} className="text-green-500" />
       </button>
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal isOpen={open} closeModal={() => setOpen(false)} width="700px">
         <div className=" w-full lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
           <Card className="max-w-2xl mx-auto p-6 shadow-lg border border-gray-200 rounded-2xl">
             <CardContent>

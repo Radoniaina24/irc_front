@@ -17,10 +17,12 @@ export default function JobList(category: any) {
         <td className="px-6 py-4"> {job.category.name}</td>
         <td className="px-6 py-4"> {job.status}</td>
         <td className="px-6 py-4"> {job.permissions}</td>
-        <td className="flex gap-3 px-6 py-4">
-          <EditButton id={job._id} job={job} />
-          <DeleteButton id={job._id} />
-          <ViewJobPost job={job} />
+        <td className=" px-6 py-4">
+          <div className="flex gap-3">
+            <EditButton id={job._id} job={job} />
+            <DeleteButton id={job._id} />
+            <ViewJobPost job={job} />
+          </div>
         </td>
       </tr>
     </>

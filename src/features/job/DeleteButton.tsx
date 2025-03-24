@@ -30,9 +30,9 @@ export default function DeleteButton({ id }: { id: string }) {
       <button onClick={() => setOpen(true)}>
         <MdDeleteForever size={20} className="text-red-500" />
       </button>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="text-center w-115">
-          <div className="w-100 mx-auto my-4">
+      <Modal isOpen={open} closeModal={() => setOpen(false)}>
+        <div className="text-center ">
+          <div className=" my-4">
             <h3 className="text-gray-800 text-lg font-black/20">
               Confirm deletion.
             </h3>

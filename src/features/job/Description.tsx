@@ -100,7 +100,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
   return (
     <div className="border rounded-lg shadow bg-white p-3">
       {/* Barre d'outils */}
-      <div className="flex items-center gap-2 border-b pb-2">
+      <div className="flex items-center gap-2 flex-wrap border-b pb-2">
         {toolbarButtons.map((btn, index) => (
           <ToolbarButton key={index} editor={editor} {...btn} />
         ))}
