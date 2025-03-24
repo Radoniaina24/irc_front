@@ -45,8 +45,8 @@ export default function EditButton({ id, name }: { id: string; name: any }) {
       <button onClick={() => setOpen(true)}>
         <MdEditNote size={20} className="text-blue-500" />
       </button>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="w-150 py-5">
+      <Modal isOpen={open} closeModal={() => setOpen(false)}>
+        <div className="mt-10">
           {" "}
           <form
             onSubmit={formik.handleSubmit}

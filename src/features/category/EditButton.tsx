@@ -71,8 +71,8 @@ export default function EditCategory({
       <button onClick={() => setOpen(true)}>
         <MdEditNote size={20} className="text-blue-500" />
       </button>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="p-10 w-115">
+      <Modal isOpen={open} closeModal={() => setOpen(false)}>
+        <div className="">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <h1 className="text-center text-lg font-bold">Edit category</h1>
 
