@@ -7,6 +7,10 @@ export interface Address {
   city: string;
   country: string;
 }
+export interface Portfolio {
+  url: string;
+  file: File | null;
+}
 
 export interface Experience {
   company: string;
@@ -32,7 +36,7 @@ export interface Certification {
 
 export interface Language {
   language: string;
-  proficiency: "Débutant" | "Intermédiaire" | "Avancé" | "Courant" | "Natif";
+  proficiency: "Beginner" | "Intermediate" | "Advanced" | "Fluent" | "Native";
 }
 
 interface FormValues {
@@ -47,6 +51,8 @@ interface FormValues {
   education: Education[];
   certifications: Certification[];
   languages: Language[];
+  portfolio: Portfolio[];
+  password: string;
 }
 
 const FormPassContext = createContext<any | null>(null);
@@ -58,28 +64,14 @@ function FormPassProvider({ children }: { children: React.ReactNode }) {
     email: "",
     phone: "",
     address: { street: "", city: "", country: "" },
+    skills: [],
+    experience: [],
+    education: [],
+    certifications: [],
+    languages: [],
     resume: null,
-    skills: [""],
-    experience: [
-      {
-        company: "",
-        position: "",
-        startDate: "",
-        endDate: "",
-        description: "",
-      },
-    ],
-    education: [
-      {
-        institution: "",
-        degree: "",
-        fieldOfStudy: "",
-        startDate: "",
-        endDate: "",
-      },
-    ],
-    certifications: [{ name: "", issuingOrganization: "", dateObtained: "" }],
-    languages: [{ language: "", proficiency: "Débutant" }],
+    portfolio: [],
+    password: "",
   });
   console.log(formData);
   return (

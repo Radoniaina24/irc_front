@@ -26,10 +26,10 @@ export default function FormStep1() {
         ),
     }),
     onSubmit: (values) => {
-      console.log(values);
-      console.log("Form Submitted", values);
+      // console.log(values);
+      // console.log("Form Submitted", values);
       setFormData((prev) => ({ ...prev, ...values }));
-      //  setStep(1);
+      setStep(1);
     },
   });
 
@@ -39,7 +39,7 @@ export default function FormStep1() {
       className="space-y-4"
       autoComplete="off"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <InputField
           label={"Last name"}
           type="text"
@@ -59,7 +59,7 @@ export default function FormStep1() {
           required
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <InputField
           label="Email"
           type="text"
@@ -79,7 +79,7 @@ export default function FormStep1() {
           required
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <InputField
           label="City"
           type="text"
