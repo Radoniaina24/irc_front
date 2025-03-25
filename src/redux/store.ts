@@ -10,6 +10,7 @@ import { authReducer } from "./features/auth/authSlice";
 import { sectorAPI } from "@/lib/api/sectorApi";
 import { categoryAPI } from "@/lib/api/categoryApi";
 import { jobAPI } from "@/lib/api/jobApi";
+import { candidateAPI } from "@/lib/api/candidateApi";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     [sectorAPI.reducerPath]: sectorAPI.reducer,
     [categoryAPI.reducerPath]: categoryAPI.reducer,
     [jobAPI.reducerPath]: jobAPI.reducer,
+    [candidateAPI.reducerPath]: candidateAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
@@ -30,7 +32,8 @@ export const store = configureStore({
       authAPI.middleware,
       sectorAPI.middleware,
       categoryAPI.middleware,
-      jobAPI.middleware
+      jobAPI.middleware,
+      candidateAPI.middleware
     );
   },
 });

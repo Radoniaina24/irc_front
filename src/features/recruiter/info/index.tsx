@@ -31,7 +31,7 @@ export default function InfoRecruteur() {
     return url;
   };
   return (
-    <div className="max-w-lg mx-auto bg-gradient-to-r mt-10 from-blue-500 to-indigo-600 shadow-2xl rounded-3xl p-8 border border-gray-300 text-white relative">
+    <div className="  bg-gradient-to-r   from-blue-500 to-indigo-600 shadow-2xl rounded-xl p-8 border border-gray-300 text-white relative">
       <h2 className="text-3xl font-bold mb-3">
         {recruiter.companyName || "Company : "}
       </h2>

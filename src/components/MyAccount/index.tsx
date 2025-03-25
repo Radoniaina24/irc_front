@@ -25,6 +25,7 @@ import InfoRecruteur from "@/features/recruiter/info";
 import { recruiterAPI } from "@/lib/api/recruiterApi";
 import { jobAPI } from "@/lib/api/jobApi";
 import JobAdmin from "@/features/admin/job";
+import ChangePasswordCandidate from "@/features/candidate/password";
 type Tab = {
   id: string;
   label: string;
@@ -76,6 +77,12 @@ const TABS: Tab[] = [
     label: "Change Password",
     icon: <MdOutlinePassword size={18} />,
     recruiterOnly: true,
+  },
+  {
+    id: "password-candidate",
+    label: "Change Password",
+    icon: <MdOutlinePassword size={18} />,
+    candidateOnly: true,
   },
   {
     id: "category",
@@ -175,6 +182,8 @@ const MyAccount = () => {
             {activeTab === "job-admin" && <JobAdmin />}
             {activeTab === "password-recruiter" &&
               user.role === "recruiter" && <ChangePassword />}
+            {activeTab === "password-candidate" &&
+              user.role === "candidate" && <ChangePasswordCandidate />}
             {activeTab === "info-recruiter" && user.role === "recruiter" && (
               <InfoRecruteur />
             )}

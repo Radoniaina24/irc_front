@@ -1,7 +1,6 @@
-import Signup from "@/components/Auth/Signup";
 import React from "react";
-
 import { Metadata } from "next";
+import SignupCandidate from "@/components/Auth/Signup";
 export const metadata: Metadata = {
   title: "Signup-Candidate  | IRC",
 
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 const SignupPage = () => {
   return (
     <main>
-      <Signup />
+      <SignupCandidate />
     </main>
   );
 };

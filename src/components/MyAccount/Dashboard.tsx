@@ -1,5 +1,6 @@
 import React from "react";
 import DashboardStats from "./DashboardStatsAdmin";
+import DashboardR from "@/features/recruiter/info/DashboardR";
 
 export default function Dashboard({ activeTab, user }) {
   return (
@@ -9,6 +10,7 @@ export default function Dashboard({ activeTab, user }) {
       }`}
     >
       {user.role === "admin" && <DashboardStats />}
+      {user.role === "recruiter" && <DashboardR />}
     </div>
   );
 }

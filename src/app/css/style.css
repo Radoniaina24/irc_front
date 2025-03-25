@@ -238,3 +238,23 @@ prose h1 {
 .prose h6 {
   @apply text-sm font-medium;
 }
+
+input.PhoneInputInput {
+  /* border-color: rgb(209 213 219) !important;
+  border-radius: 4px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem; */
+  border: none;
+  padding: 0 !important;
+}
+input.PhoneInputInput:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none;
+}
+.PhoneInputCountrySelect {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}

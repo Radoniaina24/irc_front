@@ -16,6 +16,8 @@ export default function EditButton({
 }) {
   // console.log(recruiter);
   const initialvalues = {
+    firstName: recruiter?.user.firstName || "",
+    lastName: recruiter?.user.lastName || "",
     phone: recruiter?.phone || "",
     func: recruiter?.function || "",
     companyName: recruiter?.companyName || "",
@@ -86,6 +88,24 @@ export default function EditButton({
                 required
               />
             </div>
+            {/* <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <InputField
+                label="First name"
+                name="firstName"
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                placeholder=""
+                required
+              />
+              <InputField
+                label="Last name"
+                name="lastName"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                placeholder=""
+                required
+              />
+            </div> */}
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <InputField
                 label="Industry"

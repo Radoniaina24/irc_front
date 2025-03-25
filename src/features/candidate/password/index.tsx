@@ -6,13 +6,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useToast } from "@/lib/context/ToastContext";
 import { Loader2 } from "lucide-react";
-import { useChangePasswordMutation } from "@/lib/api/recruiterApi";
+import { useChangePasswordMutation } from "@/lib/api/candidateApi";
+
 const initialvalues = {
   oldPassword: "",
   newPassword: "",
   confirmPassword: "",
 };
-export default function ChangePassword() {
+export default function ChangePasswordCandidate() {
   const { showToast } = useToast();
   const [changePass] = useChangePasswordMutation();
   const formik = useFormik({
