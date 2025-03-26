@@ -2,7 +2,6 @@
 import React, { useMemo, useState } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 import Image from "next/image";
-import AddressModal from "./AddressModal";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { logout, selectUser } from "@/redux/features/auth/authSlice";
@@ -28,6 +27,8 @@ import JobAdmin from "@/features/admin/job";
 import { GiDiploma } from "react-icons/gi";
 import ChangePasswordCandidate from "@/features/candidate/password";
 import Education from "@/features/candidate/Education";
+import { FcDiploma1 } from "react-icons/fc";
+import Experience from "@/features/candidate/Experience";
 type Tab = {
   id: string;
   label: string;
@@ -96,6 +97,12 @@ const TABS: Tab[] = [
     id: "education",
     label: "Education",
     icon: <GiDiploma size={18} />,
+    candidateOnly: true,
+  },
+  {
+    id: "experience",
+    label: "Experience",
+    icon: <FcDiploma1 size={18} />,
     candidateOnly: true,
   },
 ];
@@ -197,6 +204,9 @@ const MyAccount = () => {
             )}
             {activeTab === "education" && user.role === "candidate" && (
               <Education />
+            )}
+            {activeTab === "experience" && user.role === "candidate" && (
+              <Experience />
             )}
           </main>
         </div>

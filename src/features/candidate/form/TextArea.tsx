@@ -8,6 +8,7 @@ interface TextAreaProps {
   value: string;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;
+  required?: boolean;
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -18,6 +19,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   value,
   onChange,
   className = "",
+  required,
 }) => {
   return (
     <div className={`flex flex-col mt-2 ${className}`}>
@@ -31,6 +33,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        required
       ></textarea>
     </div>
   );

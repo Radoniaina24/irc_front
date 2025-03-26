@@ -13,6 +13,7 @@ export interface Portfolio {
 }
 
 export interface Experience {
+  _id?: string;
   company: string;
   position: string;
   startDate: string;

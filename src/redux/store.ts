@@ -12,6 +12,7 @@ import { categoryAPI } from "@/lib/api/categoryApi";
 import { jobAPI } from "@/lib/api/jobApi";
 import { candidateAPI } from "@/lib/api/candidateApi";
 import { educationAPI } from "@/lib/api/educationApi";
+import { experienceAPI } from "@/lib/api/experienceApi";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     [jobAPI.reducerPath]: jobAPI.reducer,
     [candidateAPI.reducerPath]: candidateAPI.reducer,
     [educationAPI.reducerPath]: educationAPI.reducer,
+    [experienceAPI.reducerPath]: experienceAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
@@ -36,7 +38,8 @@ export const store = configureStore({
       categoryAPI.middleware,
       jobAPI.middleware,
       candidateAPI.middleware,
-      educationAPI.middleware
+      educationAPI.middleware,
+      experienceAPI.middleware
     );
   },
 });
