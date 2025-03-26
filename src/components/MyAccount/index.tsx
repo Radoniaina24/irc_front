@@ -31,6 +31,9 @@ import { FcDiploma1 } from "react-icons/fc";
 import Experience from "@/features/candidate/Experience";
 import { GrCertificate } from "react-icons/gr";
 import Certification from "@/features/candidate/Certification";
+import { certificationAPI } from "@/lib/api/certificationApi";
+import { experienceAPI } from "@/lib/api/experienceApi";
+import { educationAPI } from "@/lib/api/educationApi";
 type Tab = {
   id: string;
   label: string;
@@ -72,6 +75,24 @@ const TABS: Tab[] = [
     adminOnly: true,
   },
   {
+    id: "education",
+    label: "Education",
+    icon: <GiDiploma size={18} />,
+    candidateOnly: true,
+  },
+  {
+    id: "experience",
+    label: "Experience",
+    icon: <FcDiploma1 size={18} />,
+    candidateOnly: true,
+  },
+  {
+    id: "certification",
+    label: "Certification",
+    icon: <GrCertificate size={18} />,
+    candidateOnly: true,
+  },
+  {
     id: "info-recruiter",
     label: "Personal Information",
     icon: <FaUserCog size={18} />,
@@ -95,24 +116,6 @@ const TABS: Tab[] = [
     icon: <BiCategoryAlt size={18} />,
     adminOnly: true,
   },
-  {
-    id: "education",
-    label: "Education",
-    icon: <GiDiploma size={18} />,
-    candidateOnly: true,
-  },
-  {
-    id: "experience",
-    label: "Experience",
-    icon: <FcDiploma1 size={18} />,
-    candidateOnly: true,
-  },
-  {
-    id: "certification",
-    label: "Certification",
-    icon: <GrCertificate size={18} />,
-    candidateOnly: true,
-  },
 ];
 
 const MyAccount = () => {
@@ -129,6 +132,9 @@ const MyAccount = () => {
       dispatch(recruiterAPI.util.resetApiState());
       dispatch(jobAPI.util.resetApiState()); // Réinitialiser RTK Query
       dispatch(authAPI.util.resetApiState()); // Réinitialiser RTK Query
+      dispatch(certificationAPI.util.resetApiState());
+      dispatch(experienceAPI.util.resetApiState());
+      dispatch(educationAPI.util.resetApiState());
       router.push("/");
     } catch (err) {
       console.error("Logout failed", err);
