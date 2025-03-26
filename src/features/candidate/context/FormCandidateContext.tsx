@@ -21,11 +21,12 @@ export interface Experience {
 }
 
 export interface Education {
+  _id?: string;
   institution: string;
   degree: string;
-  fieldOfStudy?: string;
+  fieldOfStudy: string;
   startDate: string;
-  endDate?: string;
+  endDate: string;
 }
 
 export interface Certification {

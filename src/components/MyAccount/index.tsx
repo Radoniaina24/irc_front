@@ -25,7 +25,9 @@ import InfoRecruteur from "@/features/recruiter/info";
 import { recruiterAPI } from "@/lib/api/recruiterApi";
 import { jobAPI } from "@/lib/api/jobApi";
 import JobAdmin from "@/features/admin/job";
+import { GiDiploma } from "react-icons/gi";
 import ChangePasswordCandidate from "@/features/candidate/password";
+import Education from "@/features/candidate/Education";
 type Tab = {
   id: string;
   label: string;
@@ -89,6 +91,12 @@ const TABS: Tab[] = [
     label: "Category",
     icon: <BiCategoryAlt size={18} />,
     adminOnly: true,
+  },
+  {
+    id: "education",
+    label: "Education",
+    icon: <GiDiploma size={18} />,
+    candidateOnly: true,
   },
 ];
 
@@ -186,6 +194,9 @@ const MyAccount = () => {
               user.role === "candidate" && <ChangePasswordCandidate />}
             {activeTab === "info-recruiter" && user.role === "recruiter" && (
               <InfoRecruteur />
+            )}
+            {activeTab === "education" && user.role === "candidate" && (
+              <Education />
             )}
           </main>
         </div>

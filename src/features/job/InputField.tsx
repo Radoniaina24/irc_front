@@ -8,6 +8,8 @@ interface InputProps {
   required?: boolean;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: any;
+  touched?: any;
 }
 
 const InputField: React.FC<InputProps> = ({
@@ -18,6 +20,8 @@ const InputField: React.FC<InputProps> = ({
   required = false,
   value,
   onChange,
+  error,
+  touched,
 }) => {
   return (
     <div className="w-full">
@@ -35,6 +39,13 @@ const InputField: React.FC<InputProps> = ({
           required={required}
           className="bg-gray-50 border border-gray-300 p-2 rounded text-gray-900 text-sm w-full block focus:border-blue-500 ps-5 py-2"
         />
+        {error && touched ? (
+          <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+            <span className="font-medium"></span> {error}
+          </p>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -2,19 +2,17 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 import { Button } from "flowbite-react";
-import { MdDeleteForever } from "react-icons/md";
-
-import { useDeleteSectorMutation } from "@/lib/api/sectorApi";
 import { useToast } from "@/lib/context/ToastContext";
-import { useDeleteCategoryMutation } from "@/lib/api/categoryApi";
+import { Trash } from "lucide-react";
+import { useDeleteEducationMutation } from "@/lib/api/educationApi";
 
-export default function DeleteButton({ id }: { id: string }) {
+export default function DeleteEducation({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean>(false);
-  const [deleteCategory] = useDeleteCategoryMutation();
+  const [deleteEducation] = useDeleteEducationMutation();
   const { showToast } = useToast();
   async function handleDelete(id: string) {
     try {
-      const response = await deleteCategory(id).unwrap();
+      const response = await deleteEducation(id).unwrap();
       showToast(response?.message, "success");
       setOpen(false);
     } catch (error) {
@@ -29,10 +27,12 @@ export default function DeleteButton({ id }: { id: string }) {
   }
   return (
     <div>
-      <button onClick={() => setOpen(true)}>
-        <MdDeleteForever size={20} className="text-red-500" />
+      <button
+        className="p-2 bg-gray-100 hover:bg-red-200 rounded-full"
+        onClick={() => setOpen(true)}
+      >
+        <Trash className="w-5 h-5 text-red-600" />
       </button>
-
       <Modal isOpen={open} closeModal={() => setOpen(false)}>
         <div className="">
           <div className=" my-4 text-center">

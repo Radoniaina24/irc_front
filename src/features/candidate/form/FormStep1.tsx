@@ -44,7 +44,7 @@ export default function FormStep1() {
           label={"Last name"}
           type="text"
           name="lastName"
-          placeholder={"last name"}
+          placeholder={""}
           value={formik.values.lastName}
           onChange={formik.handleChange}
           required
@@ -53,7 +53,7 @@ export default function FormStep1() {
           label={"First name"}
           type="text"
           name="firstName"
-          placeholder={"first name"}
+          placeholder={""}
           value={formik.values.firstName}
           onChange={formik.handleChange}
           required
@@ -61,10 +61,10 @@ export default function FormStep1() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <InputField
-          label="Email"
+          label="Work email address"
           type="text"
           name="email"
-          placeholder="email@"
+          placeholder=""
           value={formik.values.email}
           onChange={formik.handleChange}
           required
