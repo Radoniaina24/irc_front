@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useToast } from "@/lib/context/ToastContext";
 import Modal from "./Modal";
-import { Experience } from "../context/FormCandidateContext";
+import { Certification } from "../context/FormCandidateContext";
 import InputField from "@/features/job/InputField";
 import { Loader2, Pencil } from "lucide-react";
 import * as Yup from "yup";
-import { useUpdateExperienceMutation } from "@/lib/api/experienceApi";
+import { useUpdateCertificationMutation } from "@/lib/api/certificationApi";
 import dayjs from "dayjs";
 import TextArea from "../form/TextArea";
-export default function EditExperience({
-  experience,
+export default function EditCertification({
+  certification,
 }: {
-  experience: Experience;
+  certification: Certification;
 }) {
   dayjs.locale("en");
   const formatDate = (isoDate) => {
@@ -20,32 +20,21 @@ export default function EditExperience({
   };
   const [open, setOpen] = useState<boolean>(false);
   const { showToast } = useToast();
-  const [editExperience] = useUpdateExperienceMutation();
+  const [editCertification] = useUpdateCertificationMutation();
   const formik = useFormik({
     initialValues: {
-      ...experience,
-      startDate: formatDate(experience.startDate),
-      endDate: formatDate(experience.endDate),
+      ...certification,
+      dateObtained: formatDate(certification.dateObtained),
     },
-    validationSchema: Yup.object({
-      endDate: Yup.date()
-        .required("La date de fin est obligatoire")
-        .test(
-          "is-greater",
-          "The end date must be later than the start date",
-          function (value) {
-            return new Date(this.parent.startDate) <= new Date(value);
-          }
-        ),
-    }),
+    validationSchema: Yup.object({}),
     enableReinitialize: true,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
 
       try {
-        await editExperience({
-          experience: values,
-          id: experience._id,
+        await editCertification({
+          certification: values,
+          id: certification._id,
         }).unwrap();
         showToast("Edit successfully", "success"); // message, type(error, success)
         resetForm();
@@ -76,55 +65,37 @@ export default function EditExperience({
       <Modal isOpen={open} closeModal={() => setOpen(false)}>
         <form onSubmit={formik.handleSubmit} className="pt-5">
           <h1 className="text-center text-lg py-5 font-semibold">
-            Edit experience
+            Edit certification
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <InputField
-              label="Company"
+              label="Certificate"
               type="text"
-              name={`company`}
-              placeholder="Company name"
-              value={formik.values.company}
+              name={`name`}
+              placeholder="Certificate name"
+              value={formik.values.name}
               onChange={formik.handleChange}
               required
             />
             <InputField
-              label="Position"
+              label="Issuing Organization"
               type="text"
-              name={`position`}
-              placeholder="Enter your position"
-              value={formik.values.position}
+              name={`issuingOrganization`}
+              placeholder="Ex: Scrum Alliance"
+              value={formik.values.issuingOrganization}
               onChange={formik.handleChange}
               required
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <InputField
-              label="Start Date"
-              type="date"
-              name={`startDate`}
-              value={formik.values.startDate}
-              onChange={formik.handleChange}
-              required
-            />
-            <InputField
-              label="End Date"
-              type="date"
-              name={`endDate`}
-              value={formik.values.endDate}
-              onChange={formik.handleChange}
-              error={formik.errors.endDate}
-              touched={formik.touched.endDate}
-              required
-            />
-          </div>
-          <TextArea
-            label="Description"
-            id={`description`}
-            placeholder="Enter your description"
-            value={formik.values.description}
+          <InputField
+            label="Date Obtained"
+            type="date"
+            name={`dateObtained`}
+            value={formik.values.dateObtained}
             onChange={formik.handleChange}
+            error={formik.errors.dateObtained}
+            touched={formik.touched.dateObtained}
             required
           />
           <button

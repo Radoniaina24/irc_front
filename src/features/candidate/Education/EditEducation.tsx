@@ -68,6 +68,9 @@ export default function EditEducation({ education }: { education: Education }) {
       </div>
       <Modal isOpen={open} closeModal={() => setOpen(false)}>
         <form onSubmit={formik.handleSubmit} className="pt-5">
+          <h1 className="text-center text-lg py-5 font-semibold">
+            Edit education
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <InputField
               label="School"

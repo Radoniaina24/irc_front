@@ -17,7 +17,7 @@ export default function EducationCard({ education }: { education: Education }) {
         <DeleteEducation id={education._id} />
       </div>
       {/* Degree & Institution */} {/* Field of Study */}
-      <h2 className="text-xl font-semibold text-gray-800">
+      <h2 className="text-lg font-semibold text-gray-800">
         {education.institution}
       </h2>
       <p className="text-gray-500 text-md">

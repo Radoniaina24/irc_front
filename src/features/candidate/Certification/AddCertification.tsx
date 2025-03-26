@@ -3,42 +3,31 @@ import { useFormik } from "formik";
 import { useToast } from "@/lib/context/ToastContext";
 import Modal from "./Modal";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { Education } from "../context/FormCandidateContext";
+import { Certification } from "../context/FormCandidateContext";
 import InputField from "@/features/job/InputField";
 import { Loader2 } from "lucide-react";
 import * as Yup from "yup";
-import { useAddEducationMutation } from "@/lib/api/educationApi";
-const initialvalues: Education = {
-  institution: "",
-  degree: "",
-  startDate: "",
-  fieldOfStudy: "",
-  endDate: "",
+import { useAddCertificationMutation } from "@/lib/api/certificationApi";
+import TextArea from "../form/TextArea";
+const initialvalues: Certification = {
+  name: "",
+  issuingOrganization: "",
+  dateObtained: "",
 };
 
-export default function AddEducation() {
+export default function AddCertification() {
   const [open, setOpen] = useState<boolean>(false);
   const { showToast } = useToast();
-  const [addEducation] = useAddEducationMutation();
+  const [addCertification] = useAddCertificationMutation();
 
   const formik = useFormik({
     initialValues: initialvalues,
-    validationSchema: Yup.object({
-      endDate: Yup.date()
-        .required("La date de fin est obligatoire")
-        .test(
-          "is-greater",
-          "The end date must be later than the start date",
-          function (value) {
-            return new Date(this.parent.startDate) <= new Date(value);
-          }
-        ),
-    }),
+    validationSchema: Yup.object({}),
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
 
       try {
-        const response = await addEducation(values).unwrap();
+        const response = await addCertification(values).unwrap();
         showToast("Add successfully", "success"); // message, type(error, success)
         resetForm();
         setOpen(false);
@@ -67,58 +56,39 @@ export default function AddEducation() {
       <Modal isOpen={open} closeModal={() => setOpen(false)}>
         <form onSubmit={formik.handleSubmit} className="pt-5">
           <h1 className="text-center text-lg py-5 font-semibold">
-            Add education
+            Add certification
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <InputField
-              label="School"
+              label="Certificate"
               type="text"
-              name={`institution`}
-              placeholder="Ex: University of mauritius"
-              value={formik.values.institution}
+              name={`name`}
+              placeholder="Certificate name"
+              value={formik.values.name}
               onChange={formik.handleChange}
               required
             />
             <InputField
-              label="Degree"
+              label="Issuing Organization"
               type="text"
-              name={`degree`}
-              placeholder="Ex: Master "
-              value={formik.values.degree}
+              name={`issuingOrganization`}
+              placeholder="Ex: Scrum Alliance"
+              value={formik.values.issuingOrganization}
               onChange={formik.handleChange}
               required
             />
           </div>
 
           <InputField
-            label="Area of Study "
-            type="text"
-            name={`fieldOfStudy`}
-            placeholder="Ex: Computer Science"
-            value={formik.values.fieldOfStudy}
+            label="Date Obtained"
+            type="date"
+            name={`dateObtained`}
+            value={formik.values.dateObtained}
             onChange={formik.handleChange}
+            error={formik.errors.dateObtained}
+            touched={formik.touched.dateObtained}
             required
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <InputField
-              label="Start Date"
-              type="date"
-              name={`startDate`}
-              value={formik.values.startDate}
-              onChange={formik.handleChange}
-              required
-            />
-            <InputField
-              label="End Date"
-              type="date"
-              name={`endDate`}
-              value={formik.values.endDate}
-              onChange={formik.handleChange}
-              error={formik.errors.endDate}
-              touched={formik.touched.endDate}
-              required
-            />
-          </div>
           <button
             disabled={formik.isSubmitting}
             type="submit"

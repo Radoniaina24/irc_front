@@ -29,6 +29,8 @@ import ChangePasswordCandidate from "@/features/candidate/password";
 import Education from "@/features/candidate/Education";
 import { FcDiploma1 } from "react-icons/fc";
 import Experience from "@/features/candidate/Experience";
+import { GrCertificate } from "react-icons/gr";
+import Certification from "@/features/candidate/Certification";
 type Tab = {
   id: string;
   label: string;
@@ -103,6 +105,12 @@ const TABS: Tab[] = [
     id: "experience",
     label: "Experience",
     icon: <FcDiploma1 size={18} />,
+    candidateOnly: true,
+  },
+  {
+    id: "certification",
+    label: "Certification",
+    icon: <GrCertificate size={18} />,
     candidateOnly: true,
   },
 ];
@@ -207,6 +215,9 @@ const MyAccount = () => {
             )}
             {activeTab === "experience" && user.role === "candidate" && (
               <Experience />
+            )}
+            {activeTab === "certification" && user.role === "candidate" && (
+              <Certification />
             )}
           </main>
         </div>

@@ -20,11 +20,11 @@ export default function ExperienceCard({
         <DeleteExperience id={experience._id} />
       </div>
       {/* Degree & Institution */} {/* Field of Study */}
-      <h2 className="text-xl font-semibold text-gray-800">
+      <h2 className="text-lg font-semibold text-gray-800">
         {experience.company}
       </h2>
-      <p className="text-gray-600 text-lg">{experience.position}</p>
-      <p className="text-gray-500 ps-2 text-md">
+      <p className="text-gray-600 text-md">{experience.position}</p>
+      <p className="text-gray-500 ps-2 text-sm">
         {experience.description.slice(0, 60)}...
       </p>
       {/* Start & End Dates */}
