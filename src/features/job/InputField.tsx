@@ -25,7 +25,7 @@ const InputField: React.FC<InputProps> = ({
 }) => {
   return (
     <div className="w-full">
-      <label htmlFor={name} className="text-sm">
+      <label htmlFor={name} className="text-sm ">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <div className="w-full mt-2 relative">

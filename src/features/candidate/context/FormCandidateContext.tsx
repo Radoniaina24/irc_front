@@ -33,6 +33,7 @@ export interface Certification {
 }
 
 export interface Language {
+  _id?: string;
   language: string;
   proficiency: "Beginner" | "Intermediate" | "Advanced" | "Fluent" | "Native";
 }

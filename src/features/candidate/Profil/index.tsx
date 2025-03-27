@@ -21,8 +21,8 @@ export default function UserProfileCandidate() {
     role: "Admin", // Peut être "Admin", "Recruteur" ou "Candidat"
     skills: ["React", "Next.js", "Node.js"],
     languages: [
-      { name: "English", level: "Avancé" },
-      { name: "French", level: "Intermédiaire" },
+      { name: "English", level: "Fluent" },
+      { name: "French", level: "Intermediate" },
     ],
     address: "123 Main Street, New York, USA",
   };

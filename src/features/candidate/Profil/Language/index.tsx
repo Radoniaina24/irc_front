@@ -1,4 +1,9 @@
 import { PencilIcon, PlusCircleIcon, TrashIcon } from "lucide-react";
+import AddLanguage from "./AddLanguage";
+import { useGetLanguageQuery } from "@/lib/api/languageApi";
+import Skeleton from "@/components/Ui/Skeleton";
+import DeleteLanguage from "./DeleteLanguage";
+import EditLanguage from "./EditLanguage";
 
 export default function ProfileLanguages({
   title,
@@ -7,46 +12,70 @@ export default function ProfileLanguages({
   title: string;
   items: { name: string; level: string }[];
 }) {
+  const levelColors = {
+    Beginner: "bg-red-100 text-red-700",
+    Intermediate: "bg-yellow-100 text-yellow-700",
+    Advanced: "bg-green-100 text-green-700",
+    Fluent: "bg-blue-100 text-blue-700",
+    Native: "bg-purple-100 text-purple-700",
+  };
+  const { data, isLoading, error } = useGetLanguageQuery("");
+  if (isLoading) {
+    return (
+      <div className="space-y-2">
+        {[...Array(3)].map((_, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-gray-200 animate-pulse"
+          >
+            {/* Nom de l'élément */}
+            <Skeleton className="h-4 w-1/4" />
+
+            {/* Niveau */}
+            <Skeleton className="h-4 w-16 rounded-full" />
+
+            {/* Boutons */}
+            <div className="flex space-x-1.5">
+              <Skeleton className="h-8 w-8 rounded-full" />
+              <Skeleton className="h-8 w-8 rounded-full" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  // console.log(data);
   return (
     <div className="bg-gray-50 p-4 rounded-xl shadow-sm border border-gray-200">
       <div className="flex justify-between items-center mb-3">
         <h3 className="text-md font-semibold text-gray-700">{title}</h3>
-        <button className="p-1.5 rounded-full bg-green-500 hover:bg-green-600 text-white transition duration-300">
-          <PlusCircleIcon className="w-4 h-4" />
-        </button>
+        <AddLanguage />
       </div>
 
       <div className="space-y-2">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-gray-200"
-          >
-            <span className="text-gray-700 text-sm font-medium">
-              {item.name}
-            </span>
-            <span
-              className={`px-2 py-0.5 text-xs font-medium rounded-full shadow-sm
-                ${
-                  item.level === "Débutant"
-                    ? "bg-red-100 text-red-700"
-                    : item.level === "Intermédiaire"
-                    ? "bg-yellow-100 text-yellow-700"
-                    : "bg-green-100 text-green-700"
-                }`}
+        {data &&
+          data.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-gray-200"
             >
-              {item.level}
-            </span>
-            <div className="flex space-x-1.5">
-              <button className="p-1.5 rounded-full bg-gray-200 hover:bg-gray-300 transition duration-300">
-                <PencilIcon className="w-4 h-4 text-gray-700" />
-              </button>
-              <button className="p-1.5 rounded-full bg-red-500 hover:bg-red-600 text-white transition duration-300">
-                <TrashIcon className="w-4 h-4" />
-              </button>
+              <span className="text-gray-700 text-sm font-medium">
+                {item.language}
+              </span>
+              <span
+                key={index}
+                className={`px-2.5 py-1 text-xs font-medium rounded-full shadow-sm hover:opacity-80 transition ${
+                  levelColors[item.proficiency] || "bg-gray-100 text-gray-700"
+                }`}
+              >
+                {item.proficiency}
+              </span>
+              <div className="flex space-x-1.5">
+                <EditLanguage language={item} />
+                <DeleteLanguage id={item._id} />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
