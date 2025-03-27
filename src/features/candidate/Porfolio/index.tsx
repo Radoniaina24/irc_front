@@ -1,9 +1,10 @@
 import React from "react";
-import AddCertification from "./AddCertification";
-import { useGetCertificationQuery } from "@/lib/api/certificationApi";
-import CertificationCard from "./Item";
-export default function Certification() {
-  const { data, error, isLoading } = useGetCertificationQuery("");
+import AddExperience from "./AddPortfolio";
+import ExperienceCard from "./Item";
+import AddPortfolio from "./AddPortfolio";
+import { useGetPortfolioQuery } from "@/lib/api/portfolioApi";
+export default function Portfolio() {
+  const { data, error, isLoading } = useGetPortfolioQuery("");
   if (isLoading) {
     return <div className="text-center py-75">Loading ...</div>;
   }
@@ -16,7 +17,7 @@ export default function Certification() {
               Something&apos;s missing.
             </p>
             <p className="text-gray-500 text-lg dark:text-gray-400 font-light mb-4">
-              Error while loading the list Certification.
+              Error while loading the list Experience.
             </p>
           </div>
         </div>
@@ -27,24 +28,25 @@ export default function Certification() {
       <div className="p-5">
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold">Portfolio</h1>
-          <AddCertification />
+          <AddPortfolio />
         </div>
         <div className="mt-10 max-h-[60vh] overflow-y-auto overflow-x-hidden ">
-          <div className="text-center text-lg py-40">No certification yet</div>;
+          <div className="text-center text-lg py-40">No portfolio yet</div>;
         </div>
       </div>
     );
   }
+
   return (
     <div className="p-5">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">Certification</h1>
-        <AddCertification />
+        <h1 className="text-xl font-bold">Portfolio</h1>
+        <AddPortfolio />
       </div>
       <div className="mt-10 max-h-[50vh] overflow-y-auto overflow-x-hidden ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
           {data.map((item, index) => (
-            <CertificationCard certification={item} key={index} />
+            <ExperienceCard portfolio={item} key={index} />
           ))}
         </div>
       </div>

@@ -67,7 +67,7 @@ export default function FormStep6() {
             <h1 className="text-black py-2">Portfolio {index + 1}</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
             <div className="grid grid-cols-1 ">
-              <InputField
+              {/* <InputField
                 label="Lien"
                 type="texte"
                 name={`portfolio.${index}.url`}
@@ -79,7 +79,7 @@ export default function FormStep6() {
                 setFieldValue={formik.setFieldValue}
                 name={`portfolio.${index}.file`}
                 required
-              />
+              /> */}
             </div>
             <button
               type="button"

@@ -34,6 +34,8 @@ import Certification from "@/features/candidate/Certification";
 import { certificationAPI } from "@/lib/api/certificationApi";
 import { experienceAPI } from "@/lib/api/experienceApi";
 import { educationAPI } from "@/lib/api/educationApi";
+import { FaPortrait } from "react-icons/fa";
+import Portfolio from "@/features/candidate/Porfolio";
 type Tab = {
   id: string;
   label: string;
@@ -90,6 +92,12 @@ const TABS: Tab[] = [
     id: "certification",
     label: "Certification",
     icon: <GrCertificate size={18} />,
+    candidateOnly: true,
+  },
+  {
+    id: "portfolio",
+    label: "Portfolio",
+    icon: <FaPortrait size={18} />,
     candidateOnly: true,
   },
   {
@@ -224,6 +232,9 @@ const MyAccount = () => {
             )}
             {activeTab === "certification" && user.role === "candidate" && (
               <Certification />
+            )}
+            {activeTab === "portfolio" && user.role === "candidate" && (
+              <Portfolio />
             )}
           </main>
         </div>

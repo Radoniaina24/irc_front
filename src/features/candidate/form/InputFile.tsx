@@ -7,7 +7,7 @@ interface InputFileProps {
   error?: string;
   touched?: boolean;
   inputRef?: React.RefObject<HTMLInputElement>;
-  required?: Boolean;
+  requir?: boolean;
 }
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 Mo
@@ -25,7 +25,7 @@ const InputFile: React.FC<InputFileProps> = ({
   error,
   touched,
   inputRef,
-  required = true,
+  requir = true,
 }) => {
   const [fileError, setFileError] = useState<string | null>(null);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,15 +33,13 @@ const InputFile: React.FC<InputFileProps> = ({
 
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
-        setFileError("Le fichier ne doit pas dépasser 2 Mo.");
+        setFileError("The file must not exceed 2 MB.");
         setFieldValue(name, null);
         return;
       }
 
       if (!ALLOWED_TYPE.includes(file.type)) {
-        setFileError(
-          "Seuls les fichiers PDF, JPEG, PNG et GIF sont autorisés."
-        );
+        setFileError("Only PDF, JPEG, PNG, and GIF files are allowed.");
         setFieldValue(name, null);
         return;
       }
@@ -56,7 +54,7 @@ const InputFile: React.FC<InputFileProps> = ({
         {label}
       </label>
       <input
-        required
+        required={requir}
         ref={inputRef}
         name={name}
         type="file"
@@ -70,7 +68,7 @@ const InputFile: React.FC<InputFileProps> = ({
         <p className="mt-2 text-xs text-red-600">{error}</p>
       ) : (
         <p className="mt-2 text-xs text-gray-400">
-          Seuls les fichiers PDF, JPEG, PNG et GIF (max. 2 Mo) sont autorisés.
+          Only PDF, JPEG, PNG, and GIF files (max. 2 MB) are allowed.
         </p>
       )}
     </div>

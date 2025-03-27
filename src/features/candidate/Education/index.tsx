@@ -23,7 +23,19 @@ export default function Education() {
         </div>
       </section>
     );
-  //   console.log(data);
+  if (data.length === 0) {
+    return (
+      <div className="p-5">
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-bold">Portfolio</h1>
+          <AddEducation />
+        </div>
+        <div className="mt-10 max-h-[60vh] overflow-y-auto overflow-x-hidden ">
+          <div className="text-center text-lg py-40">No education yet</div>;
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="p-5">
       <div className="flex justify-between items-center">

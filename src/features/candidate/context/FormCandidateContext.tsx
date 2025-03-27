@@ -7,11 +7,6 @@ export interface Address {
   city: string;
   country: string;
 }
-export interface Portfolio {
-  url: string;
-  file: File | null;
-}
-
 export interface Experience {
   _id?: string;
   company: string;
@@ -42,6 +37,15 @@ export interface Language {
   proficiency: "Beginner" | "Intermediate" | "Advanced" | "Fluent" | "Native";
 }
 
+export interface Portfolio {
+  _id?: string;
+  title: string;
+  role: string;
+  description: string;
+  skills: string[];
+  file: string;
+  link: string;
+}
 interface FormValues {
   lastName: string;
   firstName: string;

@@ -5,12 +5,16 @@ interface MultiValueInputProps {
   name: string;
   values: string[];
   onChange: (values: string[]) => void;
+  touched?: any;
+  error?: any;
 }
 const MultiValueInput: React.FC<MultiValueInputProps> = ({
   label,
   name,
   values,
   onChange,
+  touched,
+  error,
 }) => {
   const [inputValue, setInputValue] = React.useState("");
 
@@ -48,6 +52,11 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
           Add
         </button>
       </div>
+      {touched && error ? (
+        <p className="mt-2 text-xs text-red-600">{error}</p>
+      ) : (
+        ""
+      )}
       <div className="flex flex-wrap gap-2 mt-2">
         {values.map((value, index) => (
           <span

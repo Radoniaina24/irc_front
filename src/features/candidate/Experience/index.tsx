@@ -22,6 +22,19 @@ export default function Experience() {
         </div>
       </section>
     );
+  if (data.length === 0) {
+    return (
+      <div className="p-5">
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-bold">Portfolio</h1>
+          <AddExperience />
+        </div>
+        <div className="mt-10 max-h-[60vh] overflow-y-auto overflow-x-hidden ">
+          <div className="text-center text-lg py-40">No experience yet</div>;
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="p-5">
       <div className="flex justify-between items-center">
