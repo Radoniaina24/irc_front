@@ -15,6 +15,7 @@ import { educationAPI } from "@/lib/api/educationApi";
 import { experienceAPI } from "@/lib/api/experienceApi";
 import { certificationAPI } from "@/lib/api/certificationApi";
 import { portfolioAPI } from "@/lib/api/portfolioApi";
+import { skilleAPI } from "@/lib/api/skillsApi";
 
 export const store = configureStore({
   reducer: {
@@ -33,6 +34,7 @@ export const store = configureStore({
     [experienceAPI.reducerPath]: experienceAPI.reducer,
     [certificationAPI.reducerPath]: certificationAPI.reducer,
     [portfolioAPI.reducerPath]: portfolioAPI.reducer,
+    [skilleAPI.reducerPath]: skilleAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
@@ -45,7 +47,8 @@ export const store = configureStore({
       educationAPI.middleware,
       experienceAPI.middleware,
       certificationAPI.middleware,
-      portfolioAPI.middleware
+      portfolioAPI.middleware,
+      skilleAPI.middleware
     );
   },
 });

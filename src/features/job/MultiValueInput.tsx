@@ -7,6 +7,7 @@ interface MultiValueInputProps {
   onChange: (values: string[]) => void;
   touched?: any;
   error?: any;
+  icon?: any;
 }
 const MultiValueInput: React.FC<MultiValueInputProps> = ({
   label,
@@ -15,6 +16,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
   onChange,
   touched,
   error,
+  icon,
 }) => {
   const [inputValue, setInputValue] = React.useState("");
 
@@ -44,12 +46,13 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
           className="bg-gray-50 border border-gray-300 p-2 rounded text-gray-900 text-sm w-full focus:border-blue-500"
           placeholder="Enter value..."
         />
+
         <button
           type="button"
           onClick={handleAddValue}
           className="bg-blue-500 rounded text-sm text-white hover:bg-blue-600 px-3 py-2"
         >
-          Add
+          {icon ? icon : "Add"}
         </button>
       </div>
       {touched && error ? (

@@ -36,6 +36,8 @@ import { experienceAPI } from "@/lib/api/experienceApi";
 import { educationAPI } from "@/lib/api/educationApi";
 import { FaPortrait } from "react-icons/fa";
 import Portfolio from "@/features/candidate/Porfolio";
+import { FaRegUserCircle } from "react-icons/fa";
+import UserProfileCandidate from "@/features/candidate/Profil";
 type Tab = {
   id: string;
   label: string;
@@ -45,7 +47,14 @@ type Tab = {
   candidateOnly?: boolean;
 };
 const TABS: Tab[] = [
+  {
+    id: "profile",
+    label: " My Profile",
+    icon: <FaRegUserCircle size={18} />,
+    candidateOnly: true,
+  },
   { id: "dashboard", label: "Dashboard", icon: <RxDashboard size={18} /> },
+
   {
     id: "job-recruiter",
     label: "Job Announcement",
@@ -235,6 +244,9 @@ const MyAccount = () => {
             )}
             {activeTab === "portfolio" && user.role === "candidate" && (
               <Portfolio />
+            )}
+            {activeTab === "profile" && user.role === "candidate" && (
+              <UserProfileCandidate />
             )}
           </main>
         </div>
