@@ -8,7 +8,7 @@ import { useDeleteEducationMutation } from "@/lib/api/educationApi";
 
 export default function DeleteEducation({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean>(false);
-  const [deleteEducation] = useDeleteEducationMutation();
+  const [deleteEducation, data] = useDeleteEducationMutation();
   const { showToast } = useToast();
   async function handleDelete(id: string) {
     try {
@@ -45,15 +45,17 @@ export default function DeleteEducation({ id }: { id: string }) {
           </div>
           <div className="flex justify-center gap-5 mt-5">
             <Button
-              size="xs"
-              className="bg-red-500 text-white"
+              disabled={data.isLoading}
+              size="sm"
+              className="bg-red-500 text-white disabled:bg-gray-5"
               onClick={() => handleDelete(id)}
             >
               Delete
             </Button>
             <Button
-              size="xs"
-              className="bg-blue-500 text-white"
+              disabled={data.isLoading}
+              size="sm"
+              className="bg-blue-500 text-white disabled:bg-gray-5"
               onClick={() => setOpen(false)}
             >
               Cancel

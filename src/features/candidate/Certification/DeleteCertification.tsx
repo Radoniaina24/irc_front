@@ -8,7 +8,7 @@ import { useDeleteCertificationMutation } from "@/lib/api/certificationApi";
 
 export default function DeleteCertification({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean>(false);
-  const [deleteCertification] = useDeleteCertificationMutation();
+  const [deleteCertification, data] = useDeleteCertificationMutation();
   const { showToast } = useToast();
   async function handleDelete(id: string) {
     try {
@@ -45,15 +45,17 @@ export default function DeleteCertification({ id }: { id: string }) {
           </div>
           <div className="flex justify-center gap-5 mt-5">
             <Button
+              disabled={data.isLoading}
               size="sm"
-              className="bg-red-500 text-white"
+              className="bg-red-500 text-white disabled:bg-gray-5"
               onClick={() => handleDelete(id)}
             >
               Delete
             </Button>
             <Button
+              disabled={data.isLoading}
               size="sm"
-              className="bg-blue-500 text-white"
+              className="bg-blue-500 text-white disabled:bg-gray-5"
               onClick={() => setOpen(false)}
             >
               Cancel
