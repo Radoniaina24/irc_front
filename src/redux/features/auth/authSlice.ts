@@ -1,6 +1,14 @@
 import { authAPI } from "@/lib/api/authApi";
 import { RootState } from "../../store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { recruiterAPI } from "@/lib/api/recruiterApi";
+import { jobAPI } from "@/lib/api/jobApi";
+import { certificationAPI } from "@/lib/api/certificationApi";
+import { experienceAPI } from "@/lib/api/experienceApi";
+import { educationAPI } from "@/lib/api/educationApi";
+import { languageAPI } from "@/lib/api/languageApi";
+import { skilleAPI } from "@/lib/api/skillsApi";
+import { portfolioAPI } from "@/lib/api/portfolioApi";
 
 interface User {
   id: string;
@@ -29,6 +37,15 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
+      recruiterAPI.util.resetApiState();
+      jobAPI.util.resetApiState(); // Réinitialiser RTK Query
+      authAPI.util.resetApiState(); // Réinitialiser RTK Query
+      certificationAPI.util.resetApiState();
+      experienceAPI.util.resetApiState();
+      educationAPI.util.resetApiState();
+      languageAPI.util.resetApiState();
+      skilleAPI.util.resetApiState();
+      portfolioAPI.util.resetApiState();
     },
   },
   extraReducers: (builder) => {

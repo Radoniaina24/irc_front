@@ -30,7 +30,56 @@ const Categories = () => {
     }
   }, []);
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <section className="overflow-hidden pt-30">
+        <div className="border-b border-gray-300 w-full max-w-[1170px] mx-auto pb-15 px-4 sm:px-8 xl:px-0">
+          <div className="animate-pulse">
+            {/* Section Title Skeleton */}
+            <div className="flex justify-between items-center mb-10">
+              <div>
+                <div className="h-4 w-24 bg-gray-300 rounded mb-2"></div>
+                <div className="h-6 w-48 bg-gray-300 rounded"></div>
+              </div>
+              <div className="flex gap-3">
+                <div className="h-10 w-10 bg-gray-300 rounded"></div>
+                <div className="h-10 w-10 bg-gray-300 rounded"></div>
+              </div>
+            </div>
+            <Swiper
+              ref={sliderRef}
+              slidesPerView={6}
+              breakpoints={{
+                // when window width is >= 640px
+                0: {
+                  slidesPerView: 2,
+                },
+                640: {
+                  slidesPerView: 3,
+                  // spaceBetween: 4,
+                },
+                1000: {
+                  slidesPerView: 5,
+                  // spaceBetween: 4,
+                },
+                // when window width is >= 768px
+                1200: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
+              {" "}
+              {[...Array(6)].map((_, index) => (
+                <SwiperSlide key={index}>
+                  <div className="flex flex-col group items-center">
+                    <div className="h-30 w-30 bg-gray-300 rounded-full"></div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+    );
   }
   const sectors = data?.sectors;
   return (

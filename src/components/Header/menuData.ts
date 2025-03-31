@@ -1,24 +1,24 @@
 import { Menu } from "@/types/Menu";
 
 export const menuData: Menu[] = [
-  {
-    id: 1,
-    title: "Jobs",
-    newTab: false,
-    path: "/jobs",
-  },
-  {
-    id: 1,
-    title: "Our profiles",
-    newTab: false,
-    path: "/jobs",
-  },
-  {
-    id: 3,
-    title: "Contact",
-    newTab: false,
-    path: "/contact",
-  },
+  // {
+  //   id: 1,
+  //   title: "Jobs",
+  //   newTab: false,
+  //   path: "/jobs",
+  // },
+  // {
+  //   id: 1,
+  //   title: "Our profiles",
+  //   newTab: false,
+  //   path: "/jobs",
+  // },
+  // {
+  //   id: 3,
+  //   title: "Contact",
+  //   newTab: false,
+  //   path: "/contact",
+  // },
   // {
   //   id: 6,
   //   title: "pages",

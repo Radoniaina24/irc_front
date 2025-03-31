@@ -38,6 +38,9 @@ import { FaPortrait } from "react-icons/fa";
 import Portfolio from "@/features/candidate/Porfolio";
 import { FaRegUserCircle } from "react-icons/fa";
 import UserProfileCandidate from "@/features/candidate/Profil";
+import { languageAPI } from "@/lib/api/languageApi";
+import { skilleAPI } from "@/lib/api/skillsApi";
+import { portfolioAPI } from "@/lib/api/portfolioApi";
 type Tab = {
   id: string;
   label: string;
@@ -152,6 +155,9 @@ const MyAccount = () => {
       dispatch(certificationAPI.util.resetApiState());
       dispatch(experienceAPI.util.resetApiState());
       dispatch(educationAPI.util.resetApiState());
+      dispatch(languageAPI.util.resetApiState());
+      dispatch(skilleAPI.util.resetApiState());
+      dispatch(portfolioAPI.util.resetApiState());
       router.push("/");
     } catch (err) {
       console.error("Logout failed", err);

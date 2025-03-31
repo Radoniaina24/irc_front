@@ -1,14 +1,11 @@
-import {
-  PencilIcon,
-  TrashIcon,
-  PlusCircleIcon,
-  MapPinIcon,
-  MailIcon,
-  PhoneIcon,
-} from "lucide-react";
+"use client";
+import { MapPinIcon, MailIcon, PhoneIcon } from "lucide-react";
 import ProfileSkills from "./Skills";
 import ProfileLanguages from "./Language";
 import ProfileSection from "./ProfilSection";
+import { useGetProfilQuery } from "@/lib/api/candidateApi";
+import Photo from "./info";
+import Info from "./info";
 
 export default function UserProfileCandidate() {
   const user = {
@@ -27,51 +24,15 @@ export default function UserProfileCandidate() {
     address: "123 Main Street, New York, USA",
   };
 
-  const getRoleBadge = (role: string) => {
-    const roleStyles: Record<string, string> = {
-      Admin: "bg-red-100 text-red-700",
-      Recruteur: "bg-blue-100 text-blue-700",
-      Candidat: "bg-green-100 text-green-700",
-    };
-    return (
-      <span
-        className={`px-3 py-1 text-xs font-medium rounded-full shadow-sm ${
-          roleStyles[role] || "bg-gray-100 text-gray-700"
-        }`}
-      >
-        {role}
-      </span>
-    );
-  };
-
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-2xl mt-10 border border-gray-200">
       {/* Profil */}
-      <div className="flex items-center space-x-6 mb-6">
-        <img
-          src={user.photo}
-          alt="Profile"
-          className="w-20 h-20 rounded-full border-4 border-blue-500 shadow-md"
-        />
-        <div>
-          <div className="flex items-center space-x-2">
-            <h2 className="text-xl font-semibold text-gray-800">
-              {user.firstname} {user.lastname}
-            </h2>
-            {getRoleBadge(user.role)}
-          </div>
-          <UserInfo icon={<MailIcon className="w-4 h-4" />} text={user.email} />
-          <UserInfo
-            icon={<PhoneIcon className="w-4 h-4" />}
-            text={user.phone}
-          />
-        </div>
-      </div>
+      <Info user={user} />
 
       {/* Informations */}
       <div className="space-y-4">
         <ProfileSkills title="Skills" items={user.skills} />
-        <ProfileLanguages title="Langues" items={user.languages} />
+        <ProfileLanguages title="Language" items={user.languages} />
         <ProfileSection
           title="Adresse"
           content={user.address}
