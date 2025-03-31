@@ -14,8 +14,8 @@ const Home = () => {
     <main className="pt-36">
       {/* <Hero /> */}
       <Categories />
-      {/* <NewArrival />
-      <PromoBanner />
+      {/* <NewArrival /> */}
+      {/* <PromoBanner />
       <BestSeller />
       <CounDown />
       <Testimonials />

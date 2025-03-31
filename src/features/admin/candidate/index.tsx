@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useGetAllRecruiterQuery } from "@/lib/api/recruiterApi";
-import RecruiterList from "./recruiterList";
-import Search from "./Search";
-import Pagination from "./Pagination";
+import Pagination from "@/components/Orders/Pagination";
+import { useGetAllCandidateQuery } from "@/lib/api/candidateApi";
+import Search from "@/components/Orders/Search";
+import CandidateList from "./listCandidate";
 
-const Recruiter = () => {
+const Candidate = () => {
   const [search, setSearch] = useState<string>("");
   const [limit, setLimit] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading, error } = useGetAllRecruiterQuery({
+  const { data, isLoading, error } = useGetAllCandidateQuery({
     search,
     limit,
     page,
   });
-  // console.log(data);
+  //   console.log(data);
   if (isLoading) {
     return <div className="text-center py-75">Loading ...</div>;
   }
@@ -26,13 +27,14 @@ const Recruiter = () => {
               Something&apos;s missing.
             </p>
             <p className="text-gray-500 text-lg dark:text-gray-400 font-light mb-4">
-              Error while loading recruiters.
+              Error while loading candidates.
             </p>
           </div>
         </div>
       </section>
     );
-  const recruiters = data.recruiters;
+  const candidates = data.candidates;
+  //   console.log(candidates);
   return (
     <div className="py-5 px-5 ">
       <div className="relative overflow-x-auto overflow-y-auto  ">
@@ -58,14 +60,14 @@ const Recruiter = () => {
               </tr>
             </thead>
             <tbody>
-              {recruiters.length > 0 ? (
-                recruiters.map((item) => (
-                  <RecruiterList recruiter={item} key={item._id} />
+              {candidates.length > 0 ? (
+                candidates.map((item) => (
+                  <CandidateList candidate={item} key={item._id} />
                 ))
               ) : (
                 <tr>
                   <td colSpan={4} className="text-center py-4 text-gray-500">
-                    No recruiters found.
+                    No candidates found.
                   </td>
                 </tr>
               )}
@@ -81,4 +83,4 @@ const Recruiter = () => {
     </div>
   );
 };
-export default Recruiter;
+export default Candidate;

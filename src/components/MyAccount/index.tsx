@@ -41,6 +41,7 @@ import UserProfileCandidate from "@/features/candidate/Profil";
 import { languageAPI } from "@/lib/api/languageApi";
 import { skilleAPI } from "@/lib/api/skillsApi";
 import { portfolioAPI } from "@/lib/api/portfolioApi";
+import Candidate from "@/features/admin/candidate";
 type Tab = {
   id: string;
   label: string;
@@ -227,6 +228,9 @@ const MyAccount = () => {
             )}
             {activeTab === "recruiter" && user.role === "admin" && (
               <Recruiter />
+            )}
+            {activeTab === "candidate" && user.role === "admin" && (
+              <Candidate />
             )}
             {activeTab === "sector" && <Sector />}
             {activeTab === "category" && <Category />}

@@ -37,7 +37,7 @@ const JobAdmin = () => {
   const jobs = data.jobPosts;
   return (
     <div className="px-5 py-5">
-      <div className="shadow-md overflow-x-auto overflow-y-auto relative sm:rounded-lg">
+      <div className=" overflow-x-auto overflow-y-auto relative ">
         <div className="flex flex-wrap justify-end items-center px-4 py-5">
           <Search onQuery={setSearch} query={search} />
         </div>

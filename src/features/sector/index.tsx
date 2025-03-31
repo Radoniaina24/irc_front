@@ -16,7 +16,60 @@ const Sector = () => {
   });
   // console.log(data);
   if (isLoading) {
-    return <div className="text-center py-75">Loading ...</div>;
+    return (
+      <div className="px-5 py-5">
+        <div className=" relative ">
+          {/* Search and Add Button Skeleton */}
+          <div className="flex flex-wrap justify-between items-center px-4 py-2">
+            <div className="h-8 w-64 bg-gray-300 rounded"></div>
+            <div className="h-8 w-8 bg-gray-300 rounded"></div>
+          </div>
+
+          {/* Table Skeleton */}
+          <div className="h-100 lg:h-[650px] overflow-y-auto">
+            <table className="text-gray-500 text-left text-sm w-full dark:text-gray-400 rtl:text-right">
+              <thead className="bg-gray-50 text-gray-700 text-xs dark:bg-gray-700 dark:text-gray-400 sticky top-0 uppercase z-10">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    <div className="h-4 w-24 bg-gray-300 rounded"></div>
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    <div className="h-4 w-24 bg-gray-300 rounded"></div>
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    <div className="h-4 w-24 bg-gray-300 rounded"></div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...Array(9)].map((_, index) => (
+                  <tr key={index} className="border-b">
+                    <td className="px-6 py-4">
+                      <div className="h-4 w-32 bg-gray-300 rounded"></div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="h-4 w-32 bg-gray-300 rounded"></div>
+                    </td>
+                    <td className=" flex gap-2 items-center px-6 py-4">
+                      <div className="h-7 w-7 bg-gray-300 rounded-md"></div>
+                      <div className="h-7 w-7 bg-gray-300 rounded-md"></div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination Skeleton */}
+          <div className="flex justify-center gap-2">
+            <div className="h-8 w-8 bg-gray-300  rounded"></div>
+            <div className="h-8 w-8 bg-gray-300 rounded"></div>
+            <div className="h-8 w-8 bg-gray-300 rounded"></div>
+            <div className="h-8 w-8 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
   if (error)
     return (
@@ -36,7 +89,7 @@ const Sector = () => {
   const sectors = data.sectors;
   return (
     <div className="px-5 py-5">
-      <div className="shadow-md overflow-x-auto overflow-y-auto relative sm:rounded-lg">
+      <div className=" overflow-x-auto overflow-y-auto relative ">
         <div className="flex flex-wrap justify-between items-center px-4 py-2">
           <AddSector />
           <Search onQuery={setSearch} query={search} />
