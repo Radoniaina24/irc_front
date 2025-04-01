@@ -131,12 +131,12 @@ const TABS: Tab[] = [
     icon: <MdOutlinePassword size={18} />,
     candidateOnly: true,
   },
-  {
-    id: "category",
-    label: "Category",
-    icon: <BiCategoryAlt size={18} />,
-    adminOnly: true,
-  },
+  // {
+  //   id: "category",
+  //   label: "Category",
+  //   icon: <BiCategoryAlt size={18} />,
+  //   adminOnly: true,
+  // },
 ];
 
 const MyAccount = () => {
@@ -233,7 +233,7 @@ const MyAccount = () => {
               <Candidate />
             )}
             {activeTab === "sector" && <Sector />}
-            {activeTab === "category" && <Category />}
+            {/* {activeTab === "category" && <Category />} */}
             {activeTab === "job-recruiter" && <Job />}
             {activeTab === "job-admin" && <JobAdmin />}
             {activeTab === "password-recruiter" &&

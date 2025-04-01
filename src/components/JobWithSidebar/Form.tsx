@@ -2,7 +2,7 @@ import React from "react";
 import ContractType from "./ContractType";
 import ExperienceLevel from "./ExperienceLevel";
 import StudyLevel from "./StudyLevel";
-import { useCategoriesOptions } from "@/features/job/options";
+import { useSectorsOptions } from "@/features/job/options";
 import SelectInput from "./SelectInput";
 const contractType = [
   {
@@ -40,22 +40,27 @@ const experienceLevel = [
   {
     name: "1 year",
     products: 10,
+    value: "1 ans",
   },
   {
     name: "2 years",
     products: 23,
+    value: "2 ans",
   },
   {
     name: "3 years",
     products: 8,
+    value: "3 ans",
   },
   {
     name: "4 years",
     products: 8,
+    value: "4 ans",
   },
   {
     name: "5 years",
     products: 8,
+    value: "5 ans",
   },
 ];
 const studyLevel = [
@@ -81,8 +86,7 @@ const studyLevel = [
   },
 ];
 export default function Form({ formik }: { formik?: any }) {
-  const { options: categories, isLoading: isCategoriesLoading } =
-    useCategoriesOptions();
+  const { options: sectors, isLoading: isSectorLoading } = useSectorsOptions();
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="flex flex-col gap-6 sticky top-0">
@@ -90,23 +94,23 @@ export default function Form({ formik }: { formik?: any }) {
         <div className="bg-white  shadow-1 rounded-lg py-3 px-5 categoryJob">
           <div className="">
             <SelectInput
-              name={"category"}
-              options={categories}
-              isLoading={isCategoriesLoading}
-              label={"Category"}
+              name={"sector"}
+              options={sectors}
+              isLoading={isSectorLoading}
+              label={"Sector"}
               formik={formik}
-              placeholder="category"
+              placeholder="Sector"
             />
           </div>
         </div>
         {/* <!-- category box --> */}
-        <ContractType type={contractType} />
+        <ContractType type={contractType} formik={formik} />
 
         {/* <!-- gender box --> */}
-        <ExperienceLevel type={experienceLevel} />
+        <ExperienceLevel type={experienceLevel} formik={formik} />
 
         {/* <!--Study level --> */}
-        <StudyLevel type={studyLevel} />
+        <StudyLevel type={studyLevel} formik={formik} />
       </div>
     </form>
   );

@@ -1,54 +1,57 @@
 "use client";
 import React, { useState } from "react";
 
-const ExperienceLevelItem = ({ category }) => {
-  const [selected, setSelected] = useState(false);
+const ExperienceLevelItem = ({ category, formik }) => {
+  const isSelected = formik.values.experienceLevel.includes(category.value);
+
+  const toggleSelection = () => {
+    const updatedSelection = isSelected
+      ? formik.values.experienceLevel.filter((item) => item !== category.value)
+      : [...formik.values.experienceLevel, category.value];
+
+    formik.setFieldValue("experienceLevel", updatedSelection);
+  };
+
   return (
     <button
       className={`${
-        selected && "text-blue"
-      } group flex items-center justify-between ease-out duration-200 hover:text-blue `}
-      onClick={() => setSelected(!selected)}
+        isSelected ? "text-blue" : "text-dark"
+      } group flex items-center justify-between ease-out duration-200 hover:text-blue`}
+      onClick={toggleSelection}
+      type="button"
     >
       <div className="flex items-center gap-2">
         <div
           className={`cursor-pointer flex items-center justify-center rounded w-4 h-4 border ${
-            selected ? "border-blue bg-blue" : "bg-white border-gray-3"
+            isSelected ? "border-blue bg-blue" : "bg-white border-gray-3"
           }`}
         >
-          <svg
-            className={selected ? "block" : "hidden"}
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.33317 2.5L3.74984 7.08333L1.6665 5"
-              stroke="white"
-              strokeWidth="1.94437"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {isSelected && (
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.33317 2.5L3.74984 7.08333L1.6665 5"
+                stroke="white"
+                strokeWidth="1.94437"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
         </div>
 
         <span>{category.name}</span>
       </div>
-
-      <span
-        className={`${
-          selected ? "text-white bg-blue" : "bg-gray-2"
-        } inline-flex rounded-[30px] text-custom-xs px-2 ease-out duration-200 group-hover:text-white group-hover:bg-blue`}
-      >
-        {category.products}
-      </span>
     </button>
   );
 };
 
-const ExperienceLevel = ({ type }) => {
+const ExperienceLevel = ({ type, formik }) => {
   const [toggleDropdown, setToggleDropdown] = useState(true);
 
   return (
@@ -56,15 +59,15 @@ const ExperienceLevel = ({ type }) => {
       <div
         onClick={() => setToggleDropdown(!toggleDropdown)}
         className={`cursor-pointer flex items-center justify-between py-3 pl-6 pr-5.5 ${
-          toggleDropdown && "shadow-filter"
+          toggleDropdown ? "shadow-filter" : ""
         }`}
       >
         <p className="text-dark">Experience Level</p>
         <button
           onClick={() => setToggleDropdown(!toggleDropdown)}
-          aria-label="button for gender dropdown"
+          aria-label="Toggle experience level dropdown"
           className={`text-dark ease-out duration-200 ${
-            toggleDropdown && "rotate-180"
+            toggleDropdown ? "rotate-180" : ""
           }`}
         >
           <svg
@@ -85,14 +88,13 @@ const ExperienceLevel = ({ type }) => {
         </button>
       </div>
 
-      {/* <!-- dropdown menu --> */}
       <div
         className={`flex-col gap-3 py-6 pl-6 pr-5.5 ${
           toggleDropdown ? "flex" : "hidden"
         }`}
       >
-        {type.map((gender, key) => (
-          <ExperienceLevelItem key={key} category={gender} />
+        {type.map((category, key) => (
+          <ExperienceLevelItem key={key} category={category} formik={formik} />
         ))}
       </div>
     </div>

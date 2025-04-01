@@ -2,23 +2,33 @@
 
 import { useState } from "react";
 
-const ContractTypeItem = ({ category }) => {
-  const [selected, setSelected] = useState(false);
+const ContractTypeItem = ({ category, formik }) => {
+  const isSelected = formik.values.contractType.includes(category.name);
+
+  const handleSelection = () => {
+    const updatedValues = isSelected
+      ? formik.values.contractType.filter((type) => type !== category.name)
+      : [...formik.values.contractType, category.name];
+
+    formik.setFieldValue("contractType", updatedValues);
+  };
+
   return (
     <button
+      type="button"
       className={`${
-        selected && "text-blue"
-      } group flex items-center justify-between ease-out duration-200 hover:text-blue `}
-      onClick={() => setSelected(!selected)}
+        isSelected && "text-blue"
+      } group flex items-center justify-between ease-out duration-200 hover:text-blue`}
+      onClick={handleSelection}
     >
       <div className="flex items-center gap-2">
         <div
           className={`cursor-pointer flex items-center justify-center rounded w-4 h-4 border ${
-            selected ? "border-blue bg-blue" : "bg-white border-gray-3"
+            isSelected ? "border-blue bg-blue" : "bg-white border-gray-3"
           }`}
         >
           <svg
-            className={selected ? "block" : "hidden"}
+            className={isSelected ? "block" : "hidden"}
             width="10"
             height="10"
             viewBox="0 0 10 10"
@@ -38,18 +48,18 @@ const ContractTypeItem = ({ category }) => {
         <span>{category.name}</span>
       </div>
 
-      <span
+      {/* <span
         className={`${
-          selected ? "text-white bg-blue" : "bg-gray-2"
+          isSelected ? "text-white bg-blue" : "bg-gray-2"
         } inline-flex rounded-[30px] text-custom-xs px-2 ease-out duration-200 group-hover:text-white group-hover:bg-blue`}
       >
         {category.products}
-      </span>
+      </span> */}
     </button>
   );
 };
 
-const ContractType = ({ type }) => {
+const ContractType = ({ type, formik }) => {
   const [toggleDropdown, setToggleDropdown] = useState(true);
 
   return (
@@ -65,6 +75,7 @@ const ContractType = ({ type }) => {
       >
         <p className="text-dark">Contract Type</p>
         <button
+          type="button"
           aria-label="button for category dropdown"
           className={`text-dark ease-out duration-200 ${
             toggleDropdown && "rotate-180"
@@ -88,15 +99,13 @@ const ContractType = ({ type }) => {
         </button>
       </div>
 
-      {/* dropdown && 'shadow-filter */}
-      {/* <!-- dropdown menu --> */}
       <div
         className={`flex-col gap-3 py-6 pl-6 pr-5.5 ${
           toggleDropdown ? "flex" : "hidden"
         }`}
       >
         {type.map((category, key) => (
-          <ContractTypeItem key={key} category={category} />
+          <ContractTypeItem key={key} category={category} formik={formik} />
         ))}
       </div>
     </div>

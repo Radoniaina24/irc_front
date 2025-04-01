@@ -90,7 +90,7 @@ const Sector = () => {
   return (
     <div className="px-5 py-5">
       <div className=" overflow-x-auto overflow-y-auto relative ">
-        <div className="flex flex-wrap justify-between items-center px-4 py-2">
+        <div className="flex flex-wrap justify-between items-center  space-y-2 sm:space-y-0  px-4 py-2">
           <AddSector />
           <Search onQuery={setSearch} query={search} />
         </div>

@@ -22,7 +22,6 @@ import { useAddJobMutation } from "@/lib/api/jobApi";
 
 const initialvalues = {
   sector: { value: "", label: "" },
-  category: { value: "", label: "" },
   title: "",
   description: "", //TextArea + summer Note
   location: "",
@@ -56,17 +55,6 @@ export default function AddJob() {
           return false; // Si la valeur n'est ni un objet valide ni une chaîne non vide, la validation échoue
         })
         .required("This field is required."),
-      category: Yup.mixed()
-        .test("category", "This field is required.", (value) => {
-          // Vérifiez si la valeur est un objet ou une chaîne non vide
-          if (typeof value === "object" && value !== null) {
-            return true; // L'objet est valide
-          } else if (typeof value === "string" && value.trim() !== "") {
-            return true; // La chaîne non vide est valide
-          }
-          return false; // Si la valeur n'est ni un objet valide ni une chaîne non vide, la validation échoue
-        })
-        .required("This field is required."),
       description: Yup.mixed().required("This field is required."),
     }),
 
@@ -76,7 +64,6 @@ export default function AddJob() {
       try {
         const response = await addJobPost({
           ...values,
-          category: values.category.value,
           sector: values.sector.value,
         }).unwrap();
         showToast(response?.message, "success"); // message, type(error, success)
@@ -183,15 +170,7 @@ export default function AddJob() {
                 optionsLabel="Please select a study levels"
               />
             </div>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              <ReactSelectInput
-                label="Category"
-                name="category"
-                options={categories}
-                formik={formik}
-                isLoading={isCategoriesLoading}
-                placeholder="Choose a category"
-              />
+            <div className="grid grid-cols-1">
               <ReactSelectInput
                 label="Sector"
                 name="sector"

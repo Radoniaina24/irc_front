@@ -30,3 +30,13 @@ export const Badge = ({ children, className = "" }) => {
     </span>
   );
 };
+
+export const PaginationSkeleton = () => (
+  <div className="flex justify-center mt-15">
+    <div className="flex items-center space-x-2">
+      <div className="h-8 w-16 bg-gray-200 animate-pulse rounded"></div>
+      <div className="h-8 w-16 bg-gray-200 animate-pulse rounded"></div>
+      <div className="h-8 w-16 bg-gray-200 animate-pulse rounded"></div>
+    </div>
+  </div>
+);

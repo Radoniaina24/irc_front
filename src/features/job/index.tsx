@@ -38,7 +38,7 @@ const Job = () => {
   const jobs = data.jobPosts;
   return (
     <div className="px-5 py-5">
-      <div className="shadow-md overflow-x-auto overflow-y-auto relative sm:rounded-lg">
+      <div className=" overflow-x-auto overflow-y-auto relative ">
         <div className="flex flex-wrap justify-between items-center px-4 py-2">
           <Search onQuery={setSearch} query={search} />
           <AddJob />
@@ -55,7 +55,7 @@ const Job = () => {
                   Deadline
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Category
+                  Sector
                 </th>
 
                 <th scope="col" className="px-6 py-3">

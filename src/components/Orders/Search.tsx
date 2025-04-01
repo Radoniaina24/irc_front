@@ -11,7 +11,7 @@ export default function Search({
     onQuery(e.target.value);
   }
   return (
-    <div className="flex  items-center justify-end flex-column flex-wrap md:flex-row space-y-4 md:space-y-0  bg-white">
+    <div className="flex  items-center justify-end flex-column flex-wrap md:flex-row space-y-0 md:space-y-0  bg-white">
       <label htmlFor="table-search" className="sr-only">
         Search
       </label>

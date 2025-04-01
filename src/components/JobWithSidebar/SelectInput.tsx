@@ -33,7 +33,7 @@ export default function SelectInput({
       <Select
         options={options}
         isLoading={isLoading}
-        placeholder={"Category"}
+        placeholder={"Sector"}
         value={formik?.values[name]}
         onChange={handleChange}
         onBlur={() => formik.setFieldTouched(name, true)}
