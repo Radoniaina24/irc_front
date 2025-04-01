@@ -8,13 +8,15 @@ import BestSeller from "./BestSeller";
 import CounDown from "./Countdown";
 import Testimonials from "./Testimonials";
 import Newsletter from "../Common/Newsletter";
+import ShopWithSidebar from "../JobWithSidebar";
 
 const Home = () => {
   return (
-    <main className="pt-36">
+    <main className="">
+      <ShopWithSidebar />
       {/* <Hero /> */}
-      <Categories />
-      {/* <NewArrival /> */}
+      {/* <Categories />
+      <NewArrival /> */}
       {/* <PromoBanner />
       <BestSeller />
       <CounDown />

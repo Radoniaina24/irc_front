@@ -1,17 +1,21 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
-import CustomSelect from "./CustomSelect";
-import CategoryDropdown from "./CategoryDropdown";
-import GenderDropdown from "./GenderDropdown";
-import SizeDropdown from "./SizeDropdown";
-import ColorsDropdwon from "./ColorsDropdwon";
-import PriceDropdown from "./PriceDropdown";
 import shopData from "../Shop/shopData";
 import SingleGridItem from "../Shop/SingleGridItem";
 import SingleListItem from "../Shop/SingleListItem";
+import Search from "../Orders/Search";
 
+import Form from "./Form";
+import { useFormik } from "formik";
+import SelectInput from "./SelectInput";
+import { useCategoriesOptions } from "@/features/job/options";
+import JobList from "./JobList";
+const initialvalues = {
+  category: { value: "", label: "" },
+};
 const ShopWithSidebar = () => {
+  const [search, setSearch] = useState<string>("");
   const [productStyle, setProductStyle] = useState("grid");
   const [productSidebar, setProductSidebar] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
@@ -23,61 +27,6 @@ const ShopWithSidebar = () => {
       setStickyMenu(false);
     }
   };
-
-  const options = [
-    { label: "Latest Products", value: "0" },
-    { label: "Best Selling", value: "1" },
-    { label: "Old Products", value: "2" },
-  ];
-
-  const categories = [
-    {
-      name: "Desktop",
-      products: 10,
-      isRefined: true,
-    },
-    {
-      name: "Laptop",
-      products: 12,
-      isRefined: false,
-    },
-    {
-      name: "Monitor",
-      products: 30,
-      isRefined: false,
-    },
-    {
-      name: "UPS",
-      products: 23,
-      isRefined: false,
-    },
-    {
-      name: "Phone",
-      products: 10,
-      isRefined: false,
-    },
-    {
-      name: "Watch",
-      products: 13,
-      isRefined: false,
-    },
-  ];
-
-  const genders = [
-    {
-      name: "Men",
-      products: 10,
-    },
-    {
-      name: "Women",
-      products: 23,
-    },
-    {
-      name: "Unisex",
-      products: 8,
-    },
-  ];
-
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
 
@@ -96,14 +45,15 @@ const ShopWithSidebar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
-
+  const formik = useFormik({
+    initialValues: initialvalues,
+    enableReinitialize: true,
+    onSubmit: async (values, { setSubmitting, resetForm }) => {},
+  });
   return (
     <>
-      <Breadcrumb
-        title={"Explore All Products"}
-        pages={["shop", "/", "shop with sidebar"]}
-      />
-      <section className="overflow-hidden relative pb-20 pt-5 lg:pt-20 xl:pt-28 bg-[#f3f4f6]">
+      <Breadcrumb title={"Explore All Jobs"} pages={""} />
+      <section className="overflow-hidden relative pb-20 pt-5 bg-[#f3f4f6]">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex gap-7.5">
             {/* <!-- Sidebar Start --> */}
@@ -145,33 +95,9 @@ const ShopWithSidebar = () => {
                   />
                 </svg>
               </button>
+              {/* Form */}
 
-              <form onSubmit={(e) => e.preventDefault()}>
-                <div className="flex flex-col gap-6">
-                  {/* <!-- filter box --> */}
-                  <div className="bg-white shadow-1 rounded-lg py-4 px-5">
-                    <div className="flex items-center justify-between">
-                      <p>Filters:</p>
-                      <button className="text-blue">Clean All</button>
-                    </div>
-                  </div>
-
-                  {/* <!-- category box --> */}
-                  <CategoryDropdown categories={categories} />
-
-                  {/* <!-- gender box --> */}
-                  <GenderDropdown genders={genders} />
-
-                  {/* // <!-- size box --> */}
-                  <SizeDropdown />
-
-                  {/* // <!-- color box --> */}
-                  <ColorsDropdwon />
-
-                  {/* // <!-- price range box --> */}
-                  <PriceDropdown />
-                </div>
-              </form>
+              <Form formik={formik} />
             </div>
             {/* // <!-- Sidebar End --> */}
 
@@ -180,13 +106,8 @@ const ShopWithSidebar = () => {
               <div className="rounded-lg bg-white shadow-1 pl-3 pr-2.5 py-2.5 mb-6">
                 <div className="flex items-center justify-between">
                   {/* <!-- top bar left --> */}
-                  <div className="flex flex-wrap items-center gap-4">
-                    <CustomSelect options={options} />
-
-                    <p>
-                      Showing <span className="text-dark">9 of 50</span>{" "}
-                      Products
-                    </p>
+                  <div className="flex flex-wrap items-center gap-4 ">
+                    <Search query={search} onQuery={setSearch} />
                   </div>
 
                   {/* <!-- top bar right --> */}
@@ -271,7 +192,8 @@ const ShopWithSidebar = () => {
               </div>
 
               {/* <!-- Products Grid Tab Content Start --> */}
-              <div
+              <JobList />
+              {/* <div
                 className={`${
                   productStyle === "grid"
                     ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-7.5 gap-y-9"
@@ -285,7 +207,7 @@ const ShopWithSidebar = () => {
                     <SingleListItem item={item} key={key} />
                   )
                 )}
-              </div>
+              </div> */}
               {/* <!-- Products Grid Tab Content End --> */}
 
               {/* <!-- Products Pagination Start --> */}

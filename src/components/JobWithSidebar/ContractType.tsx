@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
 
-const GenderItem = ({ category }) => {
+import { useState } from "react";
+
+const ContractTypeItem = ({ category }) => {
   const [selected, setSelected] = useState(false);
   return (
     <button
@@ -48,21 +49,23 @@ const GenderItem = ({ category }) => {
   );
 };
 
-const GenderDropdown = ({ genders }) => {
+const ContractType = ({ type }) => {
   const [toggleDropdown, setToggleDropdown] = useState(true);
 
   return (
     <div className="bg-white shadow-1 rounded-lg">
       <div
-        onClick={() => setToggleDropdown(!toggleDropdown)}
+        onClick={(e) => {
+          e.preventDefault();
+          setToggleDropdown(!toggleDropdown);
+        }}
         className={`cursor-pointer flex items-center justify-between py-3 pl-6 pr-5.5 ${
           toggleDropdown && "shadow-filter"
         }`}
       >
-        <p className="text-dark">Gender</p>
+        <p className="text-dark">Contract Type</p>
         <button
-          onClick={() => setToggleDropdown(!toggleDropdown)}
-          aria-label="button for gender dropdown"
+          aria-label="button for category dropdown"
           className={`text-dark ease-out duration-200 ${
             toggleDropdown && "rotate-180"
           }`}
@@ -85,18 +88,19 @@ const GenderDropdown = ({ genders }) => {
         </button>
       </div>
 
+      {/* dropdown && 'shadow-filter */}
       {/* <!-- dropdown menu --> */}
       <div
         className={`flex-col gap-3 py-6 pl-6 pr-5.5 ${
           toggleDropdown ? "flex" : "hidden"
         }`}
       >
-        {genders.map((gender, key) => (
-          <GenderItem key={key} category={gender} />
+        {type.map((category, key) => (
+          <ContractTypeItem key={key} category={category} />
         ))}
       </div>
     </div>
   );
 };
 
-export default GenderDropdown;
+export default ContractType;

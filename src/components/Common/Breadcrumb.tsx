@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const Breadcrumb = ({ title, pages }) => {
+const Breadcrumb = ({ title, pages }: { title?: string; pages?: any }) => {
   return (
     <div className="overflow-hidden shadow-breadcrumb pt-[209px] sm:pt-[155px] lg:pt-[132px] xl:pt-[165px]">
       <div className="">
@@ -13,7 +13,7 @@ const Breadcrumb = ({ title, pages }) => {
 
             <ul className="flex items-center gap-2 ">
               <li className="text-custom-sm hover:text-blue">
-                <Link href="/">Home /</Link>
+                {pages && <Link href="/">Home /</Link>}
               </li>
 
               {pages.length > 0 &&

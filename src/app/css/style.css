@@ -258,3 +258,26 @@ input.PhoneInputInput:focus {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* .categoryJob .select__dropdown-indicator {
+  color: #1c274c;
+}
+
+.categoryJob .select__control {
+  border: none;
+  outline: none;
+}
+.categoryJob .select__control--is-focused:focus {
+  border: none !important;
+  outline: none !important;
+}
+.categoryJob .css-13cymwt-control {
+  border: none;
+  outline: none;
+  border-color: white;
+}
+.categoryJob .select__input:focus {
+  border: none;
+  outline: none;
+  border-color: white;
+} */

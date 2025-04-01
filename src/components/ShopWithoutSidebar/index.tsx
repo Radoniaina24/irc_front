@@ -4,7 +4,7 @@ import Breadcrumb from "../Common/Breadcrumb";
 
 import SingleGridItem from "../Shop/SingleGridItem";
 import SingleListItem from "../Shop/SingleListItem";
-import CustomSelect from "../ShopWithSidebar/CustomSelect";
+import CustomSelect from "../JobWithSidebar/CustomSelect";
 
 import shopData from "../Shop/shopData";
 

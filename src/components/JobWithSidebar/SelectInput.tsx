@@ -8,9 +8,9 @@ interface SelectFieldProps {
   formik?: any;
   isLoading?: boolean;
   placeholder?: string;
-  label: string;
+  label?: string;
 }
-export default function ReactSelectInput({
+export default function SelectInput({
   name,
   options,
   formik,
@@ -23,24 +23,24 @@ export default function ReactSelectInput({
   };
 
   return (
-    <div className="mb-4">
-      <label htmlFor={name} className="text-sm block my-2">
-        {label}
-      </label>
+    <div className="">
+      {label && (
+        <label htmlFor={name} className="text-md text-black block my-2">
+          {label}
+        </label>
+      )}
+
       <Select
         options={options}
         isLoading={isLoading}
-        placeholder={placeholder || "Sélectionner..."}
+        placeholder={"Category"}
         value={formik?.values[name]}
         onChange={handleChange}
         onBlur={() => formik.setFieldTouched(name, true)}
         isClearable
-        className="basic-single text-sm  text-black"
+        className="basic-single text-sm  text-black selectJob"
         classNamePrefix="select"
       />
-      {formik?.touched[name] && formik?.errors[name] && (
-        <p className="text-red-500 text-sm mt-1">{formik?.errors[name]}</p>
-      )}
     </div>
   );
 }

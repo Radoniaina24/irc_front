@@ -1,4 +1,5 @@
 import Home from "@/components/Home";
+import JobList from "@/components/JobWithSidebar/JobList";
 
 import { Metadata } from "next";
 
