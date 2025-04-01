@@ -6,6 +6,7 @@ import { useGetAllCategoryQuery } from "@/lib/api/categoryApi";
 import AddJob from "./AddJob";
 import { useGetMyJobQuery } from "@/lib/api/jobApi";
 import JobList from "./JobList";
+import { PaginationSkeleton } from "@/components/JobWithSidebar/UI";
 
 const Job = () => {
   const [search, setSearch] = useState<string>("");
@@ -81,11 +82,21 @@ const Job = () => {
         </div>
       </div>
 
-      <Pagination
-        totalPages={data.totalPages}
-        currentPage={data.currentPage}
-        onPageChange={setPage}
-      />
+      {isLoading ? (
+        <PaginationSkeleton />
+      ) : error ? (
+        ""
+      ) : data?.totalPages >= 2 ? (
+        <div className="flex justify-center mt-15">
+          <Pagination
+            totalPages={data.totalPages}
+            currentPage={data.currentPage}
+            onPageChange={setPage}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

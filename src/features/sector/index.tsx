@@ -4,6 +4,7 @@ import SectorList from "./SectorList";
 import Search from "@/components/Orders/Search";
 import { useGetAllSectorQuery } from "@/lib/api/sectorApi";
 import AddSector from "./AddSector";
+import { PaginationSkeleton } from "@/components/JobWithSidebar/UI";
 
 const Sector = () => {
   const [search, setSearch] = useState<string>("");
@@ -124,11 +125,21 @@ const Sector = () => {
         </div>
       </div>
 
-      <Pagination
-        totalPages={data.totalPages}
-        currentPage={data.currentPage}
-        onPageChange={setPage}
-      />
+      {isLoading ? (
+        <PaginationSkeleton />
+      ) : error ? (
+        ""
+      ) : data?.totalPages >= 2 ? (
+        <div className="flex justify-center mt-15">
+          <Pagination
+            totalPages={data.totalPages}
+            currentPage={data.currentPage}
+            onPageChange={setPage}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

@@ -143,7 +143,7 @@ const ShopWithSidebar = () => {
                 <PaginationSkeleton />
               ) : error ? (
                 ""
-              ) : data?.totalPages > 0 ? (
+              ) : data?.totalPages >= 2 ? (
                 <div className="flex justify-center mt-15">
                   <Pagination
                     totalPages={data.totalPages}

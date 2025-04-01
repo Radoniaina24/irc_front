@@ -3,6 +3,7 @@ import { useGetAllRecruiterQuery } from "@/lib/api/recruiterApi";
 import RecruiterList from "./recruiterList";
 import Search from "./Search";
 import Pagination from "./Pagination";
+import { PaginationSkeleton } from "../JobWithSidebar/UI";
 
 const Recruiter = () => {
   const [search, setSearch] = useState<string>("");
@@ -73,11 +74,21 @@ const Recruiter = () => {
           </table>
         </div>
       </div>
-      <Pagination
-        totalPages={data.totalPages}
-        currentPage={data.currentPage}
-        onPageChange={setPage}
-      />
+      {isLoading ? (
+        <PaginationSkeleton />
+      ) : error ? (
+        ""
+      ) : data?.totalPages >= 2 ? (
+        <div className="flex justify-center mt-15">
+          <Pagination
+            totalPages={data.totalPages}
+            currentPage={data.currentPage}
+            onPageChange={setPage}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

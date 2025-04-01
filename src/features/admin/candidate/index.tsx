@@ -4,6 +4,7 @@ import Pagination from "@/components/Orders/Pagination";
 import { useGetAllCandidateQuery } from "@/lib/api/candidateApi";
 import Search from "@/components/Orders/Search";
 import CandidateList from "./listCandidate";
+import { PaginationSkeleton } from "@/components/JobWithSidebar/UI";
 
 const Candidate = () => {
   const [search, setSearch] = useState<string>("");
@@ -75,11 +76,21 @@ const Candidate = () => {
           </table>
         </div>
       </div>
-      <Pagination
-        totalPages={data.totalPages}
-        currentPage={data.currentPage}
-        onPageChange={setPage}
-      />
+      {isLoading ? (
+        <PaginationSkeleton />
+      ) : error ? (
+        ""
+      ) : data?.totalPages >= 2 ? (
+        <div className="flex justify-center mt-15">
+          <Pagination
+            totalPages={data.totalPages}
+            currentPage={data.currentPage}
+            onPageChange={setPage}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
