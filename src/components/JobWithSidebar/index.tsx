@@ -121,10 +121,10 @@ const ShopWithSidebar = () => {
 
             {/* // <!-- Content Start --> */}
             <div className="xl:max-w-[870px] w-full">
-              <div className="rounded-lg bg-white shadow-1 pl-3 pr-2.5 py-2.5 mb-6">
+              <div className="rounded-lg bg-white shadow-1 pl-3 pr-2.5 py-2.5 mb-6 mt-0 sm:mt-[70px] md:mt-[70px]  lg:mt-[0px] xl:mt-[0px]">
                 <div className="flex items-center flex-wrap justify-center  flex-col-reverse  md:flex-row  md:justify-between gap-3">
                   {/* <!-- top bar left --> */}
-                  <div className="flex items-center space-x-2 text-gray-700 text-sm font-medium">
+                  <div className="flex items-center space-x-2 text-gray-700 text-sm font-medium  ">
                     <h2>Job Announcement:</h2>
                     <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                       {data?.totalJobPosts ?? 0}

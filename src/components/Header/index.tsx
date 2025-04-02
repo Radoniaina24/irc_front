@@ -91,7 +91,7 @@ const Header = () => {
               <form>
                 <div className="flex items-center">
                   {/* <CustomSelect options={options} /> */}
-                  <div className="relative max-w-[333px] mx-auto sm:min-w-[333px] w-full">
+                  <div className="relative max-w-[400px] mx-auto sm:min-w-[333px] w-full">
                     <div className="text-center text-xl sm:text-2xl md:text-2xl lg:text-2xl font-bold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-tl from-yellow-500 via-blue-700 to-red-600  p-4">
                       International Recruit Agency
                     </div>
