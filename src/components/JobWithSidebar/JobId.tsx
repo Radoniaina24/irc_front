@@ -21,59 +21,91 @@ export default function JobId({ data, isLoading, error }) {
   const formatDate = (isoDate) => {
     return dayjs(isoDate).format("MMMM DD, YYYY ");
   };
+  const SkeletonLoader = ({ count = 5 }) => {
+    return (
+      <div className="space-y-3">
+        {Array.from({ length: count }).map((_, index) => (
+          <div
+            key={index}
+            className="w-full h-5 bg-gray-300 rounded animate-pulse"
+          ></div>
+        ))}
+      </div>
+    );
+  };
   if (isLoading) {
     return (
       <>
         {/* Breadcrumb Skeleton */}
         <BreadcrumbSkeleton />
+        <section className="overflow-hidden relative pb-20 pt-5 bg-gray-100">
+          <div className="relative max-w-3xl rounded-lg shadow-lg bg-white w-full mx-auto p-8">
+            <CardContent>
+              {/* Informations principales (Nom, Lieu, Deadline) */}
+              <h1 className="font-semibold text-dark text-xl sm:text-2xl xl:text-custom-2">
+                <div className="w-3/4 h-6 bg-gray-300 rounded animate-pulse"></div>
+              </h1>
+              <div className="flex flex-wrap items-center justify-between text-gray-700 mb-4">
+                {/* Nom de l'entreprise */}
+                <span className="text-xl font-semibold text-gray-800">
+                  <div className="w-1/3 h-5 bg-gray-300 rounded animate-pulse"></div>
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-4 mb-8">
+                {/* Type de contrat */}
+                <Badge className="bg-blue-100 text-blue-700 flex items-center gap-1 px-3 py-1 rounded-md">
+                  <div className="w-16 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </Badge>
 
-        <section className="overflow-hidden relative pb-20 pt-5 bg-[#f3f4f6]">
-          <div className="max-w-[1170px] rounded-lg shadow-md bg-white w-full mx-auto p-8">
-            <div className="p-6">
-              <CardContent>
-                {/* Titre */}
-                <div className="h-6 w-1/3 bg-gray-300 rounded-md animate-pulse mb-4"></div>
+                {/* Lieu */}
+                <Badge className="bg-green-100 text-green-700 flex items-center gap-1 px-3 py-1 rounded-md">
+                  <div className="w-16 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </Badge>
 
-                {/* Badges */}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {Array(6)
-                    .fill(null)
-                    .map((_, index) => (
-                      <div
-                        key={index}
-                        className="h-6 w-32 bg-gray-300 rounded-md animate-pulse"
-                      ></div>
-                    ))}
-                </div>
+                {/* Deadline */}
+                <Badge className="bg-red-100 text-red-700 flex items-center gap-1 px-3 py-1 rounded-md">
+                  <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </Badge>
 
-                {/* Sections de texte */}
-                {["Company activity", "Missions", "Candidate profile"].map(
-                  (section, index) => (
-                    <div key={index} className="mt-6">
-                      <div className="h-5 w-40 bg-gray-300 rounded-md animate-pulse mb-2"></div>
-                      <div className="h-4 w-full bg-gray-200 rounded-md animate-pulse mb-2"></div>
-                      <div className="h-4 w-5/6 bg-gray-200 rounded-md animate-pulse"></div>
-                    </div>
-                  )
-                )}
+                {/* Niveau d'étude */}
+                <Badge className="bg-orange-100 text-orange-700 flex items-center gap-1 px-3 py-1 rounded-md">
+                  <div className="w-16 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </Badge>
 
-                {/* Skills */}
-                <div className="h-6 w-30 bg-gray-200 rounded-md animate-pulse my-3"></div>
-                <ul className="mt-3 space-y-2">
-                  {Array(5)
-                    .fill(null)
-                    .map((_, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center gap-2 text-gray-800 bg-gray-100 px-3 py-2 rounded-lg shadow-sm animate-pulse"
-                      >
-                        <div className="w-5 h-5 bg-gray-300 rounded-full"></div>
-                        <div className="h-4 w-32 bg-gray-300 rounded-md"></div>
-                      </li>
-                    ))}
-                </ul>
-              </CardContent>
-            </div>
+                {/* Expérience requise */}
+                <Badge className="bg-purple-100 text-purple-700 flex items-center gap-1 px-3 py-1 rounded-md">
+                  <div className="w-16 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </Badge>
+
+                {/* Secteur d'activité */}
+                <Badge className="bg-gray-100 text-gray-700 flex items-center gap-1 px-3 py-1 rounded-md">
+                  <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </Badge>
+              </div>
+
+              {/* Activité de l'entreprise */}
+              <h2 className="my-3 text-xl font-semibold text-blue-600">
+                <div className="w-1/3 h-6 bg-gray-300 rounded animate-pulse"></div>
+              </h2>
+              <SkeletonLoader count={3} />
+
+              {/* Missions */}
+              <h2 className="my-3 text-xl font-semibold text-blue-600">
+                <div className="w-1/3 h-6 bg-gray-300 rounded animate-pulse"></div>
+              </h2>
+              <SkeletonLoader count={5} />
+
+              {/* Profil du candidat */}
+              <h2 className="my-3 text-xl font-semibold text-blue-600">
+                <div className="w-1/3 h-6 bg-gray-300 rounded animate-pulse"></div>
+              </h2>
+              <SkeletonLoader count={6} />
+
+              {/* Bouton "Postuler" en bas à droite */}
+              <div className="absolute z-999999 bottom-5 right-5 gap-2">
+                <div className="w-20 h-4 bg-gray-300 rounded animate-pulse"></div>
+              </div>
+            </CardContent>
           </div>
         </section>
       </>
@@ -146,12 +178,12 @@ export default function JobId({ data, isLoading, error }) {
             <ToHtml content={data?.candidate_profil} />
 
             {/* Bouton "Postuler" en bas à droite */}
-            <div className="absolute bottom-5 right-5">
+            <div className="absolute bottom-5 right-5 gap-2">
               <button
                 className="bg-blue-600 text-white font-semibold px-4 py-2 text-sm rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition-all duration-300"
                 onClick={() => alert("Rediriger vers la page de candidature")}
               >
-                Postuler
+                Apply
               </button>
             </div>
           </CardContent>
