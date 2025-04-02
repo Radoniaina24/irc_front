@@ -178,6 +178,7 @@ const JobList = ({
   error: any;
 }) => {
   dayjs.locale("en");
+  // console.log(loading);
   const formatDate = (isoDate) => {
     return dayjs(isoDate).format("MMMM DD, YYYY ");
   };

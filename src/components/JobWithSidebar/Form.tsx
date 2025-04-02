@@ -88,30 +88,32 @@ const studyLevel = [
 export default function Form({ formik }: { formik?: any }) {
   const { options: sectors, isLoading: isSectorLoading } = useSectorsOptions();
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <div className="flex flex-col gap-6 sticky top-0">
-        {/* <!-- filter box --> */}
-        <div className="bg-white  shadow-1 rounded-lg py-3 px-5 categoryJob">
-          <div className="">
-            <SelectInput
-              name={"sector"}
-              options={sectors}
-              isLoading={isSectorLoading}
-              label={"Sector"}
-              formik={formik}
-              placeholder="Sector"
-            />
+    <div className="sticky top-0">
+      <form onSubmit={(e) => e.preventDefault()}>
+        <div className="flex flex-col gap-6 sticky top-0">
+          {/* <!-- filter box --> */}
+          <div className="bg-white  shadow-1 rounded-lg py-3 px-5 categoryJob">
+            <div className="">
+              <SelectInput
+                name={"sector"}
+                options={sectors}
+                isLoading={isSectorLoading}
+                label={"Sector"}
+                formik={formik}
+                placeholder="Sector"
+              />
+            </div>
           </div>
+          {/* <!-- category box --> */}
+          <ContractType type={contractType} formik={formik} />
+
+          {/* <!-- gender box --> */}
+          <ExperienceLevel type={experienceLevel} formik={formik} />
+
+          {/* <!--Study level --> */}
+          <StudyLevel type={studyLevel} formik={formik} />
         </div>
-        {/* <!-- category box --> */}
-        <ContractType type={contractType} formik={formik} />
-
-        {/* <!-- gender box --> */}
-        <ExperienceLevel type={experienceLevel} formik={formik} />
-
-        {/* <!--Study level --> */}
-        <StudyLevel type={studyLevel} formik={formik} />
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }

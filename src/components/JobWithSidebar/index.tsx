@@ -55,18 +55,24 @@ const ShopWithSidebar = () => {
     onSubmit: async (values, { setSubmitting, resetForm }) => {},
   });
   // const sectorId = formik.values.sector?.value || null;
-  const { data, isLoading, error } = useGetAllJobQuery({
-    search,
-    limit,
-    page,
-    sectorId:
-      formik.values.sector?.value !== undefined
-        ? formik.values.sector.value
-        : "",
-    contractType: formik.values.contractType,
-    experienceRequired: formik.values.experienceLevel,
-    studyLevels: formik.values.studyLevel,
-  });
+  const { data, isLoading, error } = useGetAllJobQuery(
+    {
+      search,
+      limit,
+      page,
+      sectorId:
+        formik.values.sector?.value !== undefined
+          ? formik.values.sector.value
+          : "",
+      contractType: formik.values.contractType,
+      experienceRequired: formik.values.experienceLevel,
+      studyLevels: formik.values.studyLevel,
+    },
+    {
+      refetchOnMountOrArgChange: true, // Permet de refetch quand un paramètre change
+      pollingInterval: 0, // Désactive le polling (optionnel)
+    }
+  );
   // console.log(formik.values.studyLevel);
   return (
     <>
