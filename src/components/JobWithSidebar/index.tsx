@@ -122,7 +122,7 @@ const ShopWithSidebar = () => {
             {/* // <!-- Content Start --> */}
             <div className="xl:max-w-[870px] w-full">
               <div className="rounded-lg bg-white shadow-1 pl-3 pr-2.5 py-2.5 mb-6">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center flex-wrap justify-center  flex-col-reverse  md:flex-row  md:justify-between gap-3">
                   {/* <!-- top bar left --> */}
                   <div className="flex items-center space-x-2 text-gray-700 text-sm font-medium">
                     <h2>Job Announcement:</h2>

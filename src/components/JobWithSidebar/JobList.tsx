@@ -212,8 +212,8 @@ const JobList = ({
       </div>
     );
   }
-  const jobs = job.jobPosts;
-  if (!jobs.length) {
+  const jobs = job?.jobPosts;
+  if (!jobs?.length) {
     return (
       <div className="xl:max-w-[870px]">
         <div className="rounded-lg bg-white shadow-1 pl-3 pr-2.5 py-70 mb-6 text-center">
