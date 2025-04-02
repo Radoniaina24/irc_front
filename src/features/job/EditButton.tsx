@@ -33,6 +33,8 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
     studyLevels: job.studyLevels, //["Sans bac", "Bac", "Bac +2", "Bac +3", "Bac +4", "Bac +5"],
     skills: job.skills, //[String], // Tableau de compétences requises
     deadline: job.deadline,
+    missions: job.missions as string,
+    candidate_profil: job.candidate_profil as string,
   };
 
   const { options: sectors, isLoading: isSectorsLoading } = useSectorsOptions();
@@ -56,6 +58,8 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
         })
         .required("This field is required."),
       description: Yup.mixed().required("This field is required."),
+      missions: Yup.mixed().required("This field is required."),
+      candidate_profil: Yup.mixed().required("This field is required."),
     }),
 
     onSubmit: async (values, { setSubmitting, resetForm }) => {
@@ -193,7 +197,7 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
                 formik.setFieldValue("skills", newValues)
               }
             />
-            <label className="block text-sm mb-2">Description</label>
+            <label className="block text-sm my-3">Company Activity</label>
             <RichTextEditor
               value={formik.values.description}
               onChange={(content) =>
@@ -205,6 +209,30 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
                 {formik.errors.description}
               </p>
             )}
+            {/* Mission */}
+            <label className="block text-sm my-3">Missions</label>
+            <RichTextEditor
+              value={formik.values.missions}
+              onChange={(content) => formik.setFieldValue("missions", content)}
+            />
+            {formik.touched.missions && formik.errors.missions && (
+              <p className="text-red-500 text-sm">{formik.errors.missions}</p>
+            )}
+
+            {/* Profil du candidat */}
+            <label className="block text-sm my-3">Candidate Profil</label>
+            <RichTextEditor
+              value={formik.values.candidate_profil}
+              onChange={(content) =>
+                formik.setFieldValue("candidate_profil", content)
+              }
+            />
+            {formik.touched.candidate_profil &&
+              formik.errors.candidate_profil && (
+                <p className="text-red-500 text-sm">
+                  {formik.errors.candidate_profil}
+                </p>
+              )}
 
             <Checkbox
               label="Work from home"

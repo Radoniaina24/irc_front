@@ -100,22 +100,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
   return (
     <div className="border rounded-lg shadow bg-white p-3">
       {/* Barre d'outils */}
-      <div className="flex items-center gap-2 flex-wrap border-b pb-2">
-        {toolbarButtons.map((btn, index) => (
-          <ToolbarButton key={index} editor={editor} {...btn} />
-        ))}
-
-        {headingLevels.map((level) => (
-          <ToolbarButton
-            key={level}
-            editor={editor}
-            command="toggleHeading"
-            args={{ level }}
-            type={{ heading: { level } }}
-            icon={<span className="text-sm">H{level}</span>}
-          />
-        ))}
-      </div>
 
       {/* Zone de texte */}
       <div className="mt-3 min-h-[150px] max-h-[150px] p-2 border rounded bg-gray-50 overflow-y-auto">

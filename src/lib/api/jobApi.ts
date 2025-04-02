@@ -41,7 +41,7 @@ export const jobAPI = createApi({
     getJobById: builder.query({
       query: (id) => {
         return {
-          url: `job/${id}`,
+          url: `/job-posts/${id}`,
           method: "GET",
         };
       },

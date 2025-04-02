@@ -1,6 +1,9 @@
-export const Card = ({ children, className = "" }) => {
+export const Card = ({ children, className = "", onClick }) => {
   return (
-    <div className={`bg-white shadow-md rounded-xl p-4 ${className}`}>
+    <div
+      className={`bg-white shadow-md rounded-xl p-4 ${className} cursor-pointer`}
+      onClick={onClick}
+    >
       {children}
     </div>
   );
@@ -24,7 +27,7 @@ export const Button = ({ children, className = "", ...props }) => {
 export const Badge = ({ children, className = "" }) => {
   return (
     <span
-      className={`inline-block px-3 py-1 text-sm font-semibold rounded-full ${className}`}
+      className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${className}`}
     >
       {children}
     </span>

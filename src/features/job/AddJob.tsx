@@ -31,6 +31,8 @@ const initialvalues = {
   studyLevels: "", //["Sans bac", "Bac", "Bac +2", "Bac +3", "Bac +4", "Bac +5"],
   skills: [], //[String], // Tableau de compétences requises
   deadline: "",
+  missions: "",
+  candidate_profil: "",
 };
 export default function AddJob() {
   const { options: categories, isLoading: isCategoriesLoading } =
@@ -56,6 +58,8 @@ export default function AddJob() {
         })
         .required("This field is required."),
       description: Yup.mixed().required("This field is required."),
+      missions: Yup.mixed().required("This field is required."),
+      candidate_profil: Yup.mixed().required("This field is required."),
     }),
 
     onSubmit: async (values, { setSubmitting, resetForm }) => {
@@ -107,13 +111,14 @@ export default function AddJob() {
     { id: 5, value: "Bac +4", name: "Bac +4" },
     { id: 6, value: "Bac +5", name: "Bac +5" },
   ];
+  // console.log(formik.values.missions);
   return (
     <div>
       <button onClick={() => setOpen(true)}>
         <MdAddBox size={30} className="text-blue-500" />
       </button>
-      <Modal isOpen={open} closeModal={() => setOpen(false)} width="700px">
-        <div className=" lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
+      <Modal isOpen={open} closeModal={() => setOpen(false)} width="900px">
+        <div className=" px-3 lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <h1 className="text-center text-lg font-bold">New job post</h1>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -189,7 +194,9 @@ export default function AddJob() {
                 formik.setFieldValue("skills", newValues)
               }
             />
-            <label className="block text-sm mb-2">Description</label>
+
+            {/* Description Activité de l'entreprise */}
+            <label className="block text-sm my-3">Company Activity</label>
             <RichTextEditor
               value={formik.values.description}
               onChange={(content) =>
@@ -201,6 +208,31 @@ export default function AddJob() {
                 {formik.errors.description}
               </p>
             )}
+
+            {/* Mission */}
+            <label className="block text-sm my-3">Missions</label>
+            <RichTextEditor
+              value={formik.values.missions}
+              onChange={(content) => formik.setFieldValue("missions", content)}
+            />
+            {formik.touched.missions && formik.errors.missions && (
+              <p className="text-red-500 text-sm">{formik.errors.missions}</p>
+            )}
+
+            {/* Profil du candidat */}
+            <label className="block text-sm my-3">Candidate Profil</label>
+            <RichTextEditor
+              value={formik.values.candidate_profil}
+              onChange={(content) =>
+                formik.setFieldValue("candidate_profil", content)
+              }
+            />
+            {formik.touched.candidate_profil &&
+              formik.errors.candidate_profil && (
+                <p className="text-red-500 text-sm">
+                  {formik.errors.candidate_profil}
+                </p>
+              )}
 
             <Checkbox
               label="Work from home"
