@@ -14,6 +14,8 @@ import {
 import ToHtml from "@/lib/utils/toHtml";
 import dayjs from "dayjs";
 import { Card } from "../Ui/card";
+import AddJobApplication from "@/features/jobApplication/AddJobApplication";
+import AuthGuard from "../Auth/AuthGuard/AuthGuard";
 
 export default function JobId({ data, isLoading, error }) {
   // console.log(data);
@@ -178,14 +180,8 @@ export default function JobId({ data, isLoading, error }) {
             <ToHtml content={data?.candidate_profil} />
 
             {/* Bouton "Postuler" en bas à droite */}
-            <div className="absolute bottom-5 right-5 gap-2">
-              <button
-                className="bg-blue-600 text-white font-semibold px-4 py-2 text-sm rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition-all duration-300"
-                onClick={() => alert("Rediriger vers la page de candidature")}
-              >
-                Apply
-              </button>
-            </div>
+
+            <AddJobApplication id={data?._id} />
           </CardContent>
         </div>
       </section>

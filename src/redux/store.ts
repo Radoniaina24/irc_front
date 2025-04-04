@@ -17,6 +17,7 @@ import { certificationAPI } from "@/lib/api/certificationApi";
 import { portfolioAPI } from "@/lib/api/portfolioApi";
 import { skilleAPI } from "@/lib/api/skillsApi";
 import { languageAPI } from "@/lib/api/languageApi";
+import { applicationAPI } from "@/lib/api/applicationApi";
 
 export const store = configureStore({
   reducer: {
@@ -37,6 +38,7 @@ export const store = configureStore({
     [portfolioAPI.reducerPath]: portfolioAPI.reducer,
     [skilleAPI.reducerPath]: skilleAPI.reducer,
     [languageAPI.reducerPath]: languageAPI.reducer,
+    [applicationAPI.reducerPath]: applicationAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
@@ -51,7 +53,8 @@ export const store = configureStore({
       certificationAPI.middleware,
       portfolioAPI.middleware,
       skilleAPI.middleware,
-      languageAPI.middleware
+      languageAPI.middleware,
+      applicationAPI.middleware
     );
   },
 });

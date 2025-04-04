@@ -21,10 +21,12 @@ interface User {
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
+  role: string;
 }
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
+  role: "",
 };
 export const authSlice = createSlice({
   name: "auth",
