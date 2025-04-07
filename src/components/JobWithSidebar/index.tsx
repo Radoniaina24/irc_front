@@ -6,7 +6,7 @@ import Search from "../Orders/Search";
 import Form from "./Form";
 import { useFormik } from "formik";
 import JobList from "./JobList";
-import { useGetAllJobQuery } from "@/lib/api/jobApi";
+import { useGetAllJobClientQuery, useGetAllJobQuery } from "@/lib/api/jobApi";
 import Pagination from "../Orders/Pagination";
 import { PaginationSkeleton } from "./UI";
 import StudyLevel from "./StudyLevel";
@@ -55,7 +55,7 @@ const ShopWithSidebar = () => {
     onSubmit: async (values, { setSubmitting, resetForm }) => {},
   });
   // const sectorId = formik.values.sector?.value || null;
-  const { data, isLoading, error } = useGetAllJobQuery(
+  const { data, isLoading, error } = useGetAllJobClientQuery(
     {
       search,
       limit,

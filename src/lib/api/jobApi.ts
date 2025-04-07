@@ -28,6 +28,16 @@ export const jobAPI = createApi({
       },
       providesTags: ["job"],
     }),
+    getAllJobClient: builder.query({
+      query: (params) => {
+        return {
+          url: `/job-posts/client`,
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: ["job"],
+    }),
     getMyJob: builder.query({
       query: (params) => {
         return {
@@ -99,4 +109,5 @@ export const {
   useGetAllJobQuery,
   useGetMyJobQuery,
   useUpdateJobByAdminMutation,
+  useGetAllJobClientQuery,
 } = jobAPI;
