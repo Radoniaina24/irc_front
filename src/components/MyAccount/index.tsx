@@ -176,7 +176,7 @@ const MyAccount = () => {
     <>
       <Breadcrumb title="My Account" pages={["my account"]} />
       <section className="bg-gray-2 overflow-hidden py-20">
-        <div className="flex flex-col w-full gap-7.5 max-w-[1170px] mx-auto px-4 sm:px-8 xl:flex-row xl:px-0">
+        <div className="flex flex-col justify-center w-full gap-7.5 max-w-[1500px] mx-auto px-4 sm:px-8 xl:flex-row xl:px-0">
           {/* Sidebar */}
           <aside className="bg-white rounded-xl shadow-1 w-full xl:max-w-[300px]">
             <div className="flex xl:flex-col">
@@ -222,7 +222,7 @@ const MyAccount = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="bg-white rounded-xl shadow-1 w-full xl:max-w-[820px]">
+          <main className="bg-white rounded-xl shadow-1  w-full xl:max-w-[1000px]">
             {activeTab === "dashboard" && (
               <Dashboard activeTab={activeTab} user={user} />
             )}

@@ -24,10 +24,10 @@ export default function DashboardStats() {
     data: jobsData,
     isLoading: isJobsLoading,
     error: jobsError,
-  } = useGetAllJobQuery({});
+  } = useGetAllJobQuery({ permissions: "Allowed" });
   if (isCandidatesLoading || isRecruitersLoading || isJobsLoading) {
     return (
-      <main className="w-full xl:max-w-[820px] p-6 animate-pulse">
+      <main className="">
         <div className="flex flex-wrap justify-center gap-10">
           {[...Array(3)].map((_, index) => (
             <div
@@ -72,7 +72,7 @@ export default function DashboardStats() {
     },
   ];
   return (
-    <main className=" w-full xl:max-w-[820px] p-6">
+    <main className=" w-full  p-6">
       <div className="flex flex-wrap justify-center gap-10">
         {stats.map(({ id, label, icon: Icon, count, color }) => (
           <motion.div

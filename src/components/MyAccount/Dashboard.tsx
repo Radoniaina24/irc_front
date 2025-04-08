@@ -5,7 +5,7 @@ import DashboardR from "@/features/recruiter/info/DashboardR";
 export default function Dashboard({ activeTab, user }) {
   return (
     <div
-      className={`xl:max-w-[770px] w-full mt-20   py-9.5 px-4 sm:px-7.5 xl:px-10  ${
+      className={` my-auto  py-9.5 px-4 sm:px-7.5 xl:px-10  ${
         activeTab === "dashboard" ? "block" : "hidden"
       }`}
     >

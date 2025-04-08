@@ -11,10 +11,12 @@ const JobAdmin = () => {
   const [search, setSearch] = useState<string>("");
   const [limit, setLimit] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
+  const [permissions, setPermissions] = useState<string>("");
   const { data, isLoading, error } = useGetAllJobQuery({
     search,
     limit,
     page,
+    permissions,
   });
 
   if (isLoading) {
@@ -39,7 +41,28 @@ const JobAdmin = () => {
   return (
     <div className="px-5 py-5">
       <div className=" overflow-x-auto overflow-y-auto relative ">
-        <div className="flex flex-wrap justify-end items-center px-4 py-5">
+        <div className="flex flex-wrap flex-col-reverse gap-3 justify-between items-center  md:flex-col-reverse lg:flex-row px-4 py-5">
+          <div>
+            <select
+              id="countries"
+              value={permissions}
+              onChange={(e) => setPermissions(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value={""}>All</option>
+              <option value="Pending">Pending</option>
+              <option value="Allowed">Allowed</option>
+              <option value="Denied">Denied</option>
+            </select>
+          </div>
+          <div className="flex items-center justify-center space-x-3 border border-gray-300 bg-white shadow-sm rounded-xl px-4 py-2 text-gray-800 text-sm font-medium">
+            <h2 className="text-base font-semibold text-gray-700">
+              Job Announcement
+            </h2>
+            <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+              {data?.totalJobPosts ?? 0}
+            </span>
+          </div>
           <Search onQuery={setSearch} query={search} />
         </div>
 
