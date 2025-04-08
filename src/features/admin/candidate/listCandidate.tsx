@@ -1,11 +1,26 @@
 import React from "react";
 import dayjs from "dayjs";
+import ViewCandidate from "./ViewCandidate";
+import EditCandidate from "./EditCandidate";
 export default function CandidateList(candidate: any) {
   dayjs.locale("en");
   const formatDate = (isoDate) => {
     return dayjs(isoDate).format("MMMM DD, YYYY ");
   };
   const recrut = candidate.candidate;
+  const getPermissionBadgeColor = (permissions) => {
+    switch (permissions) {
+      case "Pending":
+        return "bg-yellow-500 text-white"; // Jaune pour "Pending"
+      case "Allowed":
+        return "bg-green-500 text-white"; // Vert pour "Allowed"
+      case "Denied":
+        return "bg-red-500 text-white"; // Rouge pour "Denied"
+      default:
+        return "bg-gray-500 text-white"; // Gris par défaut
+    }
+  };
+
   // console.log(recrut);
   return (
     <>
@@ -30,7 +45,25 @@ export default function CandidateList(candidate: any) {
             {recrut.user.role}
           </div>
         </td>
+        <td className="px-6 py-4">
+          {" "}
+          {/* Affichage du badge de statut dynamique */}
+          <span
+            className={`px-3 py-1 rounded-full text-xs ${getPermissionBadgeColor(
+              recrut.permissions
+            )}`}
+          >
+            {recrut.permissions}
+          </span>
+        </td>
         <td className="px-6 py-4"> {formatDate(recrut.createdAt)}</td>
+
+        <td className="px-6 py-4">
+          <div className="flex gap-3">
+            <EditCandidate candidate={recrut} id={recrut._id} />
+            <ViewCandidate candidate={recrut} />
+          </div>
+        </td>
       </tr>
     </>
   );

@@ -35,7 +35,6 @@ const Candidate = () => {
       </section>
     );
   const candidates = data.candidates;
-  //   console.log(candidates);
   return (
     <div className="py-5 px-5 ">
       <div className="relative overflow-x-auto overflow-y-auto  ">
@@ -56,7 +55,13 @@ const Candidate = () => {
                   Role
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Permission
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Created At
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Action
                 </th>
               </tr>
             </thead>

@@ -58,11 +58,21 @@ export const candidateAPI = createApi({
       invalidatesTags: ["candidate"],
     }),
     updateCandidate: builder.mutation({
-      query: ({ candidate, id }) => {
+      query: ({ obj, id }) => {
         return {
-          url: `/candidate/update`,
+          url: `/candidate/update/${id}`,
           method: "PUT",
-          body: candidate,
+          body: obj,
+        };
+      },
+      invalidatesTags: ["candidate"],
+    }),
+    updateCandidatePermissions: builder.mutation({
+      query: ({ permissions }) => {
+        return {
+          url: `/candidate/update_profil`,
+          method: "PUT",
+          body: permissions,
         };
       },
       invalidatesTags: ["candidate"],
@@ -99,4 +109,5 @@ export const {
   useGetAllCandidateQuery,
   useChangePasswordMutation,
   useGetProfilQuery,
+  useUpdateCandidatePermissionsMutation,
 } = candidateAPI;
