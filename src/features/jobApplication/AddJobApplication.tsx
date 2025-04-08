@@ -16,11 +16,19 @@ const initialvalues = {
   coverLetter: "",
   file: "",
 };
-export default function AddJobApplication({ id }: { id: string }) {
+export default function AddJobApplication({
+  id,
+  permission,
+}: {
+  id: string;
+  permission: any;
+}) {
+  // console.log(permission?.permissions);
   const [open, setOpen] = useState<boolean>(false);
   const [applyJob] = useAddApplicationMutation();
   const { showToast } = useToast();
   const inputFileRef = useRef<HTMLInputElement>(null);
+
   const resetFileInput = () => {
     if (inputFileRef.current) {
       inputFileRef.current.value = "";
@@ -77,14 +85,21 @@ export default function AddJobApplication({ id }: { id: string }) {
       }
     },
   });
-  // console.log(formik.errors);
+  // console.log(id);
   const router = useRouter();
   const user: any = useSelector(selectUser);
   function check() {
     const role = user?.user?.role || user?.role;
     // console.log(role);
     if (role === "candidate") {
-      return setOpen(true);
+      if (permission?.permissions !== "Allowed") {
+        return showToast(
+          "You are not approved by IRC. Please complete your profile",
+          "error"
+        ); // message, type(error, success)
+      } else {
+        return setOpen(true);
+      }
     }
     return router.push("/signup-candidate");
   }

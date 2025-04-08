@@ -51,12 +51,12 @@ type Tab = {
   candidateOnly?: boolean;
 };
 const TABS: Tab[] = [
-  {
-    id: "profile",
-    label: " My Profile",
-    icon: <FaRegUserCircle size={18} />,
-    candidateOnly: true,
-  },
+  // {
+  //   id: "profile",
+  //   label: " My Profile",
+  //   icon: <FaRegUserCircle size={18} />,
+  //   candidateOnly: true,
+  // },
   { id: "dashboard", label: "Dashboard", icon: <RxDashboard size={18} /> },
 
   {

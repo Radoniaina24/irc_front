@@ -6,7 +6,6 @@ import {
   Briefcase,
   Building,
   Calendar,
-  CheckCircle,
   Clock,
   GraduationCap,
   MapPin,
@@ -16,9 +15,10 @@ import dayjs from "dayjs";
 import { Card } from "../Ui/card";
 import AddJobApplication from "@/features/jobApplication/AddJobApplication";
 import AuthGuard from "../Auth/AuthGuard/AuthGuard";
+import { useGetPermissionQuery } from "@/lib/api/candidateApi";
 
 export default function JobId({ data, isLoading, error }) {
-  // console.log(data);
+  const { data: permission } = useGetPermissionQuery("");
   dayjs.locale("en");
   const formatDate = (isoDate) => {
     return dayjs(isoDate).format("MMMM DD, YYYY ");
@@ -181,7 +181,10 @@ export default function JobId({ data, isLoading, error }) {
 
             {/* Bouton "Postuler" en bas à droite */}
 
-            <AddJobApplication id={data?._id} />
+            <AddJobApplication
+              id={data?._id}
+              permission={permission?.candidate}
+            />
           </CardContent>
         </div>
       </section>

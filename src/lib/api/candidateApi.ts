@@ -19,6 +19,16 @@ export const candidateAPI = createApi({
       },
       providesTags: ["candidate"],
     }),
+    getPermission: builder.query({
+      query: (params) => {
+        return {
+          url: `candidate/permission`,
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: ["candidate"],
+    }),
     getAllCandidate: builder.query({
       query: (params) => {
         return {
@@ -110,4 +120,5 @@ export const {
   useChangePasswordMutation,
   useGetProfilQuery,
   useUpdateCandidatePermissionsMutation,
+  useGetPermissionQuery,
 } = candidateAPI;
