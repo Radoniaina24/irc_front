@@ -28,10 +28,10 @@ export const applicationAPI = createApi({
       },
       providesTags: ["application"],
     }),
-    getApplicationById: builder.query({
-      query: (id) => {
+    getApplicationRecruiter: builder.query({
+      query: () => {
         return {
-          url: `application/${id}`,
+          url: `application/recruiter_application`,
           method: "GET",
         };
       },
@@ -48,11 +48,11 @@ export const applicationAPI = createApi({
       invalidatesTags: ["application"],
     }),
     updateApplication: builder.mutation({
-      query: ({ name, id, sector }) => {
+      query: ({ obj, id }) => {
         return {
-          url: `/application/${id}`,
+          url: `/application/update/${id}`,
           method: "PUT",
-          body: { sector, name },
+          body: obj,
         };
       },
       invalidatesTags: ["application"],
@@ -69,10 +69,9 @@ export const applicationAPI = createApi({
     }),
   }),
 });
-
 export const {
   useGetApplicationQuery,
-  useGetApplicationByIdQuery,
+  useGetApplicationRecruiterQuery,
   useAddApplicationMutation,
   useDeleteApplicationMutation,
   useUpdateApplicationMutation,

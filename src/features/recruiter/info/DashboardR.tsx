@@ -1,13 +1,24 @@
+import { useGetApplicationRecruiterQuery } from "@/lib/api/applicationApi";
 import { useGetMyJobQuery } from "@/lib/api/jobApi";
 import { motion } from "framer-motion";
-import { FaUsers, FaUserTie, FaBriefcase } from "react-icons/fa";
+import {
+  FaUsers,
+  FaUserTie,
+  FaBriefcase,
+  FaUserGraduate,
+} from "react-icons/fa";
 
 export default function DashboardR() {
   const { data, isLoading, error } = useGetMyJobQuery({ limit: 1000 });
-  if (isLoading) {
+  const {
+    data: recruiterApplication,
+    isLoading: rectruiterLoading,
+    error: recruiterError,
+  } = useGetApplicationRecruiterQuery({ limit: 1000 });
+  if (isLoading || rectruiterLoading) {
     return <div className="text-center py-75">Loading ...</div>;
   }
-  if (error)
+  if (error || recruiterError)
     return (
       <section className="bg-white dark:bg-gray-900">
         <div className="lg:px-6 lg:py-16 max-w-screen-xl mx-auto px-4 py-8">
@@ -23,6 +34,8 @@ export default function DashboardR() {
       </section>
     );
   const job = data.jobPosts;
+  const applications = recruiterApplication.jobApplication;
+  console.log(applications);
   const stats = [
     {
       id: "jobs",
@@ -30,6 +43,13 @@ export default function DashboardR() {
       icon: FaBriefcase,
       count: job.length,
       color: "bg-purple-500",
+    },
+    {
+      id: "application",
+      label: "Application",
+      icon: FaUserGraduate,
+      count: applications.length,
+      color: "bg-blue-500",
     },
   ];
   return (

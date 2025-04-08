@@ -19,7 +19,7 @@ import Sector from "@/features/sector";
 import Category from "@/features/category";
 import Job from "@/features/job";
 import ChangePassword from "@/features/recruiter/password";
-import { FaUserCog } from "react-icons/fa";
+import { FaUserCog, FaUsers } from "react-icons/fa";
 import InfoRecruteur from "@/features/recruiter/info";
 import { recruiterAPI } from "@/lib/api/recruiterApi";
 import { jobAPI } from "@/lib/api/jobApi";
@@ -42,6 +42,8 @@ import { languageAPI } from "@/lib/api/languageApi";
 import { skilleAPI } from "@/lib/api/skillsApi";
 import { portfolioAPI } from "@/lib/api/portfolioApi";
 import Candidate from "@/features/admin/candidate";
+import JobApplicationRecruiter from "@/features/recruiter/jobApplication";
+import { applicationAPI } from "@/lib/api/applicationApi";
 type Tab = {
   id: string;
   label: string;
@@ -63,6 +65,12 @@ const TABS: Tab[] = [
     id: "job-recruiter",
     label: "Job Announcement",
     icon: <PiReadCvLogoLight size={18} />,
+    recruiterOnly: true,
+  },
+  {
+    id: "application",
+    label: "Manage applications",
+    icon: <FaUsers size={18} />,
     recruiterOnly: true,
   },
   {
@@ -159,6 +167,7 @@ const MyAccount = () => {
       dispatch(languageAPI.util.resetApiState());
       dispatch(skilleAPI.util.resetApiState());
       dispatch(portfolioAPI.util.resetApiState());
+      dispatch(applicationAPI.util.resetApiState());
       router.push("/");
     } catch (err) {
       console.error("Logout failed", err);
@@ -257,6 +266,9 @@ const MyAccount = () => {
             )}
             {activeTab === "profile" && user.role === "candidate" && (
               <UserProfileCandidate />
+            )}
+            {activeTab === "application" && user.role === "recruiter" && (
+              <JobApplicationRecruiter />
             )}
           </main>
         </div>
