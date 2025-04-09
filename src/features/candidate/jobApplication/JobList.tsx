@@ -2,6 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 import EditButton from "./EditButton";
 import ViewButton from "./ViewButton";
+import DeleteButton from "./DeleteButton";
 // import DeleteButton from "./DeleteButton";
 // import EditButton from "./EditButton";
 // import ViewJobPost from "./ViewJobPost";
@@ -35,20 +36,6 @@ export default function JobList(jobs: any) {
   return (
     <>
       <tr className="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
-        <th
-          scope="row"
-          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-        >
-          <div className="">
-            <div className="text-base font-semibold">
-              {job?.candidate?.user?.lastName}
-            </div>
-            <div className="font-normal text-gray-500">
-              {job?.candidate?.user?.firstName}
-            </div>
-          </div>
-        </th>
-
         <td className="px-6 py-4"> {job?.jobPost?.title}</td>
         <td className="px-6 py-4"> {formatDate(job?.createdAt)}</td>
         <td className="px-6 py-4"> {formatDate(job?.jobPost?.deadline)}</td>
@@ -63,10 +50,10 @@ export default function JobList(jobs: any) {
           </span>
         </td>
         <td className=" px-6 py-4">
-          <div className="flex gap-3">
-            <EditButton id={job._id} job={job} />
-            {/* <DeleteButton id={job._id} /> */}
-            <ViewButton job={job} />
+          <div className="flex items-end gap-3">
+            {/* <EditButton id={job._id} job={job} /> */}
+            <DeleteButton id={job._id} />
+            {/* <ViewButton job={job} /> */}
           </div>
         </td>
       </tr>

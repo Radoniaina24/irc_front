@@ -1,6 +1,7 @@
 import React from "react";
 import DashboardStats from "./DashboardStatsAdmin";
 import DashboardR from "@/features/recruiter/info/DashboardR";
+import DashboardCandidate from "@/features/candidate/DasboardCandidate";
 
 export default function Dashboard({ activeTab, user }) {
   return (
@@ -10,7 +11,8 @@ export default function Dashboard({ activeTab, user }) {
       }`}
     >
       {user.role === "admin" && <DashboardStats />}
-      {user.role === "recruiter" && <DashboardR />}
+      {user.role === "recruiter" && <DashboardR />}*{" "}
+      {user.role === "candidate" && <DashboardCandidate />}
     </div>
   );
 }

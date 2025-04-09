@@ -44,6 +44,7 @@ import { portfolioAPI } from "@/lib/api/portfolioApi";
 import Candidate from "@/features/admin/candidate";
 import JobApplicationRecruiter from "@/features/recruiter/jobApplication";
 import { applicationAPI } from "@/lib/api/applicationApi";
+import JobApplicationCandidate from "@/features/candidate/jobApplication";
 type Tab = {
   id: string;
   label: string;
@@ -72,6 +73,12 @@ const TABS: Tab[] = [
     label: "Manage applications",
     icon: <FaUsers size={18} />,
     recruiterOnly: true,
+  },
+  {
+    id: "application-candidate",
+    label: "Manage applications",
+    icon: <FaUsers size={18} />,
+    candidateOnly: true,
   },
   {
     id: "job-admin",
@@ -270,6 +277,8 @@ const MyAccount = () => {
             {activeTab === "application" && user.role === "recruiter" && (
               <JobApplicationRecruiter />
             )}
+            {activeTab === "application-candidate" &&
+              user.role === "candidate" && <JobApplicationCandidate />}
           </main>
         </div>
       </section>

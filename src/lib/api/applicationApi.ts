@@ -37,6 +37,15 @@ export const applicationAPI = createApi({
       },
       providesTags: ["application"],
     }),
+    getApplicationCandidate: builder.query({
+      query: () => {
+        return {
+          url: `application/candidate_application`,
+          method: "GET",
+        };
+      },
+      providesTags: ["application"],
+    }),
     addApplication: builder.mutation({
       query: ({ data, id }) => {
         return {
@@ -60,7 +69,7 @@ export const applicationAPI = createApi({
     deleteApplication: builder.mutation({
       query: (id) => {
         return {
-          url: `/application/${id}`,
+          url: `/application/delete/${id}`,
           method: "DELETE",
           body: id,
         };
@@ -76,4 +85,5 @@ export const {
   useDeleteApplicationMutation,
   useUpdateApplicationMutation,
   useGetAllApplicationQuery,
+  useGetApplicationCandidateQuery,
 } = applicationAPI;
