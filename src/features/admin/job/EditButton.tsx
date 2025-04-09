@@ -75,10 +75,10 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
               }`}
             >
               {formik.isSubmitting ? (
-                <>
-                  Edit...
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                </>
+                <div className="flex items-center gap-3">
+                  Edit
+                  <Loader2 className="h-5 w-5  animate-spin" />
+                </div>
               ) : (
                 "Edit "
               )}

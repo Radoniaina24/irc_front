@@ -127,9 +127,10 @@ export default function AddExperience() {
             }`}
           >
             {formik.isSubmitting ? (
-              <>
-                <Loader2 className="h-5 w-5 animate-spin" />
-              </>
+              <div className="flex items-center gap-3">
+                Add
+                <Loader2 className="h-5 w-5  animate-spin" />
+              </div>
             ) : (
               "Add"
             )}

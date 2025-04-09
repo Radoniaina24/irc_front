@@ -250,10 +250,10 @@ export default function AddJob() {
               }`}
             >
               {formik.isSubmitting ? (
-                <>
-                  Add Job Post...
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                </>
+                <div className="flex items-center gap-3">
+                  Add Job Post
+                  <Loader2 className="h-5 w-5  animate-spin" />
+                </div>
               ) : (
                 "Add Job Post"
               )}

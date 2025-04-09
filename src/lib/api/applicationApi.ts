@@ -29,19 +29,21 @@ export const applicationAPI = createApi({
       providesTags: ["application"],
     }),
     getApplicationRecruiter: builder.query({
-      query: () => {
+      query: (params) => {
         return {
           url: `application/recruiter_application`,
           method: "GET",
+          params,
         };
       },
       providesTags: ["application"],
     }),
     getApplicationCandidate: builder.query({
-      query: () => {
+      query: (params) => {
         return {
           url: `application/candidate_application`,
           method: "GET",
+          params,
         };
       },
       providesTags: ["application"],

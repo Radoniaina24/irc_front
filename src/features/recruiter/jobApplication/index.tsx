@@ -10,8 +10,9 @@ const JobApplicationRecruiter = () => {
   const [search, setSearch] = useState<string>("");
   const [limit, setLimit] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
+  const [permissions, setPermissions] = useState<string>("");
   const { data, isLoading, error } = useGetApplicationRecruiterQuery({
-    search,
+    permissions,
     limit,
     page,
   });
@@ -39,7 +40,21 @@ const JobApplicationRecruiter = () => {
     <div className="px-5 py-5">
       <div className=" overflow-x-auto overflow-y-auto relative ">
         <div className="flex flex-wrap justify-between items-center px-4 py-2">
-          <Search onQuery={setSearch} query={search} />
+          <div>
+            <select
+              id="countries"
+              value={permissions}
+              onChange={(e) => setPermissions(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value={""}>All</option>
+              <option value="pending">Pending</option>
+              <option value="reviewed">Reviewed</option>
+              <option value="accepted">Accepted</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+          {/* <Search onQuery={setSearch} query={search} /> */}
         </div>
 
         <div className="h-100 lg:h-[650px] overflow-y-auto">

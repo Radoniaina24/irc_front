@@ -53,6 +53,7 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
     { id: 3, value: "accepted", name: "accepted" },
     { id: 4, value: "rejected", name: "rejected" },
   ];
+  // console.log(job);
   return (
     <div>
       <button onClick={() => setOpen(true)}>
@@ -79,10 +80,10 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
               }`}
             >
               {formik.isSubmitting ? (
-                <>
-                  Edit...
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                </>
+                <div className="flex items-center gap-3">
+                  Edit
+                  <Loader2 className="h-5 w-5  animate-spin" />
+                </div>
               ) : (
                 "Edit "
               )}

@@ -93,10 +93,10 @@ const Signin = () => {
                   }`}
                 >
                   {formik.isSubmitting ? (
-                    <>
-                      Sign in to account...
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                    </>
+                    <div className="flex items-center gap-3">
+                      Sign in to account
+                      <Loader2 className="h-5 w-5  animate-spin" />
+                    </div>
                   ) : (
                     "Sign in to account"
                   )}
