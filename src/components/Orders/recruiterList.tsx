@@ -1,5 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
+import ViewButton from "./ViewButton";
 export default function RecruiterList(recruiter: any) {
   dayjs.locale("en");
   const formatDate = (isoDate) => {
@@ -31,6 +32,11 @@ export default function RecruiterList(recruiter: any) {
           </div>
         </td>
         <td className="px-6 py-4"> {formatDate(recrut.createdAt)}</td>
+        <td className="px-6 py-4">
+          <div className="flex gap-3">
+            <ViewButton recruiter={recrut} />
+          </div>
+        </td>
       </tr>
     </>
   );

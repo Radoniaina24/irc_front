@@ -63,7 +63,7 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
         <div className=" p-6  w-full lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <SelectInput
-              label="Published"
+              label="Status"
               id="permissions"
               value={formik.values.permissions}
               onChange={formik.handleChange}

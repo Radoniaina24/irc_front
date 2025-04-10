@@ -27,7 +27,7 @@ const Modal = ({ isOpen, closeModal, children }) => {
       <div className="flex items-center justify-center modal-content">
         <div
           x-show="addressModal"
-          className="w-full max-w-[1000px] rounded-xl shadow-3 bg-white p-7.5 relative modal-content"
+          className="w-full max-w-[700px] rounded-xl shadow-3 bg-white p-7.5 relative modal-content"
         >
           <button
             onClick={closeModal}

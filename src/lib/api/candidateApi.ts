@@ -39,6 +39,15 @@ export const candidateAPI = createApi({
       },
       providesTags: ["candidate"],
     }),
+    getInfoCandidate: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `candidate/information/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["candidate"],
+    }),
     getCandidateById: builder.query({
       query: (id) => {
         return {
@@ -121,4 +130,5 @@ export const {
   useGetProfilQuery,
   useUpdateCandidatePermissionsMutation,
   useGetPermissionQuery,
+  useGetInfoCandidateQuery,
 } = candidateAPI;
