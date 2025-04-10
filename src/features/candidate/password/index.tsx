@@ -42,53 +42,67 @@ export default function ChangePasswordCandidate() {
     },
   });
   return (
-    <div className="p-5 max-w-lg mx-auto">
-      <h1 className="text-center font-bold text-lg mb-5">Change password</h1>
-      <form autoComplete="off" onSubmit={formik.handleSubmit}>
-        <InputField
-          type="password"
-          label="Old Password"
-          name="oldPassword"
-          value={formik.values.oldPassword}
-          onChange={formik.handleChange}
-          placeholder=""
-          required
-        />
-        <InputField
-          type="password"
-          label="New Password"
-          name="newPassword"
-          value={formik.values.newPassword}
-          onChange={formik.handleChange}
-          placeholder=""
-          required
-        />
-        <InputField
-          type="password"
-          label="Confirm Password"
-          name="confirmPassword"
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          placeholder=""
-          required
-        />
-        <button
-          disabled={formik.isSubmitting}
-          type="submit"
-          className={`w-full flex justify-center font-medium mt-5 bg-dark text-white  py-2 px-6 rounded-lg ease-out duration-200 hover:bg-blue mt-7.5${
-            formik.isSubmitting ? "cursor-not-allowed bg-gray-400" : "bg-dark"
-          }`}
+    <div className="min-h-[750px] bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center px-4">
+      <div className="  w-full max-w-md p-8">
+        <h1 className="text-center text-2xl font-bold text-slate-800 mb-6">
+          🔒 Change your password
+        </h1>
+
+        <form
+          onSubmit={formik.handleSubmit}
+          autoComplete="off"
+          className="space-y-5"
         >
-          {formik.isSubmitting ? (
-            <>
-              Change password...
-              <Loader2 className="h-5 w-5 animate-spin" />
-            </>
-          ) : (
-            "Change password"
-          )}
-        </button>
-      </form>
+          <InputField
+            type="password"
+            label="Old Password"
+            name="oldPassword"
+            value={formik.values.oldPassword}
+            onChange={formik.handleChange}
+            placeholder="Enter your current password"
+            required
+          />
+
+          <InputField
+            type="password"
+            label="New Password"
+            name="newPassword"
+            value={formik.values.newPassword}
+            onChange={formik.handleChange}
+            placeholder="Choose a new password"
+            required
+          />
+
+          <InputField
+            type="password"
+            label="Confirm Password"
+            name="confirmPassword"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            placeholder="Re-enter new password"
+            required
+          />
+
+          <button
+            disabled={formik.isSubmitting}
+            type="submit"
+            className={`w-full flex items-center justify-center gap-2 font-semibold py-2.5 px-4 rounded-lg transition duration-200 ${
+              formik.isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 text-white"
+            }`}
+          >
+            {formik.isSubmitting ? (
+              <div className="flex gap-3 justify-center items-center">
+                Changing
+                <Loader2 className="h-5 w-5 animate-spin" />
+              </div>
+            ) : (
+              "Change Password"
+            )}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
