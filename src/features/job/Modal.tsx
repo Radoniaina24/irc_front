@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const Modal = ({ isOpen, closeModal, children, width = "500px" }) => {
+const Modal = ({ isOpen, closeModal, children }) => {
   useEffect(() => {
     // closing modal while clicking outside
     function handleClickOutside(event) {
@@ -27,7 +27,7 @@ const Modal = ({ isOpen, closeModal, children, width = "500px" }) => {
       <div className="flex items-center justify-center modal-content">
         <div
           x-show="addressModal"
-          className={`"w-full max-w-[${width}] rounded-xl shadow-3 bg-white p-7.5 relative modal-content"`}
+          className="w-full max-w-[1000px] rounded-xl shadow-3 bg-white p-7.5 relative modal-content"
         >
           <button
             onClick={closeModal}

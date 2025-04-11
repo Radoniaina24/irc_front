@@ -125,7 +125,7 @@ export default function AddJob() {
       <button onClick={() => setOpen(true)}>
         <MdAddBox size={30} className="text-blue-500" />
       </button>
-      <Modal isOpen={open} closeModal={() => setOpen(false)} width="700px">
+      <Modal isOpen={open} closeModal={() => setOpen(false)}>
         <div className=" lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
             <h1 className="text-center text-lg font-bold">New job post</h1>

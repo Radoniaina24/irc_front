@@ -120,10 +120,12 @@ export default function EditButton({ id, job }: { id: string; job: any }) {
       <button onClick={() => setOpen(true)}>
         <MdEditNote size={20} className="text-blue-500" />
       </button>
-      <Modal isOpen={open} closeModal={() => setOpen(false)} width="700px">
+      <Modal isOpen={open} closeModal={() => setOpen(false)}>
         <div className="bg-white p-6 rounded-lg shadow-lg w-full lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
-            <h1 className="text-center text-lg font-bold">New job post</h1>
+            <h1 className="text-center mb-5 text-lg font-bold">
+              Edit job post
+            </h1>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <InputField
                 label="Post"

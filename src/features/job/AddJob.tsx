@@ -117,10 +117,10 @@ export default function AddJob() {
       <button onClick={() => setOpen(true)}>
         <MdAddBox size={30} className="text-blue-500" />
       </button>
-      <Modal isOpen={open} closeModal={() => setOpen(false)} width="1000px">
+      <Modal isOpen={open} closeModal={() => setOpen(false)}>
         <div className=" px-3 lg:max-w-4xl max-w-lg md:max-w-2xl mx-auto overflow-y-auto max-h-[80vh]">
           <form onSubmit={formik.handleSubmit} autoComplete="off">
-            <h1 className="text-center text-lg font-bold">New job post</h1>
+            <h1 className="text-center text-lg mb-5 font-bold">New job post</h1>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <InputField
                 label="Post"
@@ -251,11 +251,11 @@ export default function AddJob() {
             >
               {formik.isSubmitting ? (
                 <div className="flex items-center gap-3">
-                  Add Job Post
+                  Submit your application via IRC
                   <Loader2 className="h-5 w-5  animate-spin" />
                 </div>
               ) : (
-                "Add Job Post"
+                "Submit your application via IRC"
               )}
             </button>
           </form>
