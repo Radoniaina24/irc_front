@@ -25,8 +25,14 @@ const SignupCandidate = () => {
       lastName: Yup.string().required("Last name is required"),
       firstName: Yup.string().required("First name is required"),
       email: Yup.string().email("Invalid email").required("Email is required"),
-      password: Yup.string().required("Password is required"),
-      re_type_password: Yup.string().required("Re-type Password is required"),
+      password: Yup.string()
+        .required("Password is required")
+        .min(6, "Password must be at least 6 characters long"),
+
+      re_type_password: Yup.string()
+        .required("Confirm Password is required")
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .min(6, "Confirm Password must be at least 6 characters long"),
     }),
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);

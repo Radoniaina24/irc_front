@@ -17,6 +17,16 @@ export default function ChangePassword() {
   const [changePass] = useChangePasswordMutation();
   const formik = useFormik({
     initialValues: initialvalues,
+    validationSchema: Yup.object({
+      newPassword: Yup.string()
+        .required("New password is required")
+        .min(6, "Password must be at least 6 characters long"),
+
+      confirmPassword: Yup.string()
+        .required("Confirm Password is required")
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .min(6, "Confirm Password must be at least 6 characters long"),
+    }),
     enableReinitialize: true,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       setSubmitting(true);
@@ -69,6 +79,8 @@ export default function ChangePassword() {
             value={formik.values.newPassword}
             onChange={formik.handleChange}
             placeholder="Choose a new password"
+            error={formik.errors.newPassword}
+            touched={formik.touched.newPassword}
             required
           />
 
@@ -79,6 +91,8 @@ export default function ChangePassword() {
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             placeholder="Re-enter new password"
+            error={formik.errors.confirmPassword}
+            touched={formik.touched.confirmPassword}
             required
           />
 
